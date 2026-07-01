@@ -30,8 +30,7 @@ User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-
 research-lab (private workspace); this repo's own remote is **public**.
 
 ## Known open items
-- **ORCID** link is a flagged placeholder (dashed pill, `data-placeholder="orcid"`) in the hero
-  and footer — replace with the real ORCID iD URL when available.
+- ORCID wired in (hero + footer) → https://orcid.org/0000-0003-3383-5998.
 - No CV PDF yet (decision pending).
 
 ## Verify after edits

@@ -33,8 +33,6 @@ GitHub Pages redeploys automatically.
 
 ## To do
 
-- Replace the **ORCID** placeholder link in the hero + footer (marked with a dashed border and
-  `data-placeholder="orcid"`) once the ORCID iD is available.
 - Optional: add a downloadable `assets/CV.pdf` and link it from the hero.
 
 ## Deployment (GitHub Pages)
