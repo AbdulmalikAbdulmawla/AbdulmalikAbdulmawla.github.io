@@ -14,13 +14,21 @@ Hand-written **static HTML + CSS**. No framework, no build step, no dependencies
 
 ```
 portfolio/
-├── index.html      ← the whole site (all sections); English text is the default
-├── styles.css      ← academic-minimal styling (palette shared with VSP_Unfallatlas exports)
+├── index.html      ← the whole site: hero + 4 tabbed panels; English text is the default
+├── styles.css      ← muted-Bauhaus styling (palette shared with VSP_Unfallatlas exports)
+├── tabs.js         ← accessible tab switching (Work / Research / Experience / About)
 ├── i18n.js         ← EN/DE language toggle (German strings live here)
-├── assets/         ← favicon (+ optional CV.pdf, thumbnails later)
+├── assets/         ← favicon (+ optional CV.pdf, real screenshots later)
 ├── .nojekyll       ← serve files verbatim on GitHub Pages
 └── README.md
 ```
+
+## Layout
+
+A short **hero + tabs** design, not a long scroll: the top band is always visible; the tab bar switches
+between **Work · Research · Experience · About**. Each work card shows a hand-drawn SVG diagram — to use
+a real screenshot instead, drop an `<img>` into that card's `card-media` slot. Deep-links work
+(e.g. `…github.io/#research`).
 
 ## Languages (EN / DE)
 

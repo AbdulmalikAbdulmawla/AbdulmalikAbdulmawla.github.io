@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,9 @@
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Progressive enhancement: flip to .js synchronously so panels hide on first paint -->
+  <script>document.documentElement.className = "js";</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,9 +34,18 @@
 
   <!-- ========================= HERO ========================= -->
   <header class="hero" id="top">
-    <div class="wrap">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <!-- constructivist Bauhaus primitives (decorative) -->
+    <svg class="hero-art" viewBox="0 0 200 200" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <circle class="art-circle" cx="150" cy="45" r="34" />
+      <polygon class="art-triangle" points="40,150 78,150 59,112" />
+      <line class="art-line" x1="20" y1="40" x2="110" y2="40" />
+      <line class="art-line" x1="20" y1="52" x2="90" y2="52" />
+      <rect class="art-square" x="150" y="140" width="30" height="30" />
+    </svg>
+    <div class="wrap wrap-wide">
       <p class="eyebrow" data-i18n="hero.eyebrow">Computational Urban Design · Spatial-Economic Research</p>
-      <h1>Abdulmalik Abdulmawla</h1>
+      <h1 class="hero-name">Abdulmalik<br>Abdulmawla</h1>
       <p class="lede" data-i18n="hero.lede">
         I build research tools that turn urban data into evidence &mdash; linking spatial
         structure to local value creation, service economies, and the resilience of
@@ -51,104 +63,152 @@
     </div>
   </header>
 
-  <!-- ========================= SECTION NAV ========================= -->
-  <nav class="section-nav" aria-label="Sections">
-    <div class="wrap">
-      <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#work" data-i18n="nav.work">Featured work</a>
-      <a href="#publications" data-i18n="nav.publications">Publications</a>
-      <a href="#experience" data-i18n="nav.experience">Experience</a>
-      <a href="#teaching" data-i18n="nav.teaching">Teaching</a>
-      <a href="#skills" data-i18n="nav.skills">Skills</a>
+  <!-- ========================= TAB BAR ========================= -->
+  <div class="tabbar">
+    <div class="wrap wrap-wide">
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <a class="tab" id="tab-work"       role="tab" href="#work"       aria-controls="work"       aria-selected="true"  data-i18n="tab.work">Work</a>
+        <a class="tab" id="tab-research"   role="tab" href="#research"   aria-controls="research"   aria-selected="false" data-i18n="tab.research">Research</a>
+        <a class="tab" id="tab-experience" role="tab" href="#experience" aria-controls="experience" aria-selected="false" data-i18n="tab.experience">Experience</a>
+        <a class="tab" id="tab-about"      role="tab" href="#about"      aria-controls="about"      aria-selected="false" data-i18n="tab.about">About</a>
+      </nav>
       <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Auf Deutsch umschalten">DE</button>
     </div>
-  </nav>
+  </div>
 
   <main id="main">
-    <div class="wrap">
+    <div class="wrap wrap-wide">
 
-      <!-- ========================= ABOUT ========================= -->
-      <section id="about" aria-labelledby="about-h">
-        <h2 id="about-h" data-i18n="about.h">About</h2>
-        <p data-i18n="about.p1">
-          I am a spatial-economic researcher and computational urban designer. My work
-          examines urban structures in relation to local value creation, service
-          economies, and resilience &mdash; empirically linking spatial configuration to
-          economic dynamics in order to support sustainable urban and regional development.
-        </p>
-        <p data-i18n="about.p2">
-          Methodologically I work with GIS, network analysis, agent-based simulation, and
-          data-driven methods (Python, R, C#). My PhD project investigates the
-          spatial-economic dynamics of local production and service structures:
-          <em>&ldquo;Spatial dependency of urban retail: detailed methods for positioning
-          street-level activities&rdquo;</em> (supervisor: Prof. Dr. Reinhard K&ouml;nig).
-        </p>
-        <p data-i18n="about.p3">
-          Across a decade of teaching and research &mdash; in Germany, Egypt, Jordan, and
-          Ethiopia &mdash; I have consistently built the tools that make analysis
-          reproducible: from Grasshopper plug-ins for spatial data analysis to interactive
-          web platforms for open-data exploration and evidence-based design.
-        </p>
-      </section>
-
-      <!-- ========================= FEATURED WORK ========================= -->
-      <section id="work" aria-labelledby="work-h">
-        <h2 id="work-h" data-i18n="work.h">Featured work</h2>
+      <!-- ========================= WORK ========================= -->
+      <section class="panel is-active" id="work" role="tabpanel" aria-labelledby="tab-work" tabindex="-1" style="--cat: var(--bau-blue)">
+        <header class="panel-head">
+          <span class="panel-num" aria-hidden="true">01</span>
+          <h2 data-i18n="work.h">Featured work</h2>
+        </header>
         <div class="cards">
 
           <article class="card">
-            <h3 data-i18n="work.c1.title">VSP&nbsp;Unfallatlas &mdash; Road-Safety Explorer</h3>
-            <p class="card-role" data-i18n="work.c1.role">Sole developer &middot; Bauhaus Weimar, EDIH.TH</p>
-            <p data-i18n="work.c1.body">
-              An interactive web platform for exploring German road-accident data:
-              spatial aggregation, blackspot detection, and statistical methods for
-              evidence-based traffic-safety analysis. Runs entirely in the browser
-              (DuckDB-WASM + deck.gl).
-            </p>
-            <a class="card-link" href="https://www.uni-weimar.de/~vewa2645/VSP_Unfallatlas/VSP_Unfallatlas.html" target="_blank" rel="noopener" data-i18n="work.c1.link">Open the live app &rarr;</a>
+            <div class="card-media" aria-hidden="true">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="200" fill="#f7f8fa"/>
+                <g stroke="#e0e3e8" stroke-width="1">
+                  <line x1="0" y1="50" x2="320" y2="50"/><line x1="0" y1="100" x2="320" y2="100"/><line x1="0" y1="150" x2="320" y2="150"/>
+                  <line x1="80" y1="0" x2="80" y2="200"/><line x1="160" y1="0" x2="160" y2="200"/><line x1="240" y1="0" x2="240" y2="200"/>
+                </g>
+                <g>
+                  <circle cx="70" cy="120" r="9" fill="#c8452f" opacity=".85"/>
+                  <circle cx="120" cy="70" r="6" fill="#2b6cb0" opacity=".85"/>
+                  <circle cx="180" cy="110" r="12" fill="#c8452f" opacity=".7"/>
+                  <circle cx="150" cy="150" r="5" fill="#e0a92e"/>
+                  <circle cx="230" cy="60" r="7" fill="#2b6cb0" opacity=".8"/>
+                  <circle cx="260" cy="130" r="9" fill="#c8452f" opacity=".8"/>
+                  <circle cx="90" cy="60" r="5" fill="#e0a92e"/>
+                  <circle cx="200" cy="160" r="6" fill="#2b6cb0" opacity=".8"/>
+                  <circle cx="280" cy="95" r="5" fill="#e0a92e"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 data-i18n="work.c1.title">VSP&nbsp;Unfallatlas &mdash; Road-Safety Explorer</h3>
+              <p class="card-role" data-i18n="work.c1.role">Sole developer &middot; Bauhaus Weimar, EDIH.TH</p>
+              <p data-i18n="work.c1.body">
+                An interactive web platform for exploring German road-accident data:
+                spatial aggregation, blackspot detection, and statistical methods for
+                evidence-based traffic-safety analysis. Runs entirely in the browser
+                (DuckDB-WASM + deck.gl).
+              </p>
+              <a class="card-link" href="https://www.uni-weimar.de/~vewa2645/VSP_Unfallatlas/VSP_Unfallatlas.html" target="_blank" rel="noopener" data-i18n="work.c1.link">Open the live app &rarr;</a>
+            </div>
           </article>
 
           <article class="card">
-            <h3 data-i18n="work.c2.title">DeCodingSpaces Toolbox</h3>
-            <p class="card-role" data-i18n="work.c2.role">Contributing author &middot; C# / Grasshopper</p>
-            <p data-i18n="work.c2.body">
-              A free, open-source toolbox for the computational analysis and generation of
-              street networks, plots, and buildings. I developed C# components integrating
-              statistical analysis and socioeconomic indicators into parametric urban
-              models. A collaboration of Bauhaus Weimar, ETH Z&uuml;rich, AIT Vienna, and
-              FCL Singapore (GPL v3).
-            </p>
-            <a class="card-link" href="https://toolbox.decodingspaces.net/" target="_blank" rel="noopener" data-i18n="work.c2.link">Visit the toolbox &rarr;</a>
+            <div class="card-media" aria-hidden="true">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="200" fill="#f7f8fa"/>
+                <g stroke="#475160" stroke-width="1.5" opacity=".55">
+                  <line x1="60" y1="150" x2="130" y2="90"/><line x1="130" y1="90" x2="210" y2="120"/>
+                  <line x1="210" y1="120" x2="260" y2="60"/><line x1="130" y1="90" x2="150" y2="40"/>
+                  <line x1="60" y1="150" x2="150" y2="160"/><line x1="150" y1="160" x2="210" y2="120"/>
+                  <line x1="150" y1="40" x2="260" y2="60"/>
+                </g>
+                <g>
+                  <circle cx="60" cy="150" r="8" fill="#2b6cb0"/><circle cx="130" cy="90" r="10" fill="#c8452f"/>
+                  <circle cx="210" cy="120" r="8" fill="#2b6cb0"/><circle cx="260" cy="60" r="9" fill="#e0a92e"/>
+                  <circle cx="150" cy="40" r="7" fill="#2b6cb0"/><circle cx="150" cy="160" r="6" fill="#c8452f"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 data-i18n="work.c2.title">DeCodingSpaces Toolbox</h3>
+              <p class="card-role" data-i18n="work.c2.role">Contributing author &middot; C# / Grasshopper</p>
+              <p data-i18n="work.c2.body">
+                A free, open-source toolbox for the computational analysis and generation of
+                street networks, plots, and buildings. I developed C# components integrating
+                statistical analysis and socioeconomic indicators into parametric urban
+                models. A collaboration of Bauhaus Weimar, ETH Z&uuml;rich, AIT Vienna, and
+                FCL Singapore (GPL v3).
+              </p>
+              <a class="card-link" href="https://toolbox.decodingspaces.net/" target="_blank" rel="noopener" data-i18n="work.c2.link">Visit the toolbox &rarr;</a>
+            </div>
           </article>
 
           <article class="card">
-            <h3 data-i18n="work.c3.title">Open Mobility Data Platforms</h3>
-            <p class="card-role" data-i18n="work.c3.role">Research associate &middot; EDIH.TH, Bauhaus Weimar</p>
-            <p data-i18n="work.c3.body">
-              Interactive data-exploration platforms and digital data infrastructures for
-              open mobility data, developed while advising public institutions in data
-              science at the European Digital Innovation Hub Thuringia.
-            </p>
-            <a class="card-link" href="https://github.com/AbdulmalikAbdulmawla" target="_blank" rel="noopener" data-i18n="work.c3.link">See the code &rarr;</a>
+            <div class="card-media" aria-hidden="true">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="200" fill="#f7f8fa"/>
+                <g fill="none" stroke-width="3" stroke-linecap="round">
+                  <path d="M10 160 C 80 40, 150 200, 230 70 S 300 40, 315 90" stroke="#2b6cb0" opacity=".8"/>
+                  <path d="M10 120 C 90 80, 160 170, 240 110 S 300 90, 315 130" stroke="#c8452f" opacity=".7"/>
+                  <path d="M10 185 C 100 150, 150 60, 250 150 S 305 160, 315 60" stroke="#e0a92e" opacity=".85"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 data-i18n="work.c3.title">Open Mobility Data Platforms</h3>
+              <p class="card-role" data-i18n="work.c3.role">Research associate &middot; EDIH.TH, Bauhaus Weimar</p>
+              <p data-i18n="work.c3.body">
+                Interactive data-exploration platforms and digital data infrastructures for
+                open mobility data, developed while advising public institutions in data
+                science at the European Digital Innovation Hub Thuringia.
+              </p>
+              <a class="card-link" href="https://github.com/AbdulmalikAbdulmawla" target="_blank" rel="noopener" data-i18n="work.c3.link">See the code &rarr;</a>
+            </div>
           </article>
 
           <article class="card">
-            <h3 data-i18n="work.c4.title">Discovering Cities &mdash; Workshop &amp; Exchange</h3>
-            <p class="card-role" data-i18n="work.c4.role">Project coordinator &middot; DAAD, Weimar &harr; Amman</p>
-            <p data-i18n="work.c4.body">
-              A DAAD-funded exchange project between the Bauhaus-Universit&auml;t Weimar and
-              the German-Jordanian University in Amman. I wrote the proposal, managed the
-              finances, and organized the teaching and workshop programme.
-            </p>
-            <a class="card-link" href="https://toolbox.decodingspaces.net/discovering-cities-workshop-amman/" target="_blank" rel="noopener" data-i18n="work.c4.link">Workshop page &rarr;</a>
+            <div class="card-media" aria-hidden="true">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="200" fill="#f7f8fa"/>
+                <g fill-opacity=".45">
+                  <circle cx="120" cy="100" r="60" fill="#2b6cb0"/>
+                  <circle cx="200" cy="100" r="60" fill="#c8452f"/>
+                  <circle cx="160" cy="150" r="45" fill="#e0a92e"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 data-i18n="work.c4.title">Discovering Cities &mdash; Workshop &amp; Exchange</h3>
+              <p class="card-role" data-i18n="work.c4.role">Project coordinator &middot; DAAD, Weimar &harr; Amman</p>
+              <p data-i18n="work.c4.body">
+                A DAAD-funded exchange project between the Bauhaus-Universit&auml;t Weimar and
+                the German-Jordanian University in Amman. I wrote the proposal, managed the
+                finances, and organized the teaching and workshop programme.
+              </p>
+              <a class="card-link" href="https://toolbox.decodingspaces.net/discovering-cities-workshop-amman/" target="_blank" rel="noopener" data-i18n="work.c4.link">Workshop page &rarr;</a>
+            </div>
           </article>
 
         </div>
       </section>
 
-      <!-- ========================= PUBLICATIONS ========================= -->
-      <section id="publications" aria-labelledby="pub-h">
-        <h2 id="pub-h" data-i18n="pub.h">Selected publications</h2>
+      <!-- ========================= RESEARCH (publications + teaching) ========================= -->
+      <section class="panel" id="research" role="tabpanel" aria-labelledby="tab-research" tabindex="-1" style="--cat: var(--bau-red)">
+        <header class="panel-head">
+          <span class="panel-num" aria-hidden="true">02</span>
+          <h2 data-i18n="research.h">Research</h2>
+        </header>
+
+        <h3 class="sub-h" data-i18n="pub.h">Selected publications</h3>
         <ul class="pub-list">
           <li>
             <span class="pub-year">2022</span>
@@ -212,11 +272,28 @@
           Full list on
           <a href="https://www.researchgate.net/profile/Abdulmalik-Abdulmawla" target="_blank" rel="noopener">ResearchGate</a>.
         </p>
+
+        <h3 class="sub-h" data-i18n="teach.h">Teaching &amp; workshops</h3>
+        <ul class="plain" data-i18n="teach.list">
+          <li><strong>2022</strong> &mdash; Place Syntax Tool Workshop (participant), eCAADe 2022, Bergen</li>
+          <li><strong>2018</strong> &mdash; Discovering Cities Workshop (organizer), German-Jordanian University, Amman</li>
+          <li><strong>2018</strong> &mdash; Urban Analysis, Synthesis &amp; Exploration with Grasshopper (organizer), eCAADe 2018, &#321;&oacute;d&#378;</li>
+          <li><strong>2016</strong> &mdash; Rural-to-Urban Transformation Workshop (organizer), Emerging City Lab, Addis Ababa</li>
+          <li><strong>2015</strong> &mdash; Simulating Agent-Based Systems using Processing (organizer), Cairo</li>
+        </ul>
+        <p data-i18n="teach.seminars">
+          University seminars taught: Algorithmic Architecture &middot; Parametric Urban
+          Design &amp; Analysis &middot; SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II &middot; Digital
+          Traffic Simulation Lab &middot; Open Mobility Data &middot; Rent-a-Data-Scientist.
+        </p>
       </section>
 
       <!-- ========================= EXPERIENCE ========================= -->
-      <section id="experience" aria-labelledby="exp-h">
-        <h2 id="exp-h" data-i18n="exp.h">Experience</h2>
+      <section class="panel" id="experience" role="tabpanel" aria-labelledby="tab-experience" tabindex="-1" style="--cat: var(--bau-ochre-dk)">
+        <header class="panel-head">
+          <span class="panel-num" aria-hidden="true">03</span>
+          <h2 data-i18n="exp.h">Experience</h2>
+        </header>
         <ul class="timeline">
           <li>
             <span class="tl-date" data-i18n="exp.e1.date">2023 &ndash; present</span>
@@ -266,50 +343,59 @@
         </ul>
       </section>
 
-      <!-- ========================= TEACHING & WORKSHOPS ========================= -->
-      <section id="teaching" aria-labelledby="teach-h">
-        <h2 id="teach-h" data-i18n="teach.h">Teaching &amp; workshops</h2>
-        <ul class="plain" data-i18n="teach.list">
-          <li><strong>2022</strong> &mdash; Place Syntax Tool Workshop (participant), eCAADe 2022, Bergen</li>
-          <li><strong>2018</strong> &mdash; Discovering Cities Workshop (organizer), German-Jordanian University, Amman</li>
-          <li><strong>2018</strong> &mdash; Urban Analysis, Synthesis &amp; Exploration with Grasshopper (organizer), eCAADe 2018, &#321;&oacute;d&#378;</li>
-          <li><strong>2016</strong> &mdash; Rural-to-Urban Transformation Workshop (organizer), Emerging City Lab, Addis Ababa</li>
-          <li><strong>2015</strong> &mdash; Simulating Agent-Based Systems using Processing (organizer), Cairo</li>
-        </ul>
-        <p data-i18n="teach.seminars">
-          University seminars taught: Algorithmic Architecture &middot; Parametric Urban
-          Design &amp; Analysis &middot; SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II &middot; Digital
-          Traffic Simulation Lab &middot; Open Mobility Data &middot; Rent-a-Data-Scientist.
-        </p>
-      </section>
+      <!-- ========================= ABOUT (bio + skills) ========================= -->
+      <section class="panel" id="about" role="tabpanel" aria-labelledby="tab-about" tabindex="-1" style="--cat: var(--ink-900)">
+        <header class="panel-head">
+          <span class="panel-num" aria-hidden="true">04</span>
+          <h2 data-i18n="about.h">About</h2>
+        </header>
+        <div class="prose">
+          <p data-i18n="about.p1">
+            I am a spatial-economic researcher and computational urban designer. My work
+            examines urban structures in relation to local value creation, service
+            economies, and resilience &mdash; empirically linking spatial configuration to
+            economic dynamics in order to support sustainable urban and regional development.
+          </p>
+          <p data-i18n="about.p2">
+            Methodologically I work with GIS, network analysis, agent-based simulation, and
+            data-driven methods (Python, R, C#). My PhD project investigates the
+            spatial-economic dynamics of local production and service structures:
+            <em>&ldquo;Spatial dependency of urban retail: detailed methods for positioning
+            street-level activities&rdquo;</em> (supervisor: Prof. Dr. Reinhard K&ouml;nig).
+          </p>
+          <p data-i18n="about.p3">
+            Across a decade of teaching and research &mdash; in Germany, Egypt, Jordan, and
+            Ethiopia &mdash; I have consistently built the tools that make analysis
+            reproducible: from Grasshopper plug-ins for spatial data analysis to interactive
+            web platforms for open-data exploration and evidence-based design.
+          </p>
+        </div>
 
-      <!-- ========================= SKILLS ========================= -->
-      <section id="skills" aria-labelledby="skills-h">
-        <h2 id="skills-h" data-i18n="skills.h">Skills</h2>
+        <h3 class="sub-h" data-i18n="skills.h">Skills</h3>
         <div class="skill-groups">
           <div class="skill-group">
-            <h3 data-i18n="skills.g1">Programming</h3>
+            <h4 data-i18n="skills.g1">Programming</h4>
             <ul class="chips">
               <li>Python</li><li>C#</li><li>R</li><li>Grasshopper</li>
               <li>Java / Processing</li><li>vvvv</li><li>Arduino</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3 data-i18n="skills.g2">Spatial &amp; analytical</h3>
+            <h4 data-i18n="skills.g2">Spatial &amp; analytical</h4>
             <ul class="chips" data-i18n="skills.g2list">
               <li>GIS</li><li>Network analysis</li><li>Agent-based simulation</li>
               <li>Space syntax</li><li>Spatial data engineering</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3 data-i18n="skills.g3">Modelling &amp; media</h3>
+            <h4 data-i18n="skills.g3">Modelling &amp; media</h4>
             <ul class="chips">
               <li>Rhino</li><li>AutoCAD</li><li>Revit</li><li>3ds Max</li>
               <li>Photoshop</li><li>Illustrator</li><li>InDesign</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3 data-i18n="skills.g4">Languages</h3>
+            <h4 data-i18n="skills.g4">Languages</h4>
             <ul class="chips" data-i18n="skills.g4list">
               <li>Arabic (native)</li><li>English (fluent)</li><li>German (very good)</li>
             </ul>
@@ -322,7 +408,7 @@
 
   <!-- ========================= FOOTER ========================= -->
   <footer class="site-footer">
-    <div class="wrap">
+    <div class="wrap wrap-wide">
       <p class="foot-name">Abdulmalik Abdulmawla</p>
       <p class="foot-loc" data-i18n="foot.loc">Weimar, Germany</p>
       <p class="foot-email"><a href="mailto:abdulmalik.abdulmawla@uni-weimar.de">abdulmalik.abdulmawla@uni-weimar.de</a></p>
@@ -333,10 +419,10 @@
         <a href="https://www.linkedin.com/in/abdulmalikmawla/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
         <a href="https://orcid.org/0000-0003-3383-5998" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID"><svg><use href="#i-orcid"/></svg></a>
       </nav>
-      <p class="foot-back"><a href="#top" data-i18n="foot.back">Back to top &uarr;</a></p>
     </div>
   </footer>
 
+  <script src="tabs.js" defer></script>
   <script src="i18n.js" defer></script>
 </body>
 </html>

@@ -11,13 +11,30 @@ Hand-written **static HTML + CSS**. No framework, no Vite, no `node_modules`, no
 This is deliberate (lowest upkeep, instant GitHub Pages deploy). Sibling platform apps are
 Vite+React — this one is intentionally NOT. Do not scaffold a build system here.
 
+## Layout — landing hero + tabbed workspace
+Not a long scroll. A constant **hero** sits on top; below it a sticky **tab bar** swaps between 4
+panels — **Work · Research · Experience · About** (Research = publications + teaching; About = bio +
+skills). All 4 are real `<section class="panel">`s in source order, so **no-JS + crawlers see
+everything stacked**; JS hides the inactive ones. Progressive-enhancement guard: `<html class="no-js">`
+is flipped to `js` by an inline `<head>` script, and CSS only hides panels under `.js` — so with JS off
+nothing is hidden. Deep-links work (`#research`); legacy anchors (`#publications`, `#teaching`,
+`#skills`) alias to their tab (see `ALIAS` in `tabs.js`).
+
+Visual system = **muted Bauhaus**: desaturated accent trio (`--bau-red/-yellow/-blue`, ochre-dk for
+text) used only as per-tab wayfinding + motif, never a colour flood. Each panel sets its category colour
+via inline `style="--cat: …"`. Dual measure: `--measure-wide` (72rem) shell, `--measure` (46rem) for
+prose. Hero has a faint CSS grid + constructivist SVG primitives. Work cards carry hand-authored **SVG
+data-diagrams** in a fixed 16:10 `.card-media` slot — swap for real app screenshots later by dropping an
+`<img>` in the same slot (no layout change).
+
 ## Files
 | File | Role |
 |---|---|
-| `index.html` | Entire site. Sections are HTML-commented (ABOUT / FEATURED WORK / PUBLICATIONS / EXPERIENCE / TEACHING / SKILLS). |
-| `styles.css` | Academic-minimal design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`) for cross-project continuity. CSS custom props in `:root`. |
-| `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings live in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Choice persisted in `localStorage`; `?lang=de` forces German. |
-| `assets/` | `favicon.svg`; optional `CV.pdf` / thumbnails later. |
+| `index.html` | Entire site: hero, tab bar (`role="tablist"`), 4 `.panel` sections, footer. HTML-commented per panel. Inline `<head>` script flips `no-js`→`js`. |
+| `styles.css` | Muted-Bauhaus design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`). Tokens in `:root`; tab/panel/card/motif styles; reduced-motion + print (print expands all panels). |
+| `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
+| `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
+| `assets/` | `favicon.svg`; optional `CV.pdf` / real screenshots later. |
 | `.nojekyll` | GitHub Pages serves files verbatim. |
 
 ## i18n — how to edit bilingual content

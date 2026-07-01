@@ -16,12 +16,12 @@
       "Dienstleistungsökonomien und der Resilienz städtischer Systeme. Doktorand an " +
       "der Bauhaus-Universität Weimar.",
 
-    "nav.about": "Über mich",
-    "nav.work": "Ausgewählte Arbeiten",
-    "nav.publications": "Publikationen",
-    "nav.experience": "Berufserfahrung",
-    "nav.teaching": "Lehre",
-    "nav.skills": "Kompetenzen",
+    "tab.work": "Arbeiten",
+    "tab.research": "Forschung",
+    "tab.experience": "Werdegang",
+    "tab.about": "Über mich",
+
+    "research.h": "Forschung",
 
     "about.h": "Über mich",
     "about.p1":
@@ -127,8 +127,7 @@
     "skills.g4list":
       "<li>Arabisch (Muttersprache)</li><li>Englisch (fließend)</li><li>Deutsch (sehr gut)</li>",
 
-    "foot.loc": "Weimar, Deutschland",
-    "foot.back": "Nach oben ↑"
+    "foot.loc": "Weimar, Deutschland"
   };
 
   var STORE = "lang";
