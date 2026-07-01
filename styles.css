@@ -175,12 +175,18 @@ main { padding: 2.5rem 0 3rem; }
 /* ---------- WORK CARDS ---------- */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.4rem; }
 .card {
+  position: relative;
   display: flex; flex-direction: column;
   border: 1px solid var(--hair); border-top: 4px solid var(--cat, var(--accent));
   border-radius: 10px; overflow: hidden; background: #fff;
   transition: box-shadow .15s ease, transform .15s ease;
 }
 .card:hover { box-shadow: 0 8px 26px rgba(31,41,51,.09); transform: translateY(-3px); }
+.card:hover h3 { color: var(--accent); }        /* title reads as a link on hover */
+/* stretched link — the bottom card-link covers the whole card (media + title clickable),
+   while staying the single link in the accessibility tree */
+.card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card:focus-within { box-shadow: 0 0 0 2px var(--accent); }
 .card-media { aspect-ratio: 16 / 10; background: var(--bg-tint); border-bottom: 1px solid var(--hair); }
 .card-media svg, .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .card-body { padding: 1.2rem 1.4rem 1.4rem; display: flex; flex-direction: column; flex: 1; }

@@ -37,10 +37,11 @@
       "<em>„Räumliche Abhängigkeit des städtischen Einzelhandels: detaillierte Methoden " +
       "zur Verortung von Aktivitäten auf Straßenebene“</em> (Betreuer: Prof. Dr. Reinhard König).",
     "about.p3":
-      "In einem Jahrzehnt Lehre und Forschung – in Deutschland, Ägypten, Jordanien und " +
-      "Äthiopien – habe ich immer wieder die Werkzeuge gebaut, die Analysen reproduzierbar " +
-      "machen: von Grasshopper-Plug-ins für die räumliche Datenanalyse bis hin zu " +
-      "interaktiven Web-Plattformen für Open-Data-Exploration und evidenzbasiertes Entwerfen.",
+      "Über fast zwei Jahrzehnte – von der Architekturpraxis in Ägypten und den VAE bis zu " +
+      "einem Jahrzehnt Lehre und Forschung in Deutschland, Ägypten, Jordanien und Äthiopien – " +
+      "habe ich immer wieder die Werkzeuge gebaut, die Analysen reproduzierbar machen: von " +
+      "Grasshopper-Plug-ins für die räumliche Datenanalyse bis hin zu interaktiven " +
+      "Web-Plattformen für Open-Data-Exploration und evidenzbasiertes Entwerfen.",
 
     "work.h": "Ausgewählte Arbeiten",
     "work.c1.title": "VSP&nbsp;Unfallatlas – Verkehrssicherheits-Explorer",
@@ -92,12 +93,14 @@
     "exp.e1.role": "Wissenschaftlicher Mitarbeiter – Professur Verkehrssystemplanung",
     "exp.e1.body":
       "Erhebung und Analyse offener Mobilitätsdaten, Entwicklung interaktiver Plattformen zur " +
-      "Datenexploration und Data-Science-Beratung öffentlicher Institutionen.",
+      "Datenexploration und Data-Science-Beratung öffentlicher Institutionen – inklusive Schulungen " +
+      "für Verwaltungen zu europäischen Standards für offene Mobilitätsdaten und Betreuung " +
+      "studentischer Arbeiten.",
     "exp.e2.role": "Wissenschaftlicher Mitarbeiter – Informatik in der Architektur (InfAR/InfAU)",
     "exp.e2.body":
       "Lehre rechnergestützter Methoden für Stadtplanung und -analyse; Entwicklung von " +
-      "Entwurfs- und Forschungswerkzeugen (DeCodingSpaces Toolbox); Unterstützung " +
-      "wissenschaftlicher Publikationen.",
+      "Entwurfs- und Forschungswerkzeugen (DeCodingSpaces Toolbox, mineR); Betreuung von " +
+      "Masterarbeiten und Unterstützung wissenschaftlicher Publikationen.",
     "exp.e3.role": "Mitautor – DeCodingSpaces Toolbox",
     "exp.e3.body":
       "C#-Programmierung für eine Grasshopper-Toolbox zur Stadtanalyse; Testing, Dokumentation " +
@@ -110,6 +113,11 @@
     "exp.e5.body":
       "Entwurfsstudio und Architekturberatung – Wohn-, Bildungs- und Wettbewerbsprojekte " +
       "(u. a. der Lusail Underpass Competition, Katar).",
+    "exp.e6.role": "Junior- &amp; freiberuflicher Architekt – Ägypten &amp; VAE",
+    "exp.e6.body":
+      "Frühe Architekturpraxis – Entwurf, CAD, 3D-Modellierung und Visualisierung sowie " +
+      "Bauherrenvertretung bei Wohn- und Gewerbeprojekten – bevor der Wechsel zu Computational " +
+      "Design und Forschung erfolgte.",
 
     "teach.h": "Lehre &amp; Workshops",
     "teach.list":
@@ -120,8 +128,8 @@
       "<li><strong>2015</strong> – Simulating Agent-Based Systems using Processing (Organisator), Kairo</li>",
     "teach.seminars":
       "Gehaltene Universitätsseminare: Algorithmic Architecture · Parametric Urban Design " +
-      "&amp; Analysis · SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II · Digitales Verkehrssimulationslabor · " +
-      "Open Mobility Data · Rent-a-Data-Scientist.",
+      "&amp; Analysis · SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II · Circular Urbanism · Digitales " +
+      "Verkehrssimulationslabor · Open Mobility Data · Rent-a-Data-Scientist.",
 
     "skills.h": "Kompetenzen",
     "skills.g1": "Programmierung",
