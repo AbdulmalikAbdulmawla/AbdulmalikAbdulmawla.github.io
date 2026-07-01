@@ -71,17 +71,18 @@ h1, h2, h3, h4 { line-height: 1.2; color: var(--ink); }
     repeating-linear-gradient(to bottom, rgba(31,41,51,.045) 0 1px, transparent 1px 24px);
   pointer-events: none;
 }
-/* constructivist Bauhaus primitives, top-right */
-.hero-art {
-  position: absolute;
-  top: 1.5rem; right: max(1.5rem, calc((100% - var(--measure-wide)) / 2));
-  width: clamp(120px, 22vw, 220px); height: auto;
+/* boids-over-street-network canvas (decorative, animated) */
+.hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
 }
-.hero-art .art-circle   { fill: var(--bau-red);    opacity: .9; }
-.hero-art .art-triangle { fill: var(--bau-yellow); opacity: .95; }
-.hero-art .art-square   { fill: none; stroke: var(--bau-blue); stroke-width: 4; }
-.hero-art .art-line     { stroke: var(--bau-blue); stroke-width: 4; }
+/* soft scrim so hero text stays legible over the animation */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(100deg,
+    var(--bg-tint) 0%, rgba(247,248,250,.82) 34%, rgba(247,248,250,.15) 62%, transparent 100%);
+}
 
 .hero .wrap { position: relative; z-index: 1; }
 .eyebrow {
@@ -229,7 +230,6 @@ main { padding: 2.5rem 0 3rem; }
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 40rem) {
   .hero { padding: 4rem 0 2.5rem; }
-  .hero-art { opacity: .8; }
 }
 @media (max-width: 34rem) {
   body { font-size: 16px; }
@@ -248,7 +248,8 @@ main { padding: 2.5rem 0 3rem; }
 
 /* ---------- PRINT (expand every panel, drop chrome) ---------- */
 @media print {
-  .tabbar, .skip-link, .hero-art, .hero-grid, .lang-toggle { display: none; }
+  .tabbar, .skip-link, .hero-canvas, .hero-grid, .lang-toggle { display: none; }
+  .hero::after { display: none; }
   .js .panel { display: block !important; animation: none; page-break-inside: avoid; margin-bottom: 1.5rem; }
   .hero, .site-footer { background: #fff; }
   body { font-size: 11pt; color: #000; }

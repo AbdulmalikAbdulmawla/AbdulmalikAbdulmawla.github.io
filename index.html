@@ -35,14 +35,8 @@
   <!-- ========================= HERO ========================= -->
   <header class="hero" id="top">
     <div class="hero-grid" aria-hidden="true"></div>
-    <!-- constructivist Bauhaus primitives (decorative) -->
-    <svg class="hero-art" viewBox="0 0 200 200" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-      <circle class="art-circle" cx="150" cy="45" r="34" />
-      <polygon class="art-triangle" points="40,150 78,150 59,112" />
-      <line class="art-line" x1="20" y1="40" x2="110" y2="40" />
-      <line class="art-line" x1="20" y1="52" x2="90" y2="52" />
-      <rect class="art-square" x="150" y="140" width="30" height="30" />
-    </svg>
+    <!-- boids flocking across a street network — from swarm simulation to urban movement -->
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
     <div class="wrap wrap-wide">
       <p class="eyebrow" data-i18n="hero.eyebrow">Computational Urban Design · Spatial-Economic Research</p>
       <h1 class="hero-name">Abdulmalik<br>Abdulmawla</h1>
@@ -422,6 +416,7 @@
     </div>
   </footer>
 
+  <script src="boids.js" defer></script>
   <script src="tabs.js" defer></script>
   <script src="i18n.js" defer></script>
 </body>

@@ -23,15 +23,18 @@ nothing is hidden. Deep-links work (`#research`); legacy anchors (`#publications
 Visual system = **muted Bauhaus**: desaturated accent trio (`--bau-red/-yellow/-blue`, ochre-dk for
 text) used only as per-tab wayfinding + motif, never a colour flood. Each panel sets its category colour
 via inline `style="--cat: …"`. Dual measure: `--measure-wide` (72rem) shell, `--measure` (46rem) for
-prose. Hero has a faint CSS grid + constructivist SVG primitives. Work cards carry hand-authored **SVG
-data-diagrams** in a fixed 16:10 `.card-media` slot — swap for real app screenshots later by dropping an
-`<img>` in the same slot (no layout change).
+prose. Hero has a faint CSS grid + an animated **boids-over-street-network** canvas (`boids.js`) — a
+signature motif tying his arc from swarm/CA simulation to urban movement; a soft `.hero::after` scrim
+keeps the hero text legible over it. Work cards carry hand-authored **SVG data-diagrams** in a fixed
+16:10 `.card-media` slot — swap for real app screenshots later by dropping an `<img>` in the same slot
+(no layout change).
 
 ## Files
 | File | Role |
 |---|---|
 | `index.html` | Entire site: hero, tab bar (`role="tablist"`), 4 `.panel` sections, footer. HTML-commented per panel. Inline `<head>` script flips `no-js`→`js`. |
 | `styles.css` | Muted-Bauhaus design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`). Tokens in `:root`; tab/panel/card/motif styles; reduced-motion + print (print expands all panels). |
+| `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. Decorative + aria-hidden; freezes to a static frame under `prefers-reduced-motion`; pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
 | `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
 | `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
 | `assets/` | `favicon.svg`; optional `CV.pdf` / real screenshots later. |
