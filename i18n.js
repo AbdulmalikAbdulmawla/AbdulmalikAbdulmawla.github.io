@@ -74,6 +74,13 @@
       "German-Jordanian University in Amman. Ich habe den Antrag verfasst, die Finanzen " +
       "verwaltet und das Lehr- und Workshop-Programm organisiert.",
     "work.c4.link": "Zur Workshop-Seite →",
+    "work.c5.title": "mineR — R-Statistik in Grasshopper",
+    "work.c5.role": "Hauptautor &amp; Entwickler · C# / R / Grasshopper",
+    "work.c5.body":
+      "Ein Grasshopper-Plugin, das die statistische Analyse von R in die parametrische " +
+      "Entwurfsumgebung bringt — integrierte Datenanalyse, Regression und Visualisierung direkt " +
+      "im Modellierungs-Workflow. Vorgestellt auf der 36. eCAADe (2018).",
+    "work.c5.link": "Zum Beitrag →",
 
     "pub.h": "Ausgewählte Publikationen",
     "pub.more":
