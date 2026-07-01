@@ -1,0 +1,255 @@
+/* ============================================================
+   Abdulmalik Abdulmawla — portfolio
+   Academic-minimal, single page. Palette borrowed from the
+   VSP_Unfallatlas chart-export system for cross-project continuity.
+   ============================================================ */
+
+:root {
+  --ink:        #1f2933;   /* primary text  */
+  --ink-soft:   #475160;   /* secondary text */
+  --muted:      #6b6b6b;   /* captions / meta */
+  --accent:     #2b6cb0;   /* links / highlights */
+  --accent-dk:  #1f4f85;   /* link hover */
+  --hair:       #e0e3e8;   /* hairline dividers */
+  --hair-soft:  #eef1f4;   /* faint fill */
+  --bg:         #ffffff;
+  --bg-tint:    #f7f8fa;
+  --measure:    46rem;     /* reading column width */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-dk); text-decoration: underline; }
+
+h1, h2, h3 { line-height: 1.25; color: var(--ink); }
+
+/* skip link (a11y) */
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--ink); color: #fff; padding: .6rem 1rem; z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+/* ---------- HERO ---------- */
+.hero {
+  padding: 5rem 0 3rem;
+  border-bottom: 1px solid var(--hair);
+  background: var(--bg-tint);
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 .8rem;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.1rem);
+  margin: 0 0 1rem;
+  letter-spacing: -.01em;
+}
+.lede {
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  max-width: 40rem;
+  margin: 0 0 1.8rem;
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .4rem;
+}
+.profile-links a {
+  display: inline-block;
+  padding: .35rem .8rem;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: #fff;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+.profile-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+/* ORCID placeholder — visually flagged until the real link is added */
+.profile-links a[data-placeholder] {
+  border-style: dashed;
+  opacity: .7;
+}
+
+/* ---------- SECTION NAV (sticky) ---------- */
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--hair);
+}
+.section-nav .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+.section-nav a {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+/* ---------- SECTIONS ---------- */
+main { padding: 1rem 0 2rem; }
+section { padding: 2.6rem 0; border-bottom: 1px solid var(--hair); }
+section:last-child { border-bottom: none; }
+section > h2 {
+  font-size: 1.5rem;
+  margin: 0 0 1.3rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--ink);
+  display: inline-block;
+}
+section p { max-width: 42rem; }
+
+/* ---------- FEATURED WORK CARDS ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.2rem;
+}
+.card {
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  padding: 1.3rem 1.4rem;
+  background: #fff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 18px rgba(31,41,51,.06);
+}
+.card h3 { font-size: 1.12rem; margin: 0 0 .3rem; }
+.card-role {
+  font-size: .82rem;
+  color: var(--muted);
+  margin: 0 0 .7rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.card p { font-size: .96rem; margin: 0 0 1rem; }
+.card-link { font-weight: 600; font-size: .95rem; }
+
+/* ---------- PUBLICATIONS ---------- */
+.pub-list { list-style: none; margin: 0; padding: 0; }
+.pub-list li {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--hair);
+}
+.pub-list li:first-child { border-top: none; }
+.pub-year {
+  flex: 0 0 3.2rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--accent);
+}
+.pub-body p { margin: 0 0 .3rem; font-size: .98rem; }
+.pub-body a { font-size: .9rem; font-weight: 600; }
+.more-link { margin-top: 1.2rem; font-size: .95rem; }
+
+/* ---------- EXPERIENCE TIMELINE ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li {
+  display: flex;
+  gap: 1.4rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--hair);
+}
+.timeline li:first-child { border-top: none; }
+.tl-date {
+  flex: 0 0 8rem;
+  font-size: .9rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-top: .15rem;
+}
+.tl-body h3 { font-size: 1.05rem; margin: 0 0 .2rem; }
+.tl-org { font-size: .9rem; color: var(--accent); margin: 0 0 .4rem; }
+.tl-body p:last-child { font-size: .95rem; margin: 0; }
+
+/* ---------- PLAIN LISTS ---------- */
+.plain { padding-left: 1.1rem; }
+.plain li { margin-bottom: .35rem; font-size: .96rem; }
+
+/* ---------- SKILLS ---------- */
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.4rem;
+}
+.skill-group h3 { font-size: 1rem; margin: 0 0 .6rem; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.chips li {
+  background: var(--hair-soft);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  padding: .25rem .6rem;
+  font-size: .85rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- FOOTER ---------- */
+.site-footer {
+  background: var(--bg-tint);
+  border-top: 1px solid var(--hair);
+  padding: 2.5rem 0 3rem;
+}
+.foot-name { font-weight: 700; font-size: 1.1rem; margin: 0; }
+.foot-loc { color: var(--muted); margin: .1rem 0 1rem; }
+.foot-back { margin-top: 1.2rem; font-size: .9rem; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 34rem) {
+  body { font-size: 16px; }
+  .hero { padding: 3.5rem 0 2.5rem; }
+  .timeline li, .pub-list li { flex-direction: column; gap: .3rem; }
+  .tl-date, .pub-year { flex-basis: auto; }
+  .section-nav .wrap { gap: .8rem 1rem; }
+}
+
+/* ---------- PRINT ---------- */
+@media print {
+  .section-nav, .skip-link, .profile-links, .foot-back { display: none; }
+  .hero, .site-footer { background: #fff; }
+  body { font-size: 11pt; color: #000; }
+  a { color: #000; text-decoration: none; }
+  section { border-bottom: 1px solid #ccc; page-break-inside: avoid; }
+  .card:hover { box-shadow: none; }
+}

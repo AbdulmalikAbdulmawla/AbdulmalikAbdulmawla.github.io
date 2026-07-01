@@ -1,0 +1,9 @@
+# Editor / OS cruft
+.DS_Store
+Thumbs.db
+*~
+
+# Claude Code workspace
+.claude/
+
+# No build tooling — this is a hand-written static site (no node_modules, no dist)
