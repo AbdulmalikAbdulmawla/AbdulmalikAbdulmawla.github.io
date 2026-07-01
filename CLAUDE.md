@@ -55,8 +55,9 @@ auto-generated. When the CV changes materially, update the HTML by hand.
 
 ## Deploy
 User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-branch root at
-`https://abdulmalikabdulmawla.github.io`. Push = publish. Registered as a submodule of
-research-lab (private workspace); this repo's own remote is **public**.
+`https://abdulmalikabdulmawla.github.io`. Push = publish. Registered as a submodule of the
+**work-dev** repo (private workspace) at `work-dev/portfolio`; this repo's own remote is **public**
+(a portfolio is a public site by nature — its served source is already public).
 
 ## Known open items
 - ORCID wired in (hero + footer) → https://orcid.org/0000-0003-3383-5998.
