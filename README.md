@@ -14,12 +14,20 @@ Hand-written **static HTML + CSS**. No framework, no build step, no dependencies
 
 ```
 portfolio/
-├── index.html      ← the whole site (all sections)
+├── index.html      ← the whole site (all sections); English text is the default
 ├── styles.css      ← academic-minimal styling (palette shared with VSP_Unfallatlas exports)
+├── i18n.js         ← EN/DE language toggle (German strings live here)
 ├── assets/         ← favicon (+ optional CV.pdf, thumbnails later)
 ├── .nojekyll       ← serve files verbatim on GitHub Pages
 └── README.md
 ```
+
+## Languages (EN / DE)
+
+The site has an **EN⇄DE toggle** (button top-right of the sticky nav). English is written directly in
+`index.html`; the German versions live in `i18n.js` keyed by each element's `data-i18n` attribute.
+**To edit a sentence, change it in both places.** The visitor's choice is remembered; `?lang=de` opens
+the site in German directly. Publications stay in English (they were published in English).
 
 ## Editing content
 
