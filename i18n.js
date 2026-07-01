@@ -107,8 +107,8 @@
     "teach.h": "Lehre &amp; Workshops",
     "teach.list":
       "<li><strong>2022</strong> – Place Syntax Tool Workshop (Teilnehmer), eCAADe 2022, Bergen</li>" +
-      "<li><strong>2018</strong> – Discovering Cities Workshop (Organisator), German-Jordanian University, Amman</li>" +
-      "<li><strong>2018</strong> – Urban Analysis, Synthesis &amp; Exploration with Grasshopper (Organisator), eCAADe 2018, Łódź</li>" +
+      "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/discovering-cities-workshop-amman/\" target=\"_blank\" rel=\"noopener\">Discovering Cities Workshop</a> (Organisator), German-Jordanian University, Amman</li>" +
+      "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/ecaade2018-workshop-urban-analysis-synthesis-and-exploration-with-grasshopper/\" target=\"_blank\" rel=\"noopener\">Urban Analysis, Synthesis &amp; Exploration with Grasshopper</a> (Organisator), eCAADe 2018, Łódź</li>" +
       "<li><strong>2016</strong> – Rural-to-Urban Transformation Workshop (Organisator), Emerging City Lab, Addis Abeba</li>" +
       "<li><strong>2015</strong> – Simulating Agent-Based Systems using Processing (Organisator), Kairo</li>",
     "teach.seminars":
