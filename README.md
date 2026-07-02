@@ -54,7 +54,7 @@ GitHub Pages redeploys automatically.
 
 ## To do
 
-- Optional: add a downloadable `assets/CV.pdf` and link it from the hero.
+- Optional: real app screenshots in the `card-media` slots (drop an `<img>`, remove `data-art`).
 
 ## Deployment (GitHub Pages)
 

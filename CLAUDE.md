@@ -49,7 +49,7 @@ Every translatable element carries a `data-i18n="key"`; its **English** text is 
 HTML (the default, works with JS off). The **German** counterpart is the matching key in the `DE`
 object in `i18n.js`. To change a sentence, edit BOTH the HTML (EN) and the `DE[key]` (DE). Keep the two
 in sync. Publications carry no `data-i18n` (they stay English, as published). Coverage is exact —
-65 keys, 65 translations — verify with the parity script pattern:
+66 keys, 66 translations — verify with the parity script pattern:
 `data-i18n="…"` keys in `index.html` vs the 4-space-indented `"key":` lines of the `DE` dict
 (any missing/orphan key is a bug; keep the count exact after every content edit).
 
@@ -66,7 +66,10 @@ User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-
 
 ## Known open items
 - ORCID wired in (hero + footer) → https://orcid.org/0000-0003-3383-5998.
-- No CV PDF yet (decision pending).
+- `assets/CV.pdf` — generated from the master CV (Edge headless print-to-pdf over a hand-built
+  HTML). **Phone + home address deliberately stripped** (public file: email/city/links only);
+  **PhD always "in progress"** — he is not a PhD holder. Regenerate by hand when the master CV
+  changes materially.
 
 ## Verify after edits
 `node --check` on all JS files (boids, tabs, i18n, card-art) + exact `data-i18n` ↔ `DE`-dict parity.

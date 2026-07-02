@@ -15,6 +15,7 @@
       "und verknüpfe dabei räumliche Strukturen mit lokaler Wertschöpfung, " +
       "Dienstleistungsökonomien und der Resilienz städtischer Systeme. Doktorand an " +
       "der Bauhaus-Universität Weimar.",
+    "hero.cv": "Lebenslauf (PDF) herunterladen ↓",
 
     "tab.work": "Arbeiten",
     "tab.research": "Forschung",
