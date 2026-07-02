@@ -16,6 +16,8 @@ Hand-written **static HTML + CSS**. No framework, no build step, no dependencies
 portfolio/
 ├── index.html      ← the whole site: hero + 4 tabbed panels; English text is the default
 ├── styles.css      ← muted-Bauhaus styling (palette shared with VSP_Unfallatlas exports)
+├── boids.js        ← hero canvas: boids over a street network; the cursor is an attractor
+├── card-art.js     ← generative, mouse-reactive canvas scenes over the 5 work-card diagrams
 ├── tabs.js         ← accessible tab switching (Work / Research / Experience / About)
 ├── i18n.js         ← EN/DE language toggle (German strings live here)
 ├── assets/         ← favicon (+ optional CV.pdf, real screenshots later)
@@ -26,9 +28,12 @@ portfolio/
 ## Layout
 
 A short **hero + tabs** design, not a long scroll: the top band is always visible; the tab bar switches
-between **Work · Research · Experience · About**. Each work card shows a hand-drawn SVG diagram — to use
-a real screenshot instead, drop an `<img>` into that card's `card-media` slot. Deep-links work
-(e.g. `…github.io/#research`).
+between **Work · Research · Experience · About**. Each work card shows a hand-drawn SVG diagram that
+`card-art.js` brings to life as a small generative animation themed to the project (accident hotspots,
+a self-drawing street network, mobility flows, an exchange of communities, a live regression) — all of
+them react to the cursor, as does the boids flock in the hero. To use a real screenshot instead, drop
+an `<img>` into that card's `card-media` slot and remove the slot's `data-art` attribute. Deep-links
+work (e.g. `…github.io/#research`).
 
 ## Languages (EN / DE)
 

@@ -43,6 +43,18 @@
       "Grasshopper-Plug-ins für die räumliche Datenanalyse bis hin zu interaktiven " +
       "Web-Plattformen für Open-Data-Exploration und evidenzbasiertes Entwerfen.",
 
+    "edu.h": "Ausbildung",
+    "edu.li1":
+      "<strong>Promotion – laufend</strong> (seit 2018) · Informatik in der Architektur " +
+      "und Urbanistik, Bauhaus-Universität Weimar",
+    "edu.li2": "<strong>M.A. Architektur</strong> (2013) · Hochschule Anhalt, Dessau-Roßlau",
+    "edu.li3": "<strong>B.Sc. Architektur und Ingenieurwesen</strong> (2007) · Mansoura University, Ägypten",
+
+    "recog.h": "Auszeichnung",
+    "recog.body":
+      "2026 – Würdigung des zehnjährigen Dienstjubiläums an der Bauhaus-Universität Weimar, " +
+      "überreicht vom Universitätspräsidenten.",
+
     "work.h": "Ausgewählte Arbeiten",
     "work.c1.title": "VSP&nbsp;Unfallatlas – Verkehrssicherheits-Explorer",
     "work.c1.role": "Alleiniger Entwickler · Bauhaus Weimar, EDIH.TH",

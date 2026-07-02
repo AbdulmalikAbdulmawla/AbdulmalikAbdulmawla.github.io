@@ -82,7 +82,7 @@
         <div class="cards">
 
           <article class="card">
-            <div class="card-media" aria-hidden="true">
+            <div class="card-media" data-art="unfall" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <g stroke="#e0e3e8" stroke-width="1">
@@ -116,7 +116,7 @@
           </article>
 
           <article class="card">
-            <div class="card-media" aria-hidden="true">
+            <div class="card-media" data-art="toolbox" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <g stroke="#475160" stroke-width="1.5" opacity=".55">
@@ -147,7 +147,7 @@
           </article>
 
           <article class="card">
-            <div class="card-media" aria-hidden="true">
+            <div class="card-media" data-art="flows" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <g fill="none" stroke-width="3" stroke-linecap="round">
@@ -170,7 +170,7 @@
           </article>
 
           <article class="card">
-            <div class="card-media" aria-hidden="true">
+            <div class="card-media" data-art="venn" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <g fill-opacity=".45">
@@ -193,7 +193,7 @@
           </article>
 
           <article class="card">
-            <div class="card-media" aria-hidden="true">
+            <div class="card-media" data-art="miner" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <g stroke="#e0e3e8" stroke-width="1.5">
@@ -419,6 +419,19 @@
           </p>
         </div>
 
+        <h3 class="sub-h" data-i18n="edu.h">Education</h3>
+        <ul class="plain">
+          <li data-i18n="edu.li1"><strong>PhD &mdash; in progress</strong> (since 2018) &middot; Computer Science in Architecture &amp; Urbanism, Bauhaus-Universit&auml;t Weimar</li>
+          <li data-i18n="edu.li2"><strong>MA Architecture</strong> (2013) &middot; Hochschule Anhalt, Dessau-Ro&szlig;lau, Germany</li>
+          <li data-i18n="edu.li3"><strong>BSc Architecture &amp; Engineering</strong> (2007) &middot; Mansoura University, Egypt</li>
+        </ul>
+
+        <h3 class="sub-h" data-i18n="recog.h">Recognition</h3>
+        <div class="prose">
+          <p data-i18n="recog.body">2026 &mdash; Ten-year service recognition at the
+          Bauhaus-Universit&auml;t Weimar, presented by the University President.</p>
+        </div>
+
         <h3 class="sub-h" data-i18n="skills.h">Skills</h3>
         <div class="skill-groups">
           <div class="skill-group">
@@ -473,5 +486,6 @@
   <script src="boids.js" defer></script>
   <script src="tabs.js" defer></script>
   <script src="i18n.js" defer></script>
+  <script src="card-art.js" defer></script>
 </body>
 </html>

@@ -187,8 +187,12 @@ main { padding: 2.5rem 0 3rem; }
    while staying the single link in the accessibility tree */
 .card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .card:focus-within { box-shadow: 0 0 0 2px var(--accent); }
-.card-media { aspect-ratio: 16 / 10; background: var(--bg-tint); border-bottom: 1px solid var(--hair); }
+.card-media { position: relative; aspect-ratio: 16 / 10; background: var(--bg-tint); border-bottom: 1px solid var(--hair); }
 .card-media svg, .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* generative card art (card-art.js) — a canvas scene injected over the SVG diagram;
+   the SVG remains the no-JS / reduced-motion / print fallback */
+.card-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.card-media.is-live svg { visibility: hidden; }
 .card-body { padding: 1.2rem 1.4rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
 .card-body h3 { font-size: 1.12rem; margin: 0 0 .3rem; }
 .card-role { font-size: .8rem; color: var(--muted); margin: 0 0 .7rem; text-transform: uppercase; letter-spacing: .04em; }
@@ -250,11 +254,14 @@ main { padding: 2.5rem 0 3rem; }
   html { scroll-behavior: auto; }
   .js .panel.is-active { animation: none; }
   .card, .profile-links a { transition: none; }
+  .card-canvas { display: none; }
+  .card-media.is-live svg { visibility: visible; }
 }
 
 /* ---------- PRINT (expand every panel, drop chrome) ---------- */
 @media print {
-  .tabbar, .skip-link, .hero-canvas, .hero-grid, .lang-toggle { display: none; }
+  .tabbar, .skip-link, .hero-canvas, .hero-grid, .lang-toggle, .card-canvas { display: none; }
+  .card-media.is-live svg { visibility: visible; }
   .hero::after { display: none; }
   .js .panel { display: block !important; animation: none; page-break-inside: avoid; margin-bottom: 1.5rem; }
   .hero, .site-footer { background: #fff; }

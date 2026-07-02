@@ -4,6 +4,8 @@
    simulation of natural behaviour → urban movement, traffic
    and spatial-economic analysis. The flock (Reynolds boids)
    migrates node-to-node along a procedural street graph.
+   The cursor is an attractor: the flock streams toward it and
+   orbits it, then drifts back to the streets on leave / idle.
 
    Vanilla canvas, no deps. Decorative + aria-hidden. Freezes to
    a single static frame under prefers-reduced-motion, and pauses
@@ -25,6 +27,16 @@
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   var W = 0, H = 0, nodes = [], boids = [], raf = null, running = false;
+
+  /* ---- cursor attractor state (canvas-local coords) ---- */
+  var PTR = { x: 0, y: 0, active: false, last: 0 };
+  var ptrInf = 0;                          // eased 0..1 cursor influence
+  var heroRect = null, heroRectDirty = true;
+  var P_SEEK = 1.1,                        // pull toward the cursor (waypoint seek is 0.55)
+      P_ORBIT_R = 90,                      // inside this radius: orbit instead of seek
+      P_ORBIT = 0.9,                       // tangential (CCW) orbit force
+      P_RING = 1.2,                        // radial spring toward the orbit ring
+      P_IDLE = 2500;                       // ms without movement → release the flock
 
   function rand(a, b) { return a + Math.random() * (b - a); }
 
@@ -82,6 +94,9 @@
   var R = 66, R2 = 24, MAXV = 1.35, MINV = 0.55;
 
   function step() {
+    // ease cursor influence in/out — engagement and release never snap
+    var pTgt = (PTR.active && performance.now() - PTR.last < P_IDLE) ? 1 : 0;
+    ptrInf += (pTgt - ptrInf) * (pTgt > ptrInf ? 0.06 : 0.04);
     for (var i = 0; i < boids.length; i++) {
       var b = boids[i];
       var sepx = 0, sepy = 0, alx = 0, aly = 0, cohx = 0, cohy = 0, n = 0;
@@ -100,13 +115,30 @@
       if (n) {
         alx /= n; aly /= n; ax += alx * 0.9; ay += aly * 0.9;                 // alignment
         cohx = cohx / n - b.x; cohy = cohy / n - b.y; ax += cohx * 0.010; ay += cohy * 0.010; // cohesion
-        ax += sepx * 1.5; ay += sepy * 1.5;                                    // separation
+        var sw = 1.5 * (1 + 0.4 * ptrInf);                                     // separation (boosted at the ring)
+        ax += sepx * sw; ay += sepy * sw;
+      }
+      // cursor attractor — stream toward it from afar; orbit + ring-spring when near
+      if (ptrInf > 0.001) {
+        var pdx = PTR.x - b.x, pdy = PTR.y - b.y;
+        var pd = Math.sqrt(pdx * pdx + pdy * pdy) || 1;
+        var pux = pdx / pd, puy = pdy / pd;
+        if (pd > P_ORBIT_R) {
+          ax += pux * P_SEEK * ptrInf; ay += puy * P_SEEK * ptrInf;
+        } else {
+          var rad = (pd - P_ORBIT_R * 0.72) / P_ORBIT_R;   // ring spring: + outside, − inside
+          ax += (-puy * P_ORBIT + pux * rad * P_RING) * ptrInf;
+          ay += (pux * P_ORBIT + puy * rad * P_RING) * ptrInf;
+        }
       }
       // seek current target node; hop to a neighbour on arrival (traffic on streets)
       var tx = b.target.x - b.x, ty = b.target.y - b.y;
       var td = Math.sqrt(tx * tx + ty * ty) || 1;
       if (td < 26) { b.cur = b.target; b.target = b.cur.nbrs[(Math.random() * b.cur.nbrs.length) | 0]; }
-      else { ax += (tx / td) * 0.55; ay += (ty / td) * 0.55; }
+      else {
+        var wp = 0.55 * (1 - 0.85 * ptrInf);   // streets fade while the cursor leads
+        ax += (tx / td) * wp; ay += (ty / td) * wp;
+      }
 
       b.vx += ax * 0.06; b.vy += ay * 0.06;
       var sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy) || 1;
@@ -161,6 +193,7 @@
     canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     buildNetwork(); initBoids();
+    heroRectDirty = true;
     if (reduce) draw();            // one static frame
   }
 
@@ -173,6 +206,18 @@
   resize();
 
   if (reduce) return;              // static frame already drawn
+
+  // cursor input — listeners on window: the canvas itself is pointer-events:none.
+  // Touch is ignored (no hover there, and move events fire mid-scroll = jerks).
+  window.addEventListener("pointermove", function (e) {
+    if (e.pointerType === "touch") return;
+    if (heroRectDirty) { heroRect = canvas.getBoundingClientRect(); heroRectDirty = false; }
+    PTR.x = e.clientX - heroRect.left; PTR.y = e.clientY - heroRect.top;
+    PTR.active = PTR.x >= 0 && PTR.y >= 0 && PTR.x <= W && PTR.y <= H;
+    PTR.last = performance.now();
+  }, { passive: true });
+  window.addEventListener("scroll", function () { heroRectDirty = true; }, { passive: true });
+  document.documentElement.addEventListener("mouseleave", function () { PTR.active = false; });
 
   // pause when the hero scrolls out of view
   if ("IntersectionObserver" in window) {
