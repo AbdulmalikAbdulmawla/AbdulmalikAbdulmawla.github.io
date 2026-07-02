@@ -16,8 +16,21 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Progressive enhancement: flip to .js synchronously so panels hide on first paint -->
-  <script>document.documentElement.className = "js";</script>
+  <!-- Progressive enhancement: flip to .js synchronously so panels hide on first paint.
+       Also resolve the motion state (stored override, else the OS reduced-motion
+       preference) before CSS paints — boids.js / card-art.js / styles.css key off it. -->
+  <script>
+    (function (d) {
+      d.className = "js";
+      var off = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      try {
+        var o = localStorage.getItem("motion");
+        if (o === "on") off = false; else if (o === "off") off = true;
+      } catch (e) {}
+      d.classList.add(off ? "motion-off" : "motion-on");
+    })(document.documentElement);
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -484,6 +497,7 @@
     </div>
   </footer>
 
+  <script src="motion.js" defer></script>
   <script src="boids.js" defer></script>
   <script src="tabs.js" defer></script>
   <script src="i18n.js" defer></script>

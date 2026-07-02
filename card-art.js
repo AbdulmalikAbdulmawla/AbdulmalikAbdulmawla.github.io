@@ -8,10 +8,15 @@
    One shared engine: a single rAF loop drives only the scenes
    currently on screen (IntersectionObserver — panels hidden by
    the tab bar report non-intersecting, so switching tabs pauses
-   them for free) and stops itself when none are. All scenes
-   share one window-level pointer tracker; the canvases are
-   pointer-events:none so the stretched card links stay
-   clickable. Vanilla canvas 2D, no deps.
+   them for free) and stops itself when none are. A scene runs
+   ONLY while the cursor is over its card (plus a short ease-out
+   tail), then freezes on its last frame — at rest the static
+   SVG diagram shows. All scenes share one window-level pointer
+   tracker; the canvases are pointer-events:none so the
+   stretched card links stay clickable. Everything obeys the
+   site motion state on <html> (`motion-off` = OS reduced-motion
+   preference or the motion.js pause toggle): canvases are
+   CSS-hidden and the engine stops. Vanilla canvas 2D, no deps.
 
    Scenes (bound by data-art; unknown values are skipped, so a
    future real screenshot just needs its attribute removed):
@@ -24,9 +29,13 @@
 (function () {
   "use strict";
 
-  if (window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (!window.requestAnimationFrame) return;
+
+  /* effective motion state, resolved onto <html> by the inline
+     head script and flipped live by the motion.js toggle */
+  function motionOff() {
+    return document.documentElement.classList.contains("motion-off");
+  }
 
   var medias = document.querySelectorAll(".card-media[data-art]");
   if (!medias.length) return;
@@ -645,10 +654,16 @@
       var r = recs[i];
       if (!r.visible) continue;
       alive = true;
-      if (!r.sized || r.sizeDirty) { if (!fit(r)) continue; }
+      if (!r.sized || r.sizeDirty) {
+        if (!fit(r)) continue;
+        // a live card refit after resize: repaint its frozen frame
+        if (r.live) r.scene.draw(r.ctx, r.w, r.h);
+      }
       var x = MOUSE.cx - r.rect.left, y = MOUSE.cy - r.rect.top;
       var over = MOUSE.seen && x >= 0 && y >= 0 && x <= r.w && y <= r.h;
       r.inf += ((over ? 1 : 0) - r.inf) * (over ? 0.08 : 0.05);
+      // hover-only: run under the cursor (+ ease-out tail), else keep the last frame
+      if (!over && r.inf < 0.02) continue;
       r.scene.step(dt, ts, { x: x, y: y, over: over, seen: MOUSE.seen, inf: r.inf });
       r.scene.draw(r.ctx, r.w, r.h);
       if (!r.live) { r.live = true; r.media.classList.add("is-live"); }
@@ -658,7 +673,7 @@
   }
 
   function start() {
-    if (running || document.hidden) return;
+    if (running || document.hidden || motionOff()) return;
     running = true; lastTs = 0;
     raf = window.requestAnimationFrame(frame);
   }
@@ -703,5 +718,10 @@
 
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) stop(); else maybeStart();
+  });
+
+  // play/pause toggle (motion.js) — CSS hides the canvases when off
+  window.addEventListener("motionchange", function () {
+    if (motionOff()) stop(); else maybeStart();
   });
 })();

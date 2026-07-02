@@ -150,6 +150,13 @@ h1, h2, h3, h4 { line-height: 1.2; color: var(--ink); }
 .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 .lang-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* motion play/pause (motion.js, shares .lang-toggle chrome) — the icon
+   mirrors the html motion state: pause bars while running, play while frozen */
+.motion-toggle { padding: .28rem .45rem; }
+.motion-toggle svg { width: 1.05em; height: 1.05em; display: block; fill: currentColor; }
+html.motion-on  .motion-toggle .mi-play  { display: none; }
+html.motion-off .motion-toggle .mi-pause { display: none; }
+
 /* ---------- PANELS ---------- */
 main { padding: 2.5rem 0 3rem; }
 .js .panel { display: none; }
@@ -250,13 +257,19 @@ main { padding: 2.5rem 0 3rem; }
   .tab { padding: .8rem .6rem; font-size: .9rem; }
 }
 
-/* ---------- MOTION SAFETY ---------- */
+/* ---------- MOTION SAFETY ----------
+   JS resolves the effective state onto <html> (`motion-on` / `motion-off`):
+   a stored toggle choice (motion.js) wins, else the OS reduced-motion
+   preference. With JS off neither class exists — the media query below
+   is the no-JS fallback (canvases never exist without JS). */
+html.motion-off { scroll-behavior: auto; }
+html.motion-off .panel.is-active { animation: none; }
+html.motion-off .card, html.motion-off .profile-links a { transition: none; }
+html.motion-off .card-canvas { display: none; }
+html.motion-off .card-media.is-live svg { visibility: visible; }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .js .panel.is-active { animation: none; }
-  .card, .profile-links a { transition: none; }
-  .card-canvas { display: none; }
-  .card-media.is-live svg { visibility: visible; }
+  html.no-js { scroll-behavior: auto; }
+  html.no-js .card, html.no-js .profile-links a { transition: none; }
 }
 
 /* ---------- PRINT (expand every panel, drop chrome) ---------- */

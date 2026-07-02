@@ -8,8 +8,10 @@
    orbits it, then drifts back to the streets on leave / idle.
 
    Vanilla canvas, no deps. Decorative + aria-hidden. Freezes to
-   a single static frame under prefers-reduced-motion, and pauses
-   when the hero is off-screen or the tab is hidden.
+   a single static frame while <html> carries `motion-off` (the
+   OS reduced-motion preference or the site's pause toggle — see
+   motion.js), and pauses when the hero is off-screen or the tab
+   is hidden.
    ============================================================ */
 (function () {
   "use strict";
@@ -22,8 +24,11 @@
   var EDGE = "rgba(31,41,51,0.09)";
   var NODE = "rgba(31,41,51,0.14)";
 
-  var reduce = window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* effective motion state, resolved onto <html> by the inline
+     head script and flipped live by the motion.js toggle */
+  function motionOff() {
+    return document.documentElement.classList.contains("motion-off");
+  }
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   var W = 0, H = 0, nodes = [], boids = [], raf = null, running = false;
@@ -184,7 +189,7 @@
   }
 
   function frame() { if (!running) return; step(); draw(); raf = requestAnimationFrame(frame); }
-  function start() { if (running || reduce) return; running = true; raf = requestAnimationFrame(frame); }
+  function start() { if (running || motionOff()) return; running = true; raf = requestAnimationFrame(frame); }
   function stop() { running = false; if (raf) cancelAnimationFrame(raf); raf = null; }
 
   function resize() {
@@ -194,7 +199,7 @@
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     buildNetwork(); initBoids();
     heroRectDirty = true;
-    if (reduce) draw();            // one static frame
+    if (motionOff()) draw();       // one static frame
   }
 
   var rt;
@@ -204,8 +209,6 @@
   });
 
   resize();
-
-  if (reduce) return;              // static frame already drawn
 
   // cursor input — listeners on window: the canvas itself is pointer-events:none.
   // Touch is ignored (no hover there, and move events fire mid-scroll = jerks).
@@ -220,9 +223,11 @@
   document.documentElement.addEventListener("mouseleave", function () { PTR.active = false; });
 
   // pause when the hero scrolls out of view
+  var heroVisible = true;
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
-      entries[0].isIntersecting ? start() : stop();
+      heroVisible = entries[0].isIntersecting;
+      heroVisible ? start() : stop();
     }, { threshold: 0.01 }).observe(canvas);
   } else {
     start();
@@ -230,5 +235,11 @@
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) stop();
     else if (!("IntersectionObserver" in window)) start();
+  });
+
+  // play/pause toggle (motion.js) — resume in place or freeze a clean frame
+  window.addEventListener("motionchange", function () {
+    if (motionOff()) { stop(); draw(); }
+    else if (heroVisible && !document.hidden) start();
   });
 })();
