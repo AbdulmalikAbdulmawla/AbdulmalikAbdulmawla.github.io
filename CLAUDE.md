@@ -27,18 +27,30 @@ prose. Hero has a faint CSS grid + an animated **boids-over-street-network** can
 signature motif tying his arc from swarm/CA simulation to urban movement; a soft `.hero::after` scrim
 keeps the hero text legible over it; the boids also treat the **cursor as an attractor** (stream to it,
 orbit it, release on leave / 2.5 s idle). Work cards carry hand-authored **SVG data-diagrams** in a fixed
-16:10 `.card-media` slot; `card-art.js` overlays each with a live generative canvas scene, bound by the
-slot's `data-art` attribute. Swap for real app screenshots later by dropping an `<img>` in the same slot
-**and removing that slot's `data-art` attribute** (card-art.js then skips the card; no layout change —
-the SVG stays in the DOM as the no-JS / reduced-motion / print fallback either way).
+16:10 `.card-media` slot; `card-art.js` overlays each with a generative canvas scene, bound by the
+slot's `data-art` attribute — a scene runs **only while the cursor is over its card** and freezes on the
+last frame when it leaves (at rest / on touch devices the SVG diagram shows). Swap for real app
+screenshots later by dropping an `<img>` in the same slot **and removing that slot's `data-art`
+attribute** (card-art.js then skips the card; no layout change — the SVG stays in the DOM as the
+no-JS / motion-off / print fallback either way).
+
+**Motion policy (decided 2026-07-02):** all animation obeys a single state on `<html>` —
+`motion-on` / `motion-off` — resolved synchronously by the inline `<head>` script: a stored per-device
+choice (`localStorage["motion"]`) wins, else the visitor's OS `prefers-reduced-motion` preference.
+`motion.js` injects a ⏸/▶ button beside the DE/EN switch (constant `aria-label="Animation"` — same word
+EN/DE, so no i18n keys — with `aria-pressed` carrying state) that flips the class pair, persists, and
+broadcasts `motionchange`; boids.js + card-art.js listen. With no stored choice the page also follows
+live OS changes. The reduced-motion **media query remains only as the no-JS fallback**. Rationale: the
+owner's own Windows has "Animation effects" off, and WCAG 2.2.2 wants a pause control anyway.
 
 ## Files
 | File | Role |
 |---|---|
-| `index.html` | Entire site: hero, tab bar (`role="tablist"`), 4 `.panel` sections, footer. HTML-commented per panel. Inline `<head>` script flips `no-js`→`js`. |
-| `styles.css` | Muted-Bauhaus design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`). Tokens in `:root`; tab/panel/card/motif styles; reduced-motion + print (print expands all panels). |
-| `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. The cursor is an attractor — the flock streams toward it and orbits (seek/orbit/ring-spring weights at the top of the file are the tuning dials); releases smoothly on pointer-leave or 2.5 s idle. Decorative + aria-hidden; freezes to a static frame under `prefers-reduced-motion` (no pointer listeners bound); pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
-| `card-art.js` | Generative canvas scenes for the 5 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `toolbox` self-drawing network · `flows` corridors · `venn` exchange · `miner` live weighted least-squares). One shared rAF engine: only visible scenes run (IntersectionObserver — hidden tab panels pause for free), self-halts when none; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; touch filtered (baseline loops stand alone). Under `prefers-reduced-motion` nothing is injected — the SVGs remain. No deps. |
+| `index.html` | Entire site: hero, tab bar (`role="tablist"`), 4 `.panel` sections, footer. HTML-commented per panel. Inline `<head>` script flips `no-js`→`js` AND resolves the motion state (`motion-on`/`motion-off` from stored choice, else OS preference) before first paint. |
+| `styles.css` | Muted-Bauhaus design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`). Tokens in `:root`; tab/panel/card/motif styles; `html.motion-off` rules (canvas hide, SVG restore, transitions off) + reduced-motion media query as no-JS fallback + print (print expands all panels). |
+| `motion.js` | The ⏸/▶ motion toggle: injects the button beside `#lang-toggle`, flips `motion-on`/`motion-off` on `<html>`, persists to `localStorage["motion"]`, dispatches `motionchange`, follows live OS `prefers-reduced-motion` changes when no choice is stored. Icon swap is pure CSS off the html class; `aria-pressed` = animation running. ~60 lines, no deps. |
+| `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. The cursor is an attractor — the flock streams toward it and orbits (seek/orbit/ring-spring weights at the top of the file are the tuning dials); releases smoothly on pointer-leave or 2.5 s idle. Decorative + aria-hidden; freezes to a static frame while `motion-off` (resumes/refreezes on `motionchange`); pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
+| `card-art.js` | Generative canvas scenes for the 5 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `toolbox` self-drawing network · `flows` corridors · `venn` exchange · `miner` live weighted least-squares). One shared rAF engine: only visible scenes tick (IntersectionObserver — hidden tab panels pause for free), self-halts when none; a scene draws **only while hovered** (+ ease-out tail), freezing on its last frame; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; touch = static SVGs (no hover). Engine stops under `motion-off` (canvases CSS-hidden, SVGs return). No deps. |
 | `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
 | `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
 | `assets/` | `favicon.svg`; optional `CV.pdf` / real screenshots later. |
@@ -72,10 +84,15 @@ User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-
   changes materially.
 
 ## Verify after edits
-`node --check` on all JS files (boids, tabs, i18n, card-art) + exact `data-i18n` ↔ `DE`-dict parity.
-Open `index.html` in Edge (`file://`): all sections render, every external link opens the right
-target in a new tab, layout holds at mobile + desktop widths, print preview is clean (SVG diagrams,
-no canvases). Animations: boids chase + orbit the cursor in the hero and release on leave/idle; all
-5 cards animate and react near the cursor; whole-card links stay clickable over the canvases;
-switching tabs pauses card scenes (0 CPU); DevTools reduced-motion emulation ⇒ static SVGs + frozen
-hero frame.
+`node --check` on all JS files (motion, boids, tabs, i18n, card-art) + exact `data-i18n` ↔ `DE`-dict
+parity. Open `index.html` in Edge (`file://`): all sections render, every external link opens the
+right target in a new tab, layout holds at mobile + desktop widths, print preview is clean (SVG
+diagrams, no canvases, no toggle). Animations: the ⏸/▶ toggle sits beside DE and its state persists
+across reloads; with motion on, boids chase + orbit the cursor and release on leave/idle; a card scene
+loops **only while hovered** and freezes when the mouse leaves (at rest = SVG diagram); whole-card
+links stay clickable over the canvases; switching tabs pauses card scenes (0 CPU); pressing ⏸ freezes
+the hero to a static frame and restores the SVGs; DevTools reduced-motion emulation with no stored
+choice ⇒ starts paused with ▶ showing. After push: check
+`gh api repos/AbdulmalikAbdulmawla/AbdulmalikAbdulmawla.github.io/pages/builds/latest` — deployments
+can queue-stall on GitHub's side (2026-07-02: two builds hung in `deployment_queued` ~10 min → "Page
+build failed" while the content was fine; a later push/rerun deployed cleanly).
