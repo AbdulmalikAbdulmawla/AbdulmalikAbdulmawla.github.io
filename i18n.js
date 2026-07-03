@@ -65,6 +65,16 @@
       "evidenzbasierte Verkehrssicherheitsanalyse. Läuft vollständig im Browser " +
       "(DuckDB-WASM + deck.gl).",
     "work.c1.link": "Live-App öffnen →",
+    "work.c6.title": "Aktive Fassaden kartieren — Einzelhandel &amp; Stadtform",
+    "work.c6.role": "Erstautor · 13. Space Syntax Symposium, Bergen",
+    "work.c6.body":
+      "Eine Methode, um Aktivität im Erdgeschoss dort zu kartieren, wo sie der Stadt " +
+      "tatsächlich begegnet: an der Gebäudefassade. Einzelhandels-, Dienstleistungs- und " +
+      "Wohnfassaden in Weimar werden über alle Maßstäbe der Stadtform verknüpft — Straße, " +
+      "Parzelle, Block, Gebäude — für MAUP-bewusste räumliche Abfragen, " +
+      "Gravitations-Erreichbarkeit und Zentralitätsanalysen. Aufbauend auf einer " +
+      "parametrischen Spatial-Query-Pipeline (eCAADe&nbsp;2022).",
+    "work.c6.link": "Zum Paper →",
     "work.c2.title": "DeCodingSpaces Toolbox",
     "work.c2.role": "Mitautor · C# / Grasshopper",
     "work.c2.body":

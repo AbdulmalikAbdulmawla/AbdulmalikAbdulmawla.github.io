@@ -598,8 +598,144 @@
     };
   }
 
+  /* ============================================================
+     Scene 6 · frontage — active frontages along a street grid
+     (the SSS13 Weimar paper, animated). Building-edge strips are
+     coloured by street-level function — retail clustered at the
+     core crossing, service, residential — and pulse like opening
+     hours; now and then a frontage flips function (the rise and
+     fall of ground-floor uses). Pedestrian dots stream along the
+     streets. The cursor is a gravity-accessibility probe: strips
+     glow and thicken with negative-exponential distance decay
+     (the paper's impedance), inside a soft reach ring.
+     ============================================================ */
+  function makeFrontage() {
+    var w = 0, h = 0, streets = [], strips = [], peds = [], curT = 0, curPtr = null;
+    var RESID = "#9aa3ad";
+    var DECAY = 55;                               // gaussian-ish reach of the probe (px)
+    var RING = 62;
+
+    function pickFn(cx, cy) {
+      // retail probability peaks at the card centre — the retail core
+      var dx = cx - w / 2, dy = cy - h / 2;
+      var core = gauss(dx * dx + dy * dy, Math.min(w, h) * 0.34);
+      var r = Math.random();
+      if (r < 0.15 + 0.55 * core) return P.red;   // retail
+      if (r < 0.45 + 0.45 * core) return P.blue;  // service / cultural
+      return RESID;                                // residential
+    }
+
+    function build() {
+      streets = []; strips = []; peds = [];
+      var hy = [h * (0.34 + rand(-0.04, 0.04)), h * (0.72 + rand(-0.04, 0.04))];
+      var vx = [w * (0.3 + rand(-0.05, 0.05)), w * (0.68 + rand(-0.05, 0.05))];
+      var i;
+      for (i = 0; i < hy.length; i++) streets.push({ x1: 0, y1: hy[i], x2: w, y2: hy[i] });
+      for (i = 0; i < vx.length; i++) streets.push({ x1: vx[i], y1: 0, x2: vx[i], y2: h });
+      // frontage strips: segments with gaps on both sides of every street
+      for (i = 0; i < streets.length; i++) {
+        var st = streets[i];
+        var horiz = st.y1 === st.y2;
+        var len = horiz ? w : h;
+        for (var side = -1; side <= 1; side += 2) {
+          var pos = rand(4, 16);
+          while (pos < len - 12) {
+            var seg = rand(16, 42);
+            if (pos + seg > len - 4) seg = len - 4 - pos;
+            var cx = horiz ? pos + seg / 2 : st.x1 + side * 7;
+            var cy = horiz ? st.y1 + side * 7 : pos + seg / 2;
+            strips.push({
+              st: i, side: side, a: pos, b: pos + seg,
+              color: pickFn(cx, cy),
+              ph: rand(0, 6.28),
+              flip: rand(4000, 26000)             // ms until this frontage turns over
+            });
+            pos += seg + rand(5, 14);
+          }
+        }
+      }
+      for (i = 0; i < 16; i++) {
+        peds.push({ st: (Math.random() * streets.length) | 0, s: Math.random(),
+                    sp: rand(0.0006, 0.0014) * (Math.random() < 0.5 ? -1 : 1) });
+      }
+    }
+
+    function stripXY(sp, t) {                     // point along a strip (t in [a,b])
+      var st = streets[sp.st];
+      return st.y1 === st.y2
+        ? { x: t, y: st.y1 + sp.side * 5 }
+        : { x: st.x1 + sp.side * 5, y: t };
+    }
+
+    return {
+      init: function (cw, ch) { w = cw; h = ch; build(); },
+      step: function (dt, t, ptr) {
+        curT = t; curPtr = ptr;
+        var i;
+        for (i = 0; i < peds.length; i++) {
+          var p = peds[i];
+          p.s += p.sp * dt;
+          if (p.s > 1) p.s -= 1; else if (p.s < 0) p.s += 1;
+        }
+        for (i = 0; i < strips.length; i++) {
+          var s = strips[i];
+          s.flip -= dt * 16.667;
+          if (s.flip < 0) {                       // ground-floor turnover
+            var m = stripXY(s, (s.a + s.b) / 2);
+            s.color = pickFn(m.x, m.y);
+            s.flip = rand(6000, 30000);
+          }
+        }
+      },
+      draw: function (ctx, cw, ch) {
+        var t = curT, ptr = curPtr;
+        ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch);
+        var i;
+        // streets
+        ctx.strokeStyle = P.hair; ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (i = 0; i < streets.length; i++) {
+          ctx.moveTo(streets[i].x1, streets[i].y1);
+          ctx.lineTo(streets[i].x2, streets[i].y2);
+        }
+        ctx.stroke();
+        // frontage strips, weighted by the probe's distance decay
+        for (i = 0; i < strips.length; i++) {
+          var s = strips[i];
+          var m = stripXY(s, (s.a + s.b) / 2);
+          var wgt = 0;
+          if (ptr && ptr.over) {
+            var dx = m.x - ptr.x, dy = m.y - ptr.y;
+            wgt = gauss(dx * dx + dy * dy, DECAY) * ptr.inf;
+          }
+          var pulse = 0.62 + 0.22 * Math.sin(t * 0.0016 + s.ph);
+          ctx.globalAlpha = Math.min(pulse + 0.5 * wgt, 1);
+          ctx.strokeStyle = s.color;
+          ctx.lineWidth = 3.4 + 3 * wgt;
+          var a1 = stripXY(s, s.a), b1 = stripXY(s, s.b);
+          ctx.beginPath(); ctx.moveTo(a1.x, a1.y); ctx.lineTo(b1.x, b1.y); ctx.stroke();
+        }
+        // pedestrians on the streets
+        ctx.globalAlpha = 0.75; ctx.fillStyle = P.soft;
+        for (i = 0; i < peds.length; i++) {
+          var pd = peds[i], st = streets[pd.st];
+          var px = lerp(st.x1, st.x2, pd.s), py = lerp(st.y1, st.y2, pd.s);
+          ctx.beginPath(); ctx.arc(px, py, 1.7, 0, 6.2832); ctx.fill();
+        }
+        // the accessibility probe's reach ring
+        if (ptr && ptr.inf > 0.02 && ptr.over) {
+          ctx.globalAlpha = 0.35 * ptr.inf; ctx.strokeStyle = P.soft; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(ptr.x, ptr.y, RING, 0, 6.2832); ctx.stroke();
+          ctx.globalAlpha = 0.05 * ptr.inf; ctx.fillStyle = P.yellow;
+          ctx.beginPath(); ctx.arc(ptr.x, ptr.y, RING, 0, 6.2832); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+    };
+  }
+
   /* ---------------- engine ---------------- */
-  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, venn: makeVenn, miner: makeMiner };
+  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, venn: makeVenn, miner: makeMiner, frontage: makeFrontage };
   var DPR_CAP = 2;
   /* touch devices have no hover, so the hover-gate would keep scenes dead
      forever there — instead visible cards play on their own (the IO already
