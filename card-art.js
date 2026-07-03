@@ -8,12 +8,14 @@
    One shared engine: a single rAF loop drives only the scenes
    currently on screen (IntersectionObserver — panels hidden by
    the tab bar report non-intersecting, so switching tabs pauses
-   them for free) and stops itself when none are. A scene runs
-   ONLY while the cursor is over its card (plus a short ease-out
-   tail), then freezes on its last frame — at rest the static
-   SVG diagram shows. All scenes share one window-level pointer
-   tracker; the canvases are pointer-events:none so the
-   stretched card links stay clickable. Everything obeys the
+   them for free) and stops itself when none are. With a mouse, a
+   scene runs ONLY while the cursor is over its card (plus a short
+   ease-out tail), then freezes on its last frame — at rest the
+   static SVG diagram shows. On touch devices (hover:none) there
+   is no hover to gate on: visible cards play on their own, and a
+   finger pressed on a card drives the cursor effects. All scenes
+   share one window-level pointer tracker; the canvases are
+   pointer-events:none so the stretched card links stay clickable. Everything obeys the
    site motion state on <html> (`motion-off` = OS reduced-motion
    preference or the motion.js pause toggle): canvases are
    CSS-hidden and the engine stops. Vanilla canvas 2D, no deps.
@@ -599,6 +601,12 @@
   /* ---------------- engine ---------------- */
   var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, venn: makeVenn, miner: makeMiner };
   var DPR_CAP = 2;
+  /* touch devices have no hover, so the hover-gate would keep scenes dead
+     forever there — instead visible cards play on their own (the IO already
+     limits that to what's on screen), and a finger down on a card drives
+     the cursor effects like the mouse does */
+  var COARSE = window.matchMedia &&
+    window.matchMedia("(hover: none), (pointer: coarse)").matches;
   var MOUSE = { cx: 0, cy: 0, seen: false };
   var rectsDirty = true;
   var recs = [], running = false, raf = null, lastTs = 0;
@@ -662,8 +670,9 @@
       var x = MOUSE.cx - r.rect.left, y = MOUSE.cy - r.rect.top;
       var over = MOUSE.seen && x >= 0 && y >= 0 && x <= r.w && y <= r.h;
       r.inf += ((over ? 1 : 0) - r.inf) * (over ? 0.08 : 0.05);
-      // hover-only: run under the cursor (+ ease-out tail), else keep the last frame
-      if (!over && r.inf < 0.02) continue;
+      // mouse: run under the cursor (+ ease-out tail), else keep the last frame.
+      // touch: visible cards play freely; a finger on the card adds the effects.
+      if (!COARSE && !over && r.inf < 0.02) continue;
       r.scene.step(dt, ts, { x: x, y: y, over: over, seen: MOUSE.seen, inf: r.inf });
       r.scene.draw(r.ctx, r.w, r.h);
       if (!r.live) { r.live = true; r.media.classList.add("is-live"); }
@@ -699,10 +708,15 @@
     maybeStart();
   }
 
-  window.addEventListener("pointermove", function (e) {
-    if (e.pointerType === "touch") return;        // no hover on touch; baseline loops stand alone
+  function trackPointer(e) {
     MOUSE.cx = e.clientX; MOUSE.cy = e.clientY; MOUSE.seen = true;
-  }, { passive: true });
+  }
+  window.addEventListener("pointermove", trackPointer, { passive: true });
+  window.addEventListener("pointerdown", trackPointer, { passive: true });
+  window.addEventListener("pointerup", function (e) {
+    if (e.pointerType !== "mouse") MOUSE.seen = false;   // finger lifted — no hover to keep
+  });
+  window.addEventListener("pointercancel", function () { MOUSE.seen = false; });
   window.addEventListener("scroll", function () { rectsDirty = true; }, { passive: true });
   document.documentElement.addEventListener("mouseleave", function () { MOUSE.seen = false; });
 

@@ -94,26 +94,6 @@ h1, h2, h3, h4 { line-height: 1.2; color: var(--ink); }
   font-weight: 800; letter-spacing: -.02em; line-height: .98;
   margin: 0 0 1.3rem; color: var(--ink-900);
 }
-/* the name's capital A's echo the boids: letter tinted with the Bauhaus
-   trio, and the A's own triangular counter (the hole under the apex)
-   filled with a solid boid triangle in a companion trio colour. The
-   triangle is border-built, em-sized and centred on the glyph, so it
-   scales with the clamp() type; sized slightly under the counter so
-   small metric differences across system-ui fonts stay inside the hole */
-.boid-a { position: relative; display: inline-block; }
-.boid-a--blue { color: var(--bau-blue); }
-.boid-a--red  { color: var(--bau-red); }
-.boid-a::after {
-  content: ""; position: absolute; width: 0; height: 0;
-  border-style: solid;
-  border-width: 0 .085em .16em .085em;    /* ▲ matching the counter's shape */
-  border-color: transparent;
-  left: 50%; transform: translateX(-50%);
-  top: .485em;
-}
-.boid-a--blue::after { border-bottom-color: var(--bau-red); }
-.boid-a--red::after  { border-bottom-color: var(--bau-ochre-dk); }
-
 .lede {
   font-size: clamp(1.1rem, 2.4vw, 1.3rem);
   color: var(--ink-soft); max-width: 40rem; margin: 0 0 1.8rem;
@@ -301,7 +281,5 @@ html.motion-off .card-media.is-live svg { visibility: visible; }
   .hero, .site-footer { background: #fff; }
   body { font-size: 11pt; color: #000; }
   a { color: #000; text-decoration: none; }
-  .boid-a { color: inherit; }
-  .boid-a::after { display: none; }
   .card:hover { box-shadow: none; transform: none; }
 }
