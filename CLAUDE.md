@@ -28,9 +28,10 @@ signature motif tying his arc from swarm/CA simulation to urban movement; a soft
 keeps the hero text legible over it; the boids treat the **pointer as an attractor — mouse and finger
 alike** (stream to it, orbit it; release on leave / 2.5 s idle; on touch, a drag steers while pressed, a
 tap plants the attractor until idle, and a scroll gesture releases instantly via `pointercancel`). The
-name's two capital A's carry the boid motif in CSS (`.boid-a`): tinted with the Bauhaus trio, each with
-a border-built boid triangle (same 10:6.4 shape as the canvas boids) taking off from the apex;
-neutralized in print. Work cards carry hand-authored **SVG data-diagrams** in a fixed
+name's two capital A's carry the boid motif in CSS (`.boid-a`): letter tinted with the Bauhaus trio, and
+the A's own triangular counter (the hole) filled with a solid boid triangle in a companion trio colour —
+border-built, em-positioned (tuned visually for Segoe UI Bold; sized a hair under the hole so the
+hairline gap absorbs glyph differences across system-ui fonts). Neutralized in print. Work cards carry hand-authored **SVG data-diagrams** in a fixed
 16:10 `.card-media` slot; `card-art.js` overlays each with a generative canvas scene, bound by the
 slot's `data-art` attribute — a scene runs **only while the cursor is over its card** and freezes on the
 last frame when it leaves (at rest / on touch devices the SVG diagram shows). Swap for real app
