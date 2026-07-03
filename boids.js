@@ -210,15 +210,21 @@
 
   resize();
 
-  // cursor input — listeners on window: the canvas itself is pointer-events:none.
-  // Touch is ignored (no hover there, and move events fire mid-scroll = jerks).
-  window.addEventListener("pointermove", function (e) {
-    if (e.pointerType === "touch") return;
+  // pointer input — listeners on window: the canvas itself is pointer-events:none.
+  // Mouse and finger are treated the same: a touch drag steers the flock while the
+  // finger is down (pointermove only fires during contact on touch), and a tap
+  // plants the attractor at that spot until the idle timer releases it. When a
+  // gesture turns into a page scroll the browser fires pointercancel — we release
+  // immediately there, so the flock never jerks mid-scroll.
+  function setPtr(e) {
     if (heroRectDirty) { heroRect = canvas.getBoundingClientRect(); heroRectDirty = false; }
     PTR.x = e.clientX - heroRect.left; PTR.y = e.clientY - heroRect.top;
     PTR.active = PTR.x >= 0 && PTR.y >= 0 && PTR.x <= W && PTR.y <= H;
     PTR.last = performance.now();
-  }, { passive: true });
+  }
+  window.addEventListener("pointermove", setPtr, { passive: true });
+  window.addEventListener("pointerdown", setPtr, { passive: true });
+  window.addEventListener("pointercancel", function () { PTR.active = false; });
   window.addEventListener("scroll", function () { heroRectDirty = true; }, { passive: true });
   document.documentElement.addEventListener("mouseleave", function () { PTR.active = false; });
 

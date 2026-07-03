@@ -25,8 +25,12 @@ text) used only as per-tab wayfinding + motif, never a colour flood. Each panel 
 via inline `style="--cat: …"`. Dual measure: `--measure-wide` (72rem) shell, `--measure` (46rem) for
 prose. Hero has a faint CSS grid + an animated **boids-over-street-network** canvas (`boids.js`) — a
 signature motif tying his arc from swarm/CA simulation to urban movement; a soft `.hero::after` scrim
-keeps the hero text legible over it; the boids also treat the **cursor as an attractor** (stream to it,
-orbit it, release on leave / 2.5 s idle). Work cards carry hand-authored **SVG data-diagrams** in a fixed
+keeps the hero text legible over it; the boids treat the **pointer as an attractor — mouse and finger
+alike** (stream to it, orbit it; release on leave / 2.5 s idle; on touch, a drag steers while pressed, a
+tap plants the attractor until idle, and a scroll gesture releases instantly via `pointercancel`). The
+name's two capital A's carry the boid motif in CSS (`.boid-a`): tinted with the Bauhaus trio, each with
+a border-built boid triangle (same 10:6.4 shape as the canvas boids) taking off from the apex;
+neutralized in print. Work cards carry hand-authored **SVG data-diagrams** in a fixed
 16:10 `.card-media` slot; `card-art.js` overlays each with a generative canvas scene, bound by the
 slot's `data-art` attribute — a scene runs **only while the cursor is over its card** and freezes on the
 last frame when it leaves (at rest / on touch devices the SVG diagram shows). Swap for real app
@@ -49,7 +53,7 @@ owner's own Windows has "Animation effects" off, and WCAG 2.2.2 wants a pause co
 | `index.html` | Entire site: hero, tab bar (`role="tablist"`), 4 `.panel` sections, footer. HTML-commented per panel. Inline `<head>` script flips `no-js`→`js` AND resolves the motion state (`motion-on`/`motion-off` from stored choice, else OS preference) before first paint. |
 | `styles.css` | Muted-Bauhaus design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`). Tokens in `:root`; tab/panel/card/motif styles; `html.motion-off` rules (canvas hide, SVG restore, transitions off) + reduced-motion media query as no-JS fallback + print (print expands all panels). |
 | `motion.js` | The ⏸/▶ motion toggle: injects the button beside `#lang-toggle`, flips `motion-on`/`motion-off` on `<html>`, persists to `localStorage["motion"]`, dispatches `motionchange`, follows live OS `prefers-reduced-motion` changes when no choice is stored. Icon swap is pure CSS off the html class; `aria-pressed` = animation running. ~60 lines, no deps. |
-| `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. The cursor is an attractor — the flock streams toward it and orbits (seek/orbit/ring-spring weights at the top of the file are the tuning dials); releases smoothly on pointer-leave or 2.5 s idle. Decorative + aria-hidden; freezes to a static frame while `motion-off` (resumes/refreezes on `motionchange`); pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
+| `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. The pointer — mouse or finger — is an attractor: the flock streams toward it and orbits (seek/orbit/ring-spring weights at the top of the file are the tuning dials); releases smoothly on pointer-leave, 2.5 s idle, or `pointercancel` (scroll takeover on touch). Decorative + aria-hidden; freezes to a static frame while `motion-off` (resumes/refreezes on `motionchange`); pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
 | `card-art.js` | Generative canvas scenes for the 5 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `toolbox` self-drawing network · `flows` corridors · `venn` exchange · `miner` live weighted least-squares). One shared rAF engine: only visible scenes tick (IntersectionObserver — hidden tab panels pause for free), self-halts when none; a scene draws **only while hovered** (+ ease-out tail), freezing on its last frame; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; touch = static SVGs (no hover). Engine stops under `motion-off` (canvases CSS-hidden, SVGs return). No deps. |
 | `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
 | `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
@@ -88,7 +92,9 @@ User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-
 parity. Open `index.html` in Edge (`file://`): all sections render, every external link opens the
 right target in a new tab, layout holds at mobile + desktop widths, print preview is clean (SVG
 diagrams, no canvases, no toggle). Animations: the ⏸/▶ toggle sits beside DE and its state persists
-across reloads; with motion on, boids chase + orbit the cursor and release on leave/idle; a card scene
+across reloads; with motion on, boids chase + orbit the cursor and release on leave/idle (DevTools touch emulation:
+a drag steers the flock, a tap attracts it, scrolling releases it — no jerks mid-scroll); the hero A's
+show their boid triangles at desktop and phone widths; a card scene
 loops **only while hovered** and freezes when the mouse leaves (at rest = SVG diagram); whole-card
 links stay clickable over the canvases; switching tabs pauses card scenes (0 CPU); pressing ⏸ freezes
 the hero to a static frame and restores the SVGs; DevTools reduced-motion emulation with no stored

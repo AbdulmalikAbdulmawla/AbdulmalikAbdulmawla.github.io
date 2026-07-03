@@ -94,6 +94,23 @@ h1, h2, h3, h4 { line-height: 1.2; color: var(--ink); }
   font-weight: 800; letter-spacing: -.02em; line-height: .98;
   margin: 0 0 1.3rem; color: var(--ink-900);
 }
+/* the name's capital A's echo the boids: letter tinted with the Bauhaus
+   trio, and a small boid — the same velocity-oriented triangle shape as
+   boids.js (10 : 6.4), built from borders — taking off from the apex */
+.boid-a { position: relative; display: inline-block; }
+.boid-a--blue { color: var(--bau-blue); }
+.boid-a--red  { color: var(--bau-red); }
+.boid-a::after {
+  content: ""; position: absolute; width: 0; height: 0;
+  border-style: solid;
+  border-width: .075em 0 .075em .235em;   /* boid triangle, 10:6.4 like the canvas */
+  border-color: transparent;
+  top: -.02em; right: -.14em;
+  transform: rotate(-32deg);              /* flying up-right, off the apex */
+}
+.boid-a--blue::after { border-left-color: var(--bau-red); }
+.boid-a--red::after  { border-left-color: var(--bau-ochre-dk); }
+
 .lede {
   font-size: clamp(1.1rem, 2.4vw, 1.3rem);
   color: var(--ink-soft); max-width: 40rem; margin: 0 0 1.8rem;
@@ -281,5 +298,7 @@ html.motion-off .card-media.is-live svg { visibility: visible; }
   .hero, .site-footer { background: #fff; }
   body { font-size: 11pt; color: #000; }
   a { color: #000; text-decoration: none; }
+  .boid-a { color: inherit; }
+  .boid-a::after { display: none; }
   .card:hover { box-shadow: none; transform: none; }
 }
