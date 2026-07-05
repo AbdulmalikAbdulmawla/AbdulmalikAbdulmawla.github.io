@@ -743,7 +743,12 @@
      the cursor effects like the mouse does */
   var COARSE = window.matchMedia &&
     window.matchMedia("(hover: none), (pointer: coarse)").matches;
-  var MOUSE = { cx: 0, cy: 0, seen: false };
+  /* a touch almost never ends cleanly — a slight drift fires pointercancel
+     (scroll takeover). So a finger is a latched trigger: lift/cancel starts a
+     hold window instead of dropping the hover state, and the frame loop lets
+     it expire (mirrors boids.js P_IDLE). */
+  var TOUCH_HOLD = 2500;
+  var MOUSE = { cx: 0, cy: 0, seen: false, touchUntil: 0 };
   var rectsDirty = true;
   var recs = [], running = false, raf = null, lastTs = 0;
 
@@ -792,6 +797,9 @@
         if (recs[k].visible && recs[k].sized) recs[k].rect = recs[k].canvas.getBoundingClientRect();
       }
       rectsDirty = false;
+    }
+    if (MOUSE.touchUntil && ts > MOUSE.touchUntil) {
+      MOUSE.seen = false; MOUSE.touchUntil = 0;          // latched touch expired
     }
     var alive = false;
     for (var i = 0; i < recs.length; i++) {
@@ -846,13 +854,17 @@
 
   function trackPointer(e) {
     MOUSE.cx = e.clientX; MOUSE.cy = e.clientY; MOUSE.seen = true;
+    MOUSE.touchUntil = 0;                                // contact live — no expiry running
+  }
+  function releaseTouch(e) {
+    if (e.pointerType === "mouse") { MOUSE.seen = false; return; }
+    // finger lifted or scroll took over: latch the touch, let the loop expire it
+    MOUSE.touchUntil = performance.now() + TOUCH_HOLD;
   }
   window.addEventListener("pointermove", trackPointer, { passive: true });
   window.addEventListener("pointerdown", trackPointer, { passive: true });
-  window.addEventListener("pointerup", function (e) {
-    if (e.pointerType !== "mouse") MOUSE.seen = false;   // finger lifted — no hover to keep
-  });
-  window.addEventListener("pointercancel", function () { MOUSE.seen = false; });
+  window.addEventListener("pointerup", releaseTouch);
+  window.addEventListener("pointercancel", releaseTouch);
   window.addEventListener("scroll", function () { rectsDirty = true; }, { passive: true });
   document.documentElement.addEventListener("mouseleave", function () { MOUSE.seen = false; });
 

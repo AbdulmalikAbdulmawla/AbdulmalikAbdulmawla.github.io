@@ -19,6 +19,7 @@
 
     "tab.work": "Arbeiten",
     "tab.research": "Forschung",
+    "tab.teaching": "Lehre",
     "tab.experience": "Werdegang",
     "tab.about": "Über mich",
 
@@ -46,10 +47,26 @@
 
     "edu.h": "Ausbildung",
     "edu.li1":
-      "<strong>Promotion – laufend</strong> (seit 2018) · Informatik in der Architektur " +
-      "und Urbanistik, Bauhaus-Universität Weimar",
-    "edu.li2": "<strong>M.A. Architektur</strong> (2013) · Hochschule Anhalt, Dessau-Roßlau",
-    "edu.li3": "<strong>B.Sc. Architektur und Ingenieurwesen</strong> (2007) · Mansoura University, Ägypten",
+      "<strong>Promotion – laufend</strong> (seit Nov. 2018) · " +
+      "<a href=\"https://www.uni-weimar.de/de/architektur-und-urbanistik/professuren/infau/\" " +
+      "target=\"_blank\" rel=\"noopener\">Informatik in der Architektur und Urbanistik (InfAU)</a>, " +
+      "Bauhaus-Universität Weimar – Arbeitstitel: <em>„Spatial dependency of urban retail: " +
+      "detailed methods for positioning street-level activities“</em>",
+    "edu.li2":
+      "<strong>M.A. Architektur</strong> (2013) · " +
+      "<a href=\"https://www.hs-anhalt.de/\" target=\"_blank\" rel=\"noopener\">Hochschule Anhalt</a>, " +
+      "Dessau-Roßlau – Thesis: <em>„Heterogeneous-Atelier Industry: Revitalization as Social " +
+      "Stratification of Atelier Industrial Community“</em>",
+    "edu.li3":
+      "<strong>B.Sc. Architektur und Ingenieurwesen</strong> (2007) · " +
+      "<a href=\"https://www.mans.edu.eg/\" target=\"_blank\" rel=\"noopener\">Fakultät für " +
+      "Ingenieurwesen, Mansoura University</a>, Ägypten",
+
+    "comp.h": "Wettbewerbe",
+    "comp.list":
+      "<li><strong>2014</strong> – Lusail Underpasses Public Art Competition, Phase 1 &amp; 2 · Lusail Real Estate, Doha, Katar</li>" +
+      "<li><strong>2007</strong> – 2. Platz, 4. National Architecture Students Competition · Fakultät für Ingenieurwesen, Universität Kairo</li>" +
+      "<li><strong>2006</strong> – 1. Platz, 3. National Architecture Students Competition · Fakultät für Ingenieurwesen, Universität Kairo</li>",
 
     "recog.h": "Auszeichnung",
     "recog.body":
@@ -112,47 +129,91 @@
       'target="_blank" rel="noopener">ResearchGate</a>.',
 
     "exp.h": "Berufserfahrung",
-    "exp.e1.date": "2023 – heute",
+    "exp.e1.date": "Dez. 2023 – heute",
     "exp.e1.role": "Wissenschaftlicher Mitarbeiter – Professur Verkehrssystemplanung",
     "exp.e1.body":
       "Erhebung und Analyse offener Mobilitätsdaten, Entwicklung interaktiver Plattformen zur " +
       "Datenexploration und Data-Science-Beratung öffentlicher Institutionen – inklusive Schulungen " +
-      "für Verwaltungen zu europäischen Standards für offene Mobilitätsdaten und Betreuung " +
-      "studentischer Arbeiten.",
-    "exp.e2.role": "Wissenschaftlicher Mitarbeiter – Informatik in der Architektur (InfAR/InfAU)",
+      "für Verwaltungen zu europäischen Standards für offene Mobilitätsdaten, Unterstützung bei " +
+      "der Datenveröffentlichung auf der Mobilithek sowie Betreuung studentischer Projekte und " +
+      "Masterarbeiten (Digital Transport Research Lab).",
+    "exp.e2.date": "Apr. – Nov. 2023",
+    "exp.e2.role": "Doktorand – Informatik in der Architektur und Urbanistik (InfAU)",
     "exp.e2.body":
+      "Übergangsphase mit Fokus auf die eigene Dissertation und die Planung der nächsten Etappe " +
+      "meiner Forschungslaufbahn.",
+    "exp.e3.date": "Dez. 2017 – Jan. 2019",
+    "exp.e3.role": "Projektkoordinator – DAAD-Austauschprojekt „Discovering Cities“",
+    "exp.e3.body":
+      "DAAD-gefördertes Austauschprojekt zwischen der Bauhaus-Universität Weimar und der " +
+      "German-Jordanian University in Amman – parallel zur Stelle als wissenschaftlicher " +
+      "Mitarbeiter am InfAR. Verfassen des Projektantrags, Verwaltung der Finanzen, Lehrseminar " +
+      "in Weimar und Vorbereitung des Workshops in Amman.",
+    "exp.e4.date": "Mai 2016 – März 2023",
+    "exp.e4.role": "Wissenschaftlicher Mitarbeiter – Informatik in der Architektur (InfAR, heute InfAU)",
+    "exp.e4.body":
       "Lehre rechnergestützter Methoden für Stadtplanung und -analyse; Entwicklung von " +
       "Entwurfs- und Forschungswerkzeugen (DeCodingSpaces Toolbox, mineR); Betreuung von " +
-      "Masterarbeiten und Unterstützung wissenschaftlicher Publikationen.",
-    "exp.e3.role": "Mitautor – DeCodingSpaces Toolbox",
-    "exp.e3.body":
+      "Masterarbeiten; Konferenzvorträge sowie Unterstützung von Publikationen, Ausstellungen " +
+      "und Exkursionen.",
+    "exp.e5.date": "Mai 2016 – 2020",
+    "exp.e5.role": "Mitautor – DeCodingSpaces Toolbox",
+    "exp.e5.body":
       "C#-Programmierung für eine Grasshopper-Toolbox zur Stadtanalyse; Testing, Dokumentation " +
       "und Beratung für Stadtprojekte und Workshops.",
-    "exp.e4.role": "Wissenschaftlicher Mitarbeiter – Lehre &amp; Computational Design",
-    "exp.e4.body":
+    "exp.e6.date": "Okt. 2014 – Apr. 2016",
+    "exp.e6.role": "Wissenschaftlicher Mitarbeiter – Lehre &amp; Computational Design",
+    "exp.e6.body":
       "Lehre von rechnergestütztem und parametrischem Entwerfen (Grasshopper, Processing, " +
       "Arduino) in einem RIBA-Part-I-zertifizierten Programm.",
-    "exp.e5.role": "Mitgründer &amp; Architekt",
-    "exp.e5.body":
+    "exp.e7.date": "Jan. 2012 – Apr. 2016",
+    "exp.e7.role": "Mitgründer &amp; Architekt",
+    "exp.e7.body":
       "Entwurfsstudio und Architekturberatung – Wohn-, Bildungs- und Wettbewerbsprojekte " +
       "(u. a. der Lusail Underpass Competition, Katar).",
-    "exp.e6.role": "Junior- &amp; freiberuflicher Architekt – Ägypten &amp; VAE",
-    "exp.e6.body":
-      "Frühe Architekturpraxis – Entwurf, CAD, 3D-Modellierung und Visualisierung sowie " +
-      "Bauherrenvertretung bei Wohn- und Gewerbeprojekten – bevor der Wechsel zu Computational " +
-      "Design und Forschung erfolgte.",
+    "exp.e8.date": "Mai 2009 – Sep. 2011",
+    "exp.e8.role": "Junior-Architekt",
+    "exp.e8.body":
+      "Halbstaatliches Planungsbüro – Bauherrenvertretung für ausgelagerte Projekte und " +
+      "Kundenberatung bei internen Projekten.",
+    "exp.e9.date": "Jul. 2008 – Apr. 2009",
+    "exp.e9.role": "Freiberuflicher Architekt",
+    "exp.e9.org": "Selbstständige Tätigkeit, Ägypten",
+    "exp.e9.body": "3D-Modellierung und Visualisierung von Wohnbauprojekten.",
+    "exp.e10.date": "Jul. 2007 – Jun. 2008",
+    "exp.e10.role": "Junior-Architekt",
+    "exp.e10.body":
+      "Architekturentwurf und Planung im Büro von Kamel Louqman &amp; Amir Wahid.",
+    "exp.e11.date": "Jun. – Aug. 2005",
+    "exp.e11.role": "Praktikant (Grundstudium)",
+    "exp.e11.body": "CAD-Entwurf, Layout und Plotten vollständiger Projektsätze.",
 
-    "teach.h": "Lehre &amp; Workshops",
-    "teach.list":
-      "<li><strong>2022</strong> – Place Syntax Tool Workshop (Teilnehmer), eCAADe 2022, Bergen</li>" +
-      "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/discovering-cities-workshop-amman/\" target=\"_blank\" rel=\"noopener\">Discovering Cities Workshop</a> (Organisator), German-Jordanian University, Amman</li>" +
-      "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/ecaade2018-workshop-urban-analysis-synthesis-and-exploration-with-grasshopper/\" target=\"_blank\" rel=\"noopener\">Urban Analysis, Synthesis &amp; Exploration with Grasshopper</a> (Organisator), eCAADe 2018, Łódź</li>" +
-      "<li><strong>2016</strong> – Rural-to-Urban Transformation Workshop (Organisator), Emerging City Lab, Addis Abeba</li>" +
-      "<li><strong>2015</strong> – Simulating Agent-Based Systems using Processing (Organisator), Kairo</li>",
-    "teach.seminars":
-      "Gehaltene Universitätsseminare: Algorithmic Architecture · Parametric Urban Design " +
-      "&amp; Analysis · SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II · Circular Urbanism · Digitales " +
-      "Verkehrssimulationslabor · Open Mobility Data · Rent-a-Data-Scientist.",
+    "teaching.h": "Lehre",
+    "sem.h": "Universitätsseminare",
+    "sem.list":
+      "<li><strong>2023 – heute</strong> – Digital Traffic Simulation Lab · Open Mobility Data · " +
+      "Rent-a-Data-Scientist – Professur Verkehrssystemplanung, Bauhaus-Universität Weimar</li>" +
+      "<li><strong>2016 – 2023</strong> – Algorithmic Architecture · Parametric Urban Design &amp; Analysis · " +
+      "SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II · Circular Urbanism – InfAR/InfAU, Bauhaus-Universität Weimar</li>" +
+      "<li><strong>2018</strong> – Discovering-Cities-Lehrseminar (DAAD-Austausch), Bauhaus-Universität Weimar</li>" +
+      "<li><strong>2014 – 2016</strong> – Design 5 Studio · Web Application in Architecture – AASTMT, Kairo " +
+      "(RIBA-Part-I-Programm)</li>",
+    "sup.body":
+      "Laufend: Betreuung von Masterarbeiten und studentischen Projekten – am InfAR/InfAU " +
+      "(2016–2023) und im Digital Transport Research Lab der Professur Verkehrssystemplanung " +
+      "(seit 2023).",
+    "worg.h": "Organisierte Workshops",
+    "worg.list":
+      "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/discovering-cities-workshop-amman/\" target=\"_blank\" rel=\"noopener\">Discovering Cities Workshop</a>, German-Jordanian University, Amman</li>" +
+      "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/ecaade2018-workshop-urban-analysis-synthesis-and-exploration-with-grasshopper/\" target=\"_blank\" rel=\"noopener\">Urban Analysis, Synthesis &amp; Exploration with Grasshopper</a>, eCAADe 2018, Łódź</li>" +
+      "<li><strong>2016</strong> – Rural-to-Urban Transformation Workshop, Emerging City Lab, Addis Abeba</li>" +
+      "<li><strong>2015</strong> – Simulating Agent-Based Systems using Processing, Kairo</li>",
+    "watt.h": "Besuchte Workshops &amp; Ausstellungen",
+    "watt.list":
+      "<li><strong>2022</strong> – Place Syntax Tool Workshop, eCAADe 2022, Bergen</li>" +
+      "<li><strong>2017</strong> – Data Informed Urban Design, Complexity Science Hub Vienna, Wien</li>" +
+      "<li><strong>2017</strong> – Data Analysis &amp; Machine Learning with Geo-Spatial Data, SSS11, Lissabon</li>" +
+      "<li><strong>2012</strong> – 13. Architekturbiennale Venedig, „Maribor 2112 YC“, Slowenischer Pavillon</li>",
 
     "skills.h": "Kompetenzen",
     "skills.g1": "Programmierung",

@@ -12,10 +12,12 @@ This is deliberate (lowest upkeep, instant GitHub Pages deploy). Sibling platfor
 Vite+React — this one is intentionally NOT. Do not scaffold a build system here.
 
 ## Layout — landing hero + tabbed workspace
-Not a long scroll. A constant **hero** sits on top; below it a sticky **tab bar** swaps between 4
-panels — **Work · Research · Experience · About** (Research = publications + teaching; About = bio +
-skills). All 4 are real `<section class="panel">`s in source order, so **no-JS + crawlers see
-everything stacked**; JS hides the inactive ones. Progressive-enhancement guard: `<html class="no-js">`
+Not a long scroll. A constant **hero** sits on top; below it a sticky **tab bar** swaps between 5
+panels — **Work · Research · Teaching · Experience · About** (Research = publications; Teaching =
+seminars + workshops organized/attended + supervision, added 2026-07-05 at the owner's request —
+his teaching list signals his interests; About = bio + education + competitions + skills). All 5 are
+real `<section class="panel">`s in source order, so **no-JS + crawlers see everything stacked**; JS
+hides the inactive ones. Progressive-enhancement guard: `<html class="no-js">`
 is flipped to `js` by an inline `<head>` script, and CSS only hides panels under `.js` — so with JS off
 nothing is hidden. Deep-links work (`#research`); legacy anchors (`#publications`, `#teaching`,
 `#skills`) alias to their tab (see `ALIAS` in `tabs.js`).
@@ -27,7 +29,8 @@ prose. Hero has a faint CSS grid + an animated **boids-over-street-network** can
 signature motif tying his arc from swarm/CA simulation to urban movement; a soft `.hero::after` scrim
 keeps the hero text legible over it; the boids treat the **pointer as an attractor — mouse and finger
 alike** (stream to it, orbit it; release on leave / 2.5 s idle; on touch, a drag steers while pressed, a
-tap plants the attractor until idle, and a scroll gesture releases instantly via `pointercancel`). (A
+tap plants the attractor until idle, and a scroll takeover (`pointercancel`) keeps the attractor
+latched — the 2.5 s idle timer releases it, since almost every real touch drifts into a scroll). (A
 boid-motif treatment of the name's capital A's was tried 2026-07-03 — apex accent, then counter-fill —
 and **rejected by the owner as ugly**; the name stays plain ink. Don't re-propose it.) Work cards carry hand-authored **SVG data-diagrams** in a fixed
 16:10 `.card-media` slot; `card-art.js` overlays each with a generative canvas scene, bound by the
@@ -54,7 +57,7 @@ owner's own Windows has "Animation effects" off, and WCAG 2.2.2 wants a pause co
 | `styles.css` | Muted-Bauhaus design system. Palette + system-ui font borrowed from VSP_Unfallatlas chart-export (`src/lib/plotExport.ts`). Tokens in `:root`; tab/panel/card/motif styles; `html.motion-off` rules (canvas hide, SVG restore, transitions off) + reduced-motion media query as no-JS fallback + print (print expands all panels). |
 | `motion.js` | The ⏸/▶ motion toggle: injects the button beside `#lang-toggle`, flips `motion-on`/`motion-off` on `<html>`, persists to `localStorage["motion"]`, dispatches `motionchange`, follows live OS `prefers-reduced-motion` changes when no choice is stored. Icon swap is pure CSS off the html class; `aria-pressed` = animation running. ~60 lines, no deps. |
 | `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. The pointer — mouse or finger — is an attractor: the flock streams toward it and orbits (seek/orbit/ring-spring weights at the top of the file are the tuning dials); releases smoothly on pointer-leave, 2.5 s idle, or `pointercancel` (scroll takeover on touch). Decorative + aria-hidden; freezes to a static frame while `motion-off` (resumes/refreezes on `motionchange`); pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
-| `card-art.js` | Generative canvas scenes for the 6 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `frontage` active-frontage strips + gravity-accessibility probe (SSS13 paper) · `toolbox` self-drawing network · `flows` corridors · `venn` exchange · `miner` live weighted least-squares). One shared rAF engine: only visible scenes tick (IntersectionObserver — hidden tab panels pause for free), self-halts when none; a scene draws **only while hovered** (+ ease-out tail), freezing on its last frame; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; on touch (`hover:none`/`pointer:coarse`) visible scenes free-run and finger-press = hover. Engine stops under `motion-off` (canvases CSS-hidden, SVGs return). No deps. |
+| `card-art.js` | Generative canvas scenes for the 6 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `frontage` active-frontage strips + gravity-accessibility probe (SSS13 paper) · `toolbox` self-drawing network · `flows` corridors · `venn` exchange · `miner` live weighted least-squares). One shared rAF engine: only visible scenes tick (IntersectionObserver — hidden tab panels pause for free), self-halts when none; a scene draws **only while hovered** (+ ease-out tail), freezing on its last frame; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; on touch (`hover:none`/`pointer:coarse`) visible scenes free-run and finger-press = hover; a finger lift or scroll takeover latches the hover for `TOUCH_HOLD` (2.5 s) instead of dropping it — any touch on a card is a trigger. Engine stops under `motion-off` (canvases CSS-hidden, SVGs return). No deps. |
 | `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
 | `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
 | `assets/` | `favicon.svg`; optional `CV.pdf` / real screenshots later. |
@@ -65,7 +68,7 @@ Every translatable element carries a `data-i18n="key"`; its **English** text is 
 HTML (the default, works with JS off). The **German** counterpart is the matching key in the `DE`
 object in `i18n.js`. To change a sentence, edit BOTH the HTML (EN) and the `DE[key]` (DE). Keep the two
 in sync. Publications carry no `data-i18n` (they stay English, as published). Coverage is exact —
-70 keys, 70 translations — verify with the parity script pattern:
+93 keys, 93 translations — verify with the parity script pattern:
 `data-i18n="…"` keys in `index.html` vs the 4-space-indented `"key":` lines of the `DE` dict
 (any missing/orphan key is a bug; keep the count exact after every content edit).
 

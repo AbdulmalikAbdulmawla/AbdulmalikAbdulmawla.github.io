@@ -13,8 +13,9 @@
   if (!tabs.length) return;
 
   // legacy / sub-section anchors → owning tab id
+  // (teaching is a real tab since 2026-07-05 — no longer an alias)
   var ALIAS = {
-    publications: "research", teaching: "research",
+    publications: "research",
     skills: "about", top: "work"
   };
 

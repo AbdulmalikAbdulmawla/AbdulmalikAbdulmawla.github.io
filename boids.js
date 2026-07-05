@@ -224,7 +224,11 @@
   }
   window.addEventListener("pointermove", setPtr, { passive: true });
   window.addEventListener("pointerdown", setPtr, { passive: true });
-  window.addEventListener("pointercancel", function () { PTR.active = false; });
+  // touch: a slight drift fires pointercancel (scroll takeover) — keep the
+  // attractor latched and let the P_IDLE timer release it; mouse still snaps off
+  window.addEventListener("pointercancel", function (e) {
+    if (e.pointerType === "mouse") PTR.active = false;
+  });
   window.addEventListener("scroll", function () { heroRectDirty = true; }, { passive: true });
   document.documentElement.addEventListener("mouseleave", function () { PTR.active = false; });
 
