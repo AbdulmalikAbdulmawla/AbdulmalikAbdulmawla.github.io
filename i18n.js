@@ -123,6 +123,12 @@
       "im Modellierungs-Workflow. Vorgestellt auf der 36. eCAADe (2018).",
     "work.c5.link": "Zum Beitrag →",
 
+    "stats.pubs": "Publikationen",
+    "stats.reads.n": "12.000+",
+    "stats.reads": "Aufrufe",
+    "stats.cites": "Zitationen",
+    "stats.rg": "ResearchGate-Profil →",
+
     "pub.h": "Ausgewählte Publikationen",
     "pub.more":
       'Vollständige Liste auf <a href="https://www.researchgate.net/profile/Abdulmalik-Abdulmawla" ' +

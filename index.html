@@ -87,7 +87,7 @@
         <a class="tab" id="tab-experience" role="tab" href="#experience" aria-controls="experience" aria-selected="false" data-i18n="tab.experience">Experience</a>
         <a class="tab" id="tab-about"      role="tab" href="#about"      aria-controls="about"      aria-selected="false" data-i18n="tab.about">About</a>
       </nav>
-      <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Auf Deutsch umschalten">DE</button>
+      <div class="ctrl"><button type="button" class="lang-toggle" id="lang-toggle" aria-label="Auf Deutsch umschalten">DE</button></div>
     </div>
   </div>
 
@@ -302,6 +302,15 @@
           <h2 data-i18n="research.h">Research</h2>
         </header>
 
+        <!-- Stats source: researchgate.net/profile/Abdulmalik-Abdulmawla, checked 2026-07-07.
+             Hand-maintained — re-check ~2×/year and update the three numbers (+ DE "stats.reads.n"). -->
+        <div class="stat-strip">
+          <div class="stat"><span class="stat-n">9</span><span class="stat-l" data-i18n="stats.pubs">Publications</span></div>
+          <div class="stat"><span class="stat-n" data-i18n="stats.reads.n">12,000+</span><span class="stat-l" data-i18n="stats.reads">Reads</span></div>
+          <div class="stat"><span class="stat-n">39</span><span class="stat-l" data-i18n="stats.cites">Citations</span></div>
+          <a class="stat-link" href="https://www.researchgate.net/profile/Abdulmalik-Abdulmawla" target="_blank" rel="noopener" data-i18n="stats.rg">ResearchGate profile &rarr;</a>
+        </div>
+
         <h3 class="sub-h" data-i18n="pub.h">Selected publications</h3>
         <ul class="pub-list">
           <li>
@@ -423,7 +432,7 @@
       </section>
 
       <!-- ========================= EXPERIENCE ========================= -->
-      <section class="panel" id="experience" role="tabpanel" aria-labelledby="tab-experience" tabindex="-1" style="--cat: var(--bau-ochre-dk)">
+      <section class="panel" id="experience" role="tabpanel" aria-labelledby="tab-experience" tabindex="-1" style="--cat: var(--bau-green)">
         <header class="panel-head">
           <span class="panel-num" aria-hidden="true">04</span>
           <h2 data-i18n="exp.h">Experience</h2>

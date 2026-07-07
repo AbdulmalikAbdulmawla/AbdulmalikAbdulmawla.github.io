@@ -22,9 +22,13 @@ is flipped to `js` by an inline `<head>` script, and CSS only hides panels under
 nothing is hidden. Deep-links work (`#research`); legacy anchors (`#publications`, `#teaching`,
 `#skills`) alias to their tab (see `ALIAS` in `tabs.js`).
 
-Visual system = **muted Bauhaus**: desaturated accent trio (`--bau-red/-yellow/-blue`, ochre-dk for
-text) used only as per-tab wayfinding + motif, never a colour flood. Each panel sets its category colour
-via inline `style="--cat: …"`. Dual measure: `--measure-wide` (72rem) shell, `--measure` (46rem) for
+Visual system = **muted Bauhaus**: desaturated accents (`--bau-red/-yellow/-blue` trio + `--bau-green`
+dark sea green for Experience, owner's pick 2026-07-07 over the ochre; `--bau-ochre-dk` stays for
+text-adjacent/card-art use) used only as per-tab wayfinding + motif, never a colour flood. Each panel
+sets its category colour via inline `style="--cat: …"`. Tab bar + footer share the gray **chrome
+surface** (`--surface-gray`, 2026-07-07 — a dark ink bar was tried and rejected as too heavy); the
+bar's bottom edge echoes the active tab's category colour (set by `tabs.js` via `--cat-active`), and
+tabs **wrap** on narrow screens (never overflow-scroll — tabs were getting cut off on phones). Dual measure: `--measure-wide` (72rem) shell, `--measure` (46rem) for
 prose. Hero has a faint CSS grid + an animated **boids-over-street-network** canvas (`boids.js`) — a
 signature motif tying his arc from swarm/CA simulation to urban movement; a soft `.hero::after` scrim
 keeps the hero text legible over it; the boids treat the **pointer as an attractor — mouse and finger
@@ -69,7 +73,7 @@ Every translatable element carries a `data-i18n="key"`; its **English** text is 
 HTML (the default, works with JS off). The **German** counterpart is the matching key in the `DE`
 object in `i18n.js`. To change a sentence, edit BOTH the HTML (EN) and the `DE[key]` (DE). Keep the two
 in sync. Publications carry no `data-i18n` (they stay English, as published). Coverage is exact —
-93 keys, 93 translations — verify with the parity script pattern:
+104 keys, 104 translations (as of 2026-07-07) — verify with the parity script pattern:
 `data-i18n="…"` keys in `index.html` vs the 4-space-indented `"key":` lines of the `DE` dict
 (any missing/orphan key is a bug; keep the count exact after every content edit).
 
@@ -91,6 +95,9 @@ User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-
   **Phone + home address deliberately stripped** (public files: email/city/links only);
   **PhD always "in progress"** — he is not a PhD holder. Both carry the portrait. Regenerate when
   the master CV changes materially; keep EN and DE in sync.
+- Research-tab **stat strip** (publications / reads / citations) is hand-maintained from the
+  ResearchGate profile — re-check ~2×/year; update the three numbers in `index.html` AND the DE
+  `stats.reads.n` value in `i18n.js` (last checked 2026-07-07: 9 · 12,215 · 39).
 - ResearchGate 403-blocks headless/bot fetches — verify or discover RG publication links through
   the Playwright **msedge** browser (owner-authorized 2026-07-07), never via curl/WebFetch.
 

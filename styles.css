@@ -17,12 +17,18 @@
   --hair-soft:  #eef1f4;
   --bg:         #ffffff;
   --bg-tint:    #f7f8fa;
+  /* shared "chrome" surface: tab bar + footer — a real gray, clearly distinct
+     from the white page but lighter than the ink bar (owner: dark = too heavy) */
+  --surface-gray:      #e6e9ed;
+  --surface-gray-line: #ccd2d9;
 
   /* muted Bauhaus accent trio — motif + tab wayfinding only */
   --bau-blue:     #2b6cb0;
   --bau-red:      #c8452f;
   --bau-yellow:   #e0a92e;
   --bau-ochre-dk: #b07d16;   /* darker ochre for text-adjacent contrast */
+  --bau-green:    #35876f;   /* muted sea green — Experience category (owner 2026-07-07:
+                                ochre read as "yellowish green"; brightened once on request) */
 
   --measure:      46rem;     /* prose reading width */
   --measure-wide: 72rem;     /* hero + panel shell */
@@ -117,36 +123,50 @@ h1, h2, h3, h4 { line-height: 1.2; color: var(--ink); }
 .profile-links svg { width: 1.3rem; height: 1.3rem; fill: currentColor; display: block; }
 .hero-cv { margin: 1.1rem 0 0; font-size: .92rem; font-weight: 700; }
 
-/* ---------- TAB BAR ---------- */
+/* ---------- TAB BAR ----------
+   Sits on the shared GRAY chrome surface (same as the footer): clearly distinct
+   from the white page without going dark (ink bar tried 2026-07-07, owner:
+   "too heavy"). Tabs WRAP (never overflow-scroll): on narrow screens they flow
+   to a second row, so no tab can sit hidden off-screen. */
 .tabbar {
   position: sticky; top: 0; z-index: 20;
-  background: rgba(255,255,255,.92);
+  background: rgba(230,233,237,.94);         /* --surface-gray @ 94% */
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--hair);
+  border-bottom: 3px solid var(--cat-active, var(--accent));
 }
 .tabbar .wrap { display: flex; align-items: stretch; gap: 1rem; }
-.tabs { display: flex; gap: .3rem; flex: 1 1 auto; overflow-x: auto; scrollbar-width: none; }
-.tabs::-webkit-scrollbar { display: none; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0 .3rem; flex: 1 1 auto; }
+/* the ⏸ + DE toggles live in their own flex column, so wrapping tab rows
+   never flow underneath or around them */
+.ctrl { display: flex; align-items: center; gap: .5rem; flex: 0 0 auto; }
 .tab {
   position: relative;
   display: inline-flex; align-items: center; white-space: nowrap;
-  padding: .95rem .9rem; border: none; background: none;
+  padding: .85rem .9rem; border: none; background: none;
   font-family: inherit; font-size: .95rem; font-weight: 600;
   color: var(--ink-soft); cursor: pointer; text-decoration: none;
   border-bottom: 3px solid transparent;
 }
-.tab:hover { color: var(--ink); text-decoration: none; }
+.tab:hover { color: var(--ink-900); text-decoration: none; }
 .tab[aria-selected="true"] { color: var(--ink-900); }
 /* category-coloured active underline (colour set per panel/tab) */
 .tab#tab-work[aria-selected="true"]       { border-bottom-color: var(--bau-blue); }
 .tab#tab-research[aria-selected="true"]   { border-bottom-color: var(--bau-red); }
-.tab#tab-experience[aria-selected="true"] { border-bottom-color: var(--bau-yellow); }
+.tab#tab-teaching[aria-selected="true"]   { border-bottom-color: var(--bau-yellow); }
+.tab#tab-experience[aria-selected="true"] { border-bottom-color: var(--bau-green); }
 .tab#tab-about[aria-selected="true"]      { border-bottom-color: var(--ink-900); }
 .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 4px; }
 
+@media (max-width: 640px) {
+  .tab { padding: .5rem .5rem; font-size: .85rem; }
+  .tabbar .wrap { gap: .5rem; }
+  /* keep the toggles level with the first tab row while the tabs wrap below */
+  .ctrl { align-items: flex-start; padding-top: .45rem; }
+}
+
 .lang-toggle {
-  align-self: center; margin-left: .5rem;
-  border: 1px solid var(--hair); background: #fff; color: var(--ink-soft);
+  align-self: center;
+  border: 1px solid var(--surface-gray-line); background: #fff; color: var(--ink-soft);
   border-radius: 6px; padding: .2rem .6rem;
   font-family: inherit; font-size: .82rem; font-weight: 700; letter-spacing: .03em; cursor: pointer;
   transition: border-color .15s ease, color .15s ease;
@@ -211,6 +231,19 @@ main { padding: 2.5rem 0 3rem; }
 .card-body p { font-size: .96rem; margin: 0 0 1rem; }
 .card-link { font-weight: 700; font-size: .95rem; margin-top: auto; }
 
+/* ---------- RESEARCH STAT STRIP ----------
+   Numbers hand-maintained from the ResearchGate profile (see the HTML comment).
+   Values use the font's proportional figures (no tabular-nums — display size). */
+.stat-strip {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2.5rem;
+  padding: 1rem 0 1.1rem; margin: 0 0 1.6rem;
+  border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+}
+.stat { display: flex; align-items: baseline; gap: .55rem; }
+.stat-n { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 600; line-height: 1; color: var(--ink-900); }
+.stat-l { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.stat-link { margin-left: auto; font-weight: 700; font-size: .95rem; align-self: center; }
+
 /* ---------- PUBLICATIONS ---------- */
 .pub-list { list-style: none; margin: 0; padding: 0; }
 .pub-list li { display: flex; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--hair); }
@@ -225,7 +258,7 @@ main { padding: 2.5rem 0 3rem; }
 .timeline { list-style: none; margin: 0; padding: 0; }
 .timeline li { display: flex; gap: 1.4rem; padding: 1.1rem 0; border-top: 1px solid var(--hair); }
 .timeline li:first-child { border-top: none; }
-.tl-date { flex: 0 0 8rem; font-size: .9rem; color: var(--bau-ochre-dk); font-weight: 600; font-variant-numeric: tabular-nums; padding-top: .15rem; }
+.tl-date { flex: 0 0 8rem; font-size: .9rem; color: var(--cat, var(--bau-green)); font-weight: 600; font-variant-numeric: tabular-nums; padding-top: .15rem; }
 .tl-body { max-width: var(--measure); }
 .tl-body h3 { font-size: 1.05rem; margin: 0 0 .2rem; }
 .tl-org { font-size: .9rem; color: var(--ink-soft); margin: 0 0 .4rem; }
@@ -256,7 +289,7 @@ main { padding: 2.5rem 0 3rem; }
 .chips li { background: var(--hair-soft); border: 1px solid var(--hair); border-radius: 6px; padding: .25rem .6rem; font-size: .85rem; color: var(--ink-soft); }
 
 /* ---------- FOOTER ---------- */
-.site-footer { background: var(--bg-tint); border-top: 1px solid var(--hair); padding: 2.5rem 0 3rem; }
+.site-footer { background: var(--surface-gray); border-top: 1px solid var(--surface-gray-line); padding: 2.5rem 0 3rem; }
 .foot-name { font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", var(--font); font-weight: 700; font-size: 1.1rem; margin: 0; color: var(--ink-900); }
 .foot-loc { color: var(--muted); margin: .1rem 0 .3rem; }
 .foot-email { margin: 0 0 1rem; font-size: .95rem; }

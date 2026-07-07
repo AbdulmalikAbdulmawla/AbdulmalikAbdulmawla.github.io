@@ -20,6 +20,7 @@
   };
 
   function panelFor(id) { return document.getElementById(id); }
+  var tabbar = document.querySelector(".tabbar");
 
   function activate(id, opts) {
     opts = opts || {};
@@ -31,6 +32,11 @@
       tab.tabIndex = on ? 0 : -1;
       var panel = panelFor(target);
       if (panel) panel.classList.toggle("is-active", on);
+      // the bar's bottom edge echoes the active tab's category colour
+      // (read back from CSS so the colour map lives in one place: styles.css)
+      if (on && tabbar) {
+        tabbar.style.setProperty("--cat-active", getComputedStyle(tab).borderBottomColor);
+      }
     });
     if (opts.focusTab) { document.getElementById("tab-" + id).focus(); }
     if (opts.updateHash) {
