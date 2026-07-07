@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Abdulmawla-CV</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 14mm 15mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+    color: #1f2933; font-size: 10.1pt; line-height: 1.42;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== header with portrait ===== */
+  .head { display: flex; align-items: flex-start; gap: 8mm; margin-bottom: 4mm; }
+  .head-text { flex: 1; }
+  h1 { font-size: 22pt; font-weight: 800; letter-spacing: -.01em; margin-bottom: 1.5mm; }
+  .eyebrow { color: #c8452f; font-weight: 700; font-size: 8.6pt; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 2mm; }
+  .contact { color: #6b6b6b; font-size: 8.8pt; }
+  .portrait {
+    width: 30mm; height: 30mm; object-fit: cover; border-radius: 2.5mm;
+    border: .4mm solid #e0e3e8; flex: none;
+  }
+  .rule { border: 0; border-top: .6mm solid #1f2933; margin: 3mm 0 4mm; }
+
+  .summary { margin-bottom: 4.5mm; }
+
+  /* ===== sections ===== */
+  h2 {
+    font-size: 10.5pt; letter-spacing: .1em; text-transform: uppercase;
+    border-left: 1.6mm solid #2b6cb0; padding-left: 2.5mm;
+    margin: 5mm 0 2.8mm;
+  }
+  .row { display: flex; gap: 5mm; margin-bottom: 3mm; break-inside: avoid; }
+  .date { flex: none; width: 33mm; color: #b07d16; font-weight: 700; font-size: 9pt; padding-top: .3mm; }
+  .body strong.role { display: block; font-size: 10.1pt; }
+  .org { color: #6b6b6b; font-size: 9pt; }
+  .thesis { color: #475160; font-size: 9pt; }
+  .thesis em { }
+
+  /* publications */
+  .pub { display: flex; gap: 5mm; margin-bottom: 2.2mm; break-inside: avoid; }
+  .pub .y { flex: none; width: 12mm; color: #b07d16; font-weight: 700; font-size: 9pt; }
+  .pub p { font-size: 9.3pt; }
+  .more { color: #6b6b6b; font-size: 8.8pt; margin-top: 1mm; }
+
+  /* skills two-column */
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 8mm; }
+  .skills p { font-size: 9.3pt; }
+
+  .foot {
+    margin-top: 6mm; padding-top: 2mm; border-top: .25mm solid #e0e3e8;
+    color: #9aa3ad; font-size: 8pt;
+  }
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <div class="head-text">
+      <h1>Abdulmalik Abdulmawla</h1>
+      <p class="eyebrow">Computational Urban Design &middot; Spatial-Economic Research</p>
+      <p class="contact">Weimar, Germany &middot; abdulmalik.abdulmawla@uni-weimar.de &middot; abdulmalikabdulmawla.github.io &middot;<br>
+      github.com/AbdulmalikAbdulmawla &middot; ORCID 0000-0003-3383-5998</p>
+    </div>
+    <img class="portrait" src="../assets/portrait.jpg" alt="Abdulmalik Abdulmawla" />
+  </div>
+  <hr class="rule" />
+
+  <p class="summary">Spatial-economic researcher and computational urban designer. I analyze urban structures in
+  relation to local value creation, service economies, and resilience &mdash; working with GIS, network analysis,
+  agent-based simulation, and data-driven methods (Python, R, C#) to empirically link spatial configuration with
+  economic dynamics, and building the research tools that make that analysis reproducible.</p>
+
+  <h2>Education</h2>
+  <div class="row">
+    <span class="date">2018 &ndash; present</span>
+    <div class="body">
+      <strong class="role">PhD candidate &mdash; in progress &middot; Computer Science in Architecture &amp; Urbanism (InfAR), Bauhaus-Universit&auml;t Weimar</strong>
+      <p class="thesis">Thesis: <em>&ldquo;Spatial dependency of urban retail: detailed methods for positioning street-level activities&rdquo;</em> &mdash; supervisor: Prof. Dr. Reinhard K&ouml;nig</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2013</span>
+    <div class="body"><strong class="role">Master of Arts in Architecture &middot; Hochschule Anhalt, Dessau-Ro&szlig;lau, Germany</strong></div>
+  </div>
+  <div class="row">
+    <span class="date">2007</span>
+    <div class="body"><strong class="role">BSc Architecture &amp; Engineering &middot; Faculty of Engineering, Mansoura University, Egypt</strong></div>
+  </div>
+
+  <h2>Experience</h2>
+  <div class="row">
+    <span class="date">Dec 2023 &ndash; present</span>
+    <div class="body">
+      <strong class="role">Research Associate &mdash; Chair of Transport System Planning</strong>
+      <p class="org">Bauhaus-Universit&auml;t Weimar &middot; Bauhaus Mobility / European Digital Innovation Hub Thuringia (EDIH.TH)</p>
+      <p>Collection and analysis of open mobility data; interactive data-exploration platforms; data-science
+      consulting for public institutions, incl. training public administrations on European open-mobility-data
+      standards and Mobilithek publishing; supervision of student theses (Digital Transport Research Lab).</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2016 &ndash; 2023</span>
+    <div class="body">
+      <strong class="role">Research Associate &mdash; Computer Science in Architecture (InfAR/InfAU)</strong>
+      <p class="org">Bauhaus-Universit&auml;t Weimar</p>
+      <p>Teaching computational methods for urban planning and analysis; development of design and research tools
+      (DeCodingSpaces Toolbox, mineR); master&rsquo;s-thesis supervision; conference research (Space Syntax
+      Symposium, eCAADe) and support of academic publications.</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2017 &ndash; 2019</span>
+    <div class="body">
+      <strong class="role">Project Coordinator &mdash; Discovering City (DAAD exchange)</strong>
+      <p class="org">Bauhaus-Universit&auml;t Weimar &harr; German-Jordanian University, Amman</p>
+      <p>Wrote the project proposal, managed the finances, organized the teaching and workshop programme.</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2016 &ndash; 2020</span>
+    <div class="body">
+      <strong class="role">Contributing Author &mdash; DeCodingSpaces Toolbox</strong>
+      <p class="org">DecodingSpaces GbR, Weimar</p>
+      <p>C# development for a Grasshopper toolbox for urban analysis; testing, documentation, consulting.</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2014 &ndash; 2016</span>
+    <div class="body">
+      <strong class="role">Research Associate &mdash; Teaching &amp; Computational Design</strong>
+      <p class="org">Arab Academy for Science, Technology &amp; Maritime Transport (AASTMT), Cairo</p>
+      <p>Computational and parametric design (Grasshopper, Processing, Arduino) in a RIBA Part I certified programme.</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2012 &ndash; 2016</span>
+    <div class="body">
+      <strong class="role">Co-founder &amp; Architect &mdash; Gozour Studio</strong>
+      <p class="org">Mansoura, Egypt</p>
+      <p>Residential, education and competition projects (incl. Lusail Underpass Competition, Qatar).</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="date">2005 &ndash; 2011</span>
+    <div class="body">
+      <strong class="role">Junior &amp; Freelance Architect &mdash; Egypt &amp; UAE</strong>
+      <p class="org">EAI Group, Abu Dhabi &middot; Invert Studios, Cairo &middot; Al Turath, Abu Dhabi</p>
+      <p>Early architectural practice: design, CAD, 3D modelling and visualization, client representation.</p>
+    </div>
+  </div>
+
+  <h2>Selected Publications</h2>
+  <div class="pub"><span class="y">2022</span><p>&mdash; Abdulmawla, A., Bielik, M., Schneider, S., &amp; K&ouml;nig, R. Mapping active frontages: a method for linking street-level activities to their surrounding urban forms &mdash; a case study of Weimar, Germany. <em>13th International Space Syntax Symposium (SSS13)</em>, Bergen.</p></div>
+  <div class="pub"><span class="y">2022</span><p>&mdash; Abdulmawla, A., Schneider, S., K&ouml;nig, R., Bielik, M., &amp; Fuchkina, E. Parametric urban data structuring and spatial query. <em>40th eCAADe</em>.</p></div>
+  <div class="pub"><span class="y">2019</span><p>&mdash; Bielik, M., K&ouml;nig, R., Fuchkina, E., Schneider, S., &amp; Abdulmawla, A. Evolving configurational properties: simulating multiplier effects between land use and movement patterns. <em>12th International Space Syntax Symposium (SSS12)</em>.</p></div>
+  <div class="pub"><span class="y">2018</span><p>&mdash; Abdulmawla, A., Schneider, S., Bielik, M., &amp; K&ouml;nig, R. Integrated data analysis for parametric design environments &mdash; mineR: a Grasshopper plugin based on R. <em>36th eCAADe</em>.</p></div>
+  <div class="pub"><span class="y">2017</span><p>&mdash; K&ouml;nig, R., Bielik, M., Knecht, K., Abdulmawla, A., &amp; Fuchkina, E. New methods for urban analysis and simulation with Grasshopper &mdash; the DeCodingSpaces-Toolbox. <em>CAAD Futures 2017</em>, Istanbul.</p></div>
+  <div class="pub"><span class="y">2017</span><p>&mdash; Schneider, S., Abdulmawla, A., &amp; Donath, D. The effect of the street network on movement patterns and land use in small cities. <em>11th International Space Syntax Symposium</em>, Lisbon.</p></div>
+  <div class="pub"><span class="y">2017</span><p>&mdash; Dennemark, M., Schneider, S., K&ouml;nig, R., Abdulmawla, A., &amp; Donath, D. Towards a modular design strategy for urban masterplanning. <em>eCAADe 2017</em>, Rome.</p></div>
+  <p class="more">Full list: researchgate.net/profile/Abdulmalik-Abdulmawla</p>
+
+  <h2>Teaching &amp; Workshops</h2>
+  <p><strong>University seminars:</strong> Algorithmic Architecture &middot; Parametric Urban Design &amp; Analysis &middot;
+  SYNCITY I &amp; II &middot; Circular Urbanism &middot; Digital Traffic Simulation Lab &middot; Open Mobility Data &middot;
+  Rent-a-Data-Scientist.</p>
+  <p><strong>Workshops (organizer):</strong> Discovering Cities (GJU Amman, 2018) &middot; Urban Analysis, Synthesis &amp;
+  Exploration with Grasshopper (eCAADe 2018, &#321;&oacute;d&#378;) &middot; Rural-to-Urban Transformation (Emerging City
+  Lab, Addis Ababa, 2016) &middot; Simulating Agent-Based Systems using Processing (Cairo, 2015).</p>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <p><strong>Programming:</strong> Python, C#, R, Grasshopper, Java/Processing, vvvv, Arduino</p>
+    <p><strong>Modelling &amp; media:</strong> Rhino, AutoCAD, Revit, 3ds Max, Photoshop, Illustrator, InDesign</p>
+    <p><strong>Spatial &amp; analytical:</strong> GIS, network analysis, agent-based simulation, space syntax, spatial data engineering</p>
+    <p><strong>Languages:</strong> Arabic (native) &middot; English (fluent) &middot; German (very good)</p>
+  </div>
+
+  <h2>Recognition</h2>
+  <div class="pub"><span class="y">2026</span><p>&mdash; Ten-year service recognition at the Bauhaus-Universit&auml;t Weimar, presented by the University President.</p></div>
+
+  <p class="foot">Abdulmalik Abdulmawla &middot; July 2026 &middot; https://abdulmalikabdulmawla.github.io</p>
+
+</body>
+</html>

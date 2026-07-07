@@ -60,7 +60,8 @@ owner's own Windows has "Animation effects" off, and WCAG 2.2.2 wants a pause co
 | `card-art.js` | Generative canvas scenes for the 6 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `frontage` active-frontage strips + gravity-accessibility probe (SSS13 paper) · `toolbox` self-drawing network · `flows` corridors · `venn` exchange · `miner` live weighted least-squares). One shared rAF engine: only visible scenes tick (IntersectionObserver — hidden tab panels pause for free), self-halts when none; a scene draws **only while hovered** (+ ease-out tail), freezing on its last frame; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; on touch (`hover:none`/`pointer:coarse`) visible scenes free-run and finger-press = hover; a finger lift or scroll takeover latches the hover for `TOUCH_HOLD` (2.5 s) instead of dropping it — any touch on a card is a trigger. Engine stops under `motion-off` (canvases CSS-hidden, SVGs return). No deps. |
 | `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
 | `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
-| `assets/` | `favicon.svg`; optional `CV.pdf` / real screenshots later. |
+| `assets/` | `favicon.svg` · `portrait.jpg` (800×800, from `…/Abdulmawla Pictures/VSP Malik/DSCF79421.jpg`) · `og.png` (1200×630 social-share card, wired via `og:image`/`twitter:card`) · `Abdulmawla-CV.pdf` (EN) + `Abdulmawla-Lebenslauf.pdf` (DE) — the hero CV link (`#cv-link`) swaps file + `download` name per language in `i18n.js`. |
+| `cv/` | Regeneration sources: `cv.html` (EN CV) · `lebenslauf.html` (DE Lebenslauf) · `og.html` (social card). Rebuild via headless Edge — PDFs: `msedge --headless --no-pdf-header-footer --print-to-pdf=assets\Abdulmawla-CV.pdf cv\cv.html`; OG image: `msedge --headless --window-size=1200,630 --screenshot=assets\og.png cv\og.html`. |
 | `.nojekyll` | GitHub Pages serves files verbatim. |
 
 ## i18n — how to edit bilingual content
@@ -85,10 +86,13 @@ User-site repo `AbdulmalikAbdulmawla.github.io` → GitHub Pages serves default-
 
 ## Known open items
 - ORCID wired in (hero + footer) → https://orcid.org/0000-0003-3383-5998.
-- `assets/CV.pdf` — generated from the master CV (Edge headless print-to-pdf over a hand-built
-  HTML). **Phone + home address deliberately stripped** (public file: email/city/links only);
-  **PhD always "in progress"** — he is not a PhD holder. Regenerate by hand when the master CV
-  changes materially.
+- `assets/Abdulmawla-CV.pdf` (EN) + `assets/Abdulmawla-Lebenslauf.pdf` (DE) — generated from the
+  master CV via the `cv/` HTML sources (Edge headless print-to-pdf; commands in the Files table).
+  **Phone + home address deliberately stripped** (public files: email/city/links only);
+  **PhD always "in progress"** — he is not a PhD holder. Both carry the portrait. Regenerate when
+  the master CV changes materially; keep EN and DE in sync.
+- ResearchGate 403-blocks headless/bot fetches — verify or discover RG publication links through
+  the Playwright **msedge** browser (owner-authorized 2026-07-07), never via curl/WebFetch.
 
 ## Verify after edits
 `node --check` on all JS files (motion, boids, tabs, i18n, card-art) + exact `data-i18n` ↔ `DE`-dict

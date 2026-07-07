@@ -234,6 +234,18 @@ main { padding: 2.5rem 0 3rem; }
 /* ---------- ABOUT prose + lists ---------- */
 .prose { max-width: var(--measure); }
 .prose p { margin: 0 0 1rem; }
+
+/* About: lead paragraphs + portrait side by side */
+.about-lead { display: flex; gap: 2.5rem; align-items: flex-start; }
+.about-portrait {
+  flex: none; width: 172px; height: 172px; object-fit: cover;
+  border-radius: 12px; border: 1px solid var(--hair);
+  box-shadow: 0 4px 18px rgba(20, 24, 29, .08);
+}
+@media (max-width: 700px) {
+  .about-lead { flex-direction: column-reverse; }
+  .about-portrait { width: 140px; height: 140px; }
+}
 .plain { padding-left: 1.1rem; max-width: var(--measure); }
 .plain li { margin-bottom: .35rem; font-size: .96rem; }
 

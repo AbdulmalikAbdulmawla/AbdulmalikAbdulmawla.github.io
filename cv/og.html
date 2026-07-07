@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>og-image source — screenshot at exactly 1200×630</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+    background: #f7f8fa; color: #1f2933; position: relative;
+  }
+
+  /* faint architectural grid, like the site hero */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(#e0e3e8 1px, transparent 1px),
+      linear-gradient(90deg, #e0e3e8 1px, transparent 1px);
+    background-size: 70px 70px;
+    opacity: .55;
+  }
+
+  /* street network + boids motif (hand-authored, echoes boids.js) */
+  svg.net { position: absolute; inset: 0; }
+
+  .content {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; align-items: center;
+    padding: 0 84px;
+    gap: 72px;
+  }
+  .text { flex: 1; }
+  .eyebrow {
+    color: #c8452f; font-weight: 700; font-size: 17px;
+    letter-spacing: .15em; text-transform: uppercase; margin-bottom: 22px;
+    white-space: nowrap;
+  }
+  h1 {
+    font-size: 88px; line-height: 1.02; font-weight: 700;
+    letter-spacing: -.015em; margin-bottom: 26px;
+  }
+  .lede { font-size: 27px; line-height: 1.4; color: #475160; max-width: 640px; }
+  .url { margin-top: 30px; font-size: 23px; font-weight: 600; color: #2b6cb0; }
+
+  .portrait-wrap { position: relative; flex: none; width: 300px; height: 300px; }
+  .portrait {
+    width: 300px; height: 300px; object-fit: cover; border-radius: 50%;
+    border: 6px solid #ffffff;
+    box-shadow: 0 8px 40px rgba(20,24,29,.18);
+    position: relative; z-index: 2;
+  }
+  /* Bauhaus orbit accents around the portrait */
+  .ring { position: absolute; border-radius: 50%; z-index: 1; }
+  .ring.blue   { inset: -22px; border: 3px solid #2b6cb0; opacity: .55; }
+  .ring.yellow { inset: -44px; border: 2px solid #e0a92e; opacity: .5; }
+  .dot { position: absolute; border-radius: 50%; z-index: 3; }
+  .dot.red    { width: 26px; height: 26px; background: #c8452f; top: 6px;  right: 14px; }
+  .dot.yellow { width: 18px; height: 18px; background: #e0a92e; bottom: 30px; left: -30px; }
+  .dot.blue   { width: 14px; height: 14px; background: #2b6cb0; top: 66px; left: -46px; }
+
+  /* Bauhaus baseline strip */
+  .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 14px; display: flex; z-index: 4; }
+  .strip span { height: 100%; }
+  .strip .b { background: #2b6cb0; flex: 3; }
+  .strip .r { background: #c8452f; flex: 2; }
+  .strip .y { background: #e0a92e; flex: 1; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <!-- street network with flocking boid triangles, echoing the hero canvas -->
+  <svg class="net" viewBox="0 0 1200 630" fill="none">
+    <g stroke="#cfd5dc" stroke-width="2" opacity=".8">
+      <path d="M-20 500 L180 430 L390 470 L620 380 L860 430 L1090 340 L1240 370"/>
+      <path d="M180 430 L240 250 L430 180 L640 220 L820 130 L1050 170 L1240 110"/>
+      <path d="M390 470 L430 180"/>
+      <path d="M620 380 L640 220"/>
+      <path d="M860 430 L820 130"/>
+      <path d="M1090 340 L1050 170"/>
+      <path d="M240 250 L60 180 L-20 210"/>
+      <path d="M430 180 L390 40"/>
+      <path d="M640 220 L680 60"/>
+    </g>
+    <g stroke="#2b6cb0" stroke-width="3.5" opacity=".45">
+      <path d="M-20 500 L180 430 L390 470 L620 380 L860 430"/>
+    </g>
+    <!-- boids: small triangles along the paths -->
+    <g opacity=".9">
+      <path d="M150 442 l20 -7 l-16 -12 z" fill="#2b6cb0"/>
+      <path d="M300 452 l21 4 l-11 -17 z" fill="#2b6cb0" opacity=".8"/>
+      <path d="M480 428 l19 -9 l-14 -13 z" fill="#c8452f"/>
+      <path d="M560 402 l20 -8 l-15 -13 z" fill="#2b6cb0" opacity=".75"/>
+      <path d="M720 398 l21 6 l-12 -17 z" fill="#e0a92e"/>
+      <path d="M955 385 l20 -10 l-16 -11 z" fill="#2b6cb0" opacity=".7"/>
+      <path d="M420 205 l18 -11 l-16 -10 z" fill="#c8452f" opacity=".7"/>
+      <path d="M590 232 l20 -3 l-13 -15 z" fill="#e0a92e" opacity=".75"/>
+    </g>
+    <!-- network nodes -->
+    <g fill="#9aa3ad" opacity=".7">
+      <circle cx="180" cy="430" r="5"/><circle cx="390" cy="470" r="5"/><circle cx="620" cy="380" r="5"/>
+      <circle cx="860" cy="430" r="5"/><circle cx="1090" cy="340" r="5"/><circle cx="240" cy="250" r="5"/>
+      <circle cx="430" cy="180" r="5"/><circle cx="640" cy="220" r="5"/><circle cx="820" cy="130" r="5"/>
+      <circle cx="1050" cy="170" r="5"/>
+    </g>
+  </svg>
+
+  <!-- soft scrim so the text stays crisp over the motif -->
+  <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(247,248,250,.94) 38%,rgba(247,248,250,.55) 66%,rgba(247,248,250,.15) 100%);z-index:1"></div>
+
+  <div class="content">
+    <div class="text">
+      <p class="eyebrow">Computational Urban Design &middot; Spatial-Economic Research</p>
+      <h1>Abdulmalik<br>Abdulmawla</h1>
+      <p class="lede">Research tools that turn urban data into evidence &mdash; spatial structure, local value creation, urban resilience.</p>
+      <p class="url">abdulmalikabdulmawla.github.io</p>
+    </div>
+    <div class="portrait-wrap">
+      <span class="ring blue"></span>
+      <span class="ring yellow"></span>
+      <img class="portrait" src="../assets/portrait.jpg" alt="" />
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot blue"></span>
+    </div>
+  </div>
+
+  <div class="strip"><span class="b"></span><span class="r"></span><span class="y"></span></div>
+</body>
+</html>

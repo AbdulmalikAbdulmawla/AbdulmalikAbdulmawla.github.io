@@ -243,6 +243,13 @@
       el.innerHTML = de && DE[key] != null ? DE[key] : el.__en;
     });
     document.documentElement.lang = de ? "de" : "en";
+    // the CV download is a different file per language (CV vs. Lebenslauf)
+    var cv = document.getElementById("cv-link");
+    if (cv) {
+      var file = de ? "Abdulmawla-Lebenslauf.pdf" : "Abdulmawla-CV.pdf";
+      cv.setAttribute("href", "assets/" + file);
+      cv.setAttribute("download", file);
+    }
     if (toggle) {
       toggle.textContent = de ? "EN" : "DE";
       toggle.setAttribute("aria-label", de ? "Switch to English" : "Auf Deutsch umschalten");
