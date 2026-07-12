@@ -1255,7 +1255,7 @@
     recs.push({
       media: media, canvas: canvas, ctx: ctx, scene: make(),
       w: 0, h: 0, rect: null, visible: false, sized: false,
-      sizeDirty: false, live: false, inf: 0
+      sizeDirty: false, live: false, inf: 0, primed: false
     });
   });
   if (!recs.length) return;
@@ -1300,6 +1300,15 @@
         if (!fit(r)) continue;
         // a live card refit after resize: repaint its frozen frame
         if (r.live) r.scene.draw(r.ctx, r.w, r.h);
+      }
+      // prime: every card shows its scene's OWN first frame at rest (same
+      // algorithm as the animation — the SVG below is only the no-JS /
+      // motion-off / print fallback), then freezes until the cursor arrives
+      if (!r.primed) {
+        r.scene.step(dt, ts, { x: -9999, y: -9999, over: false, seen: false, inf: 0 });
+        r.scene.draw(r.ctx, r.w, r.h);
+        r.primed = true;
+        if (!r.live) { r.live = true; r.media.classList.add("is-live"); }
       }
       var x = MOUSE.cx - r.rect.left, y = MOUSE.cy - r.rect.top;
       var over = MOUSE.seen && x >= 0 && y >= 0 && x <= r.w && y <= r.h;
