@@ -7,6 +7,9 @@
    ============================================================ */
 
 :root {
+  /* light-only by design: opt out of UA/OS dark-mode darkening (pairs with the
+     <meta name="color-scheme" content="only light"> in index.html) */
+  color-scheme: light only;
   --ink:        #1f2933;
   --ink-soft:   #475160;
   --muted:      #6b6b6b;

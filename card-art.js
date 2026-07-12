@@ -24,7 +24,6 @@
    future real screenshot just needs its attribute removed):
      unfall  — accident points + hotspot; cursor = inspection lens
      toolbox — a street network that draws itself; cursor = gravity well
-     flows   — particles on bendable mobility corridors
      dcities — the joined Amman+Erfurt map (the owner's project
                banner) under one centrality analysis; the cursor
                is the analysis probe (reticle) revealing weights
@@ -288,92 +287,6 @@
           ctx.globalAlpha = 0.88 * fadeF;
           ctx.fillStyle = n.color;
           ctx.beginPath(); ctx.arc(n.hx + n.dx, n.hy + n.dy, r, 0, 6.2832); ctx.fill();
-        }
-        ctx.globalAlpha = 1;
-      }
-    };
-  }
-
-  /* ============================================================
-     Scene 3 · flows — particles streaming along three mobility
-     corridors, with fading trails (the only scene that never
-     clears — it fades). The cursor bends the nearest corridor
-     toward it and speeds up nearby particles.
-     ============================================================ */
-  function makeFlows() {
-    var w = 0, h = 0, cors = [], fresh = true;
-    // corridor shapes in unit space (scaled to the card on init)
-    var DEFS = [
-      { color: "blue",   u: [[0, 0.78], [0.28, 0.15], [0.55, 0.95], [1, 0.32]] },
-      { color: "red",    u: [[0, 0.55], [0.30, 0.38], [0.62, 0.86], [1, 0.58]] },
-      { color: "yellow", u: [[0, 0.90], [0.36, 0.74], [0.52, 0.28], [1, 0.74]] }
-    ];
-
-    return {
-      init: function (cw, ch) {
-        w = cw; h = ch; cors = []; fresh = true;
-        for (var i = 0; i < DEFS.length; i++) {
-          var d = DEFS[i], base = [], cur = [];
-          for (var k = 0; k < 4; k++) {
-            base.push({ x: d.u[k][0] * w, y: d.u[k][1] * h });
-            cur.push({ x: d.u[k][0] * w, y: d.u[k][1] * h });
-          }
-          var parts = [];
-          for (var m = 0; m < 26; m++) {
-            parts.push({ s: Math.random(), sp: rand(0.0022, 0.005), off: rand(-5, 5), size: rand(1.1, 2.3) });
-          }
-          cors.push({ color: P[d.color], base: base, cur: cur, parts: parts });
-        }
-      },
-      step: function (dt, t, ptr) {
-        for (var i = 0; i < cors.length; i++) {
-          var c = cors[i];
-          for (var k = 1; k <= 2; k++) {          // inner control points bend
-            var b = c.base[k], q = c.cur[k], tx = b.x, ty = b.y;
-            if (ptr.over) {
-              var ddx = ptr.x - b.x, ddy = ptr.y - b.y;
-              var pull = 0.35 * gauss(ddx * ddx + ddy * ddy, 120) * ptr.inf;
-              tx = b.x + ddx * pull; ty = b.y + ddy * pull;
-            }
-            q.x += (tx - q.x) * Math.min(0.1 * dt, 1);
-            q.y += (ty - q.y) * Math.min(0.1 * dt, 1);
-          }
-          for (var m = 0; m < c.parts.length; m++) {
-            var p = c.parts[m], boost = 1;
-            if (ptr.over) {
-              var pos = bezPoint(c.cur, p.s);
-              var pdx = pos.x - ptr.x, pdy = pos.y - ptr.y;
-              boost = 1 + 0.9 * gauss(pdx * pdx + pdy * pdy, 80) * ptr.inf;
-            }
-            p.s += p.sp * dt * boost;
-            if (p.s > 1) p.s -= 1;
-          }
-        }
-      },
-      draw: function (ctx, cw, ch) {
-        if (fresh) { ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch); fresh = false; }
-        else { ctx.fillStyle = "rgba(" + TINT_RGB + ",0.16)"; ctx.fillRect(0, 0, cw, ch); }
-
-        for (var i = 0; i < cors.length; i++) {
-          var c = cors[i];
-          ctx.globalAlpha = 0.22; ctx.strokeStyle = c.color; ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(c.cur[0].x, c.cur[0].y);
-          ctx.bezierCurveTo(c.cur[1].x, c.cur[1].y, c.cur[2].x, c.cur[2].y, c.cur[3].x, c.cur[3].y);
-          ctx.stroke();
-
-          ctx.globalAlpha = 0.9; ctx.fillStyle = c.color;
-          for (var m = 0; m < c.parts.length; m++) {
-            var p = c.parts[m];
-            var pos = bezPoint(c.cur, p.s);
-            var ahead = bezPoint(c.cur, Math.min(p.s + 0.01, 1));
-            var txv = ahead.x - pos.x, tyv = ahead.y - pos.y;
-            var tl = Math.sqrt(txv * txv + tyv * tyv) || 1;
-            var nx = -tyv / tl, ny = txv / tl;      // perpendicular offset lane
-            ctx.beginPath();
-            ctx.arc(pos.x + nx * p.off, pos.y + ny * p.off, p.size, 0, 6.2832);
-            ctx.fill();
-          }
         }
         ctx.globalAlpha = 1;
       }
@@ -1225,7 +1138,7 @@
   }
 
   /* ---------------- engine ---------------- */
-  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, dcities: makeDcities, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
+  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, dcities: makeDcities, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
   var DPR_CAP = 2;
   /* touch devices have no hover, so the hover-gate would keep scenes dead
      forever there — instead visible cards play on their own (the IO already

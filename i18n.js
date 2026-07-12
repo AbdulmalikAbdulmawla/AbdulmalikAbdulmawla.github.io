@@ -140,13 +140,6 @@
       "jede Variante in den gemeinsamen Workflow des Teams zurück (C#, R, Grasshopper, QGIS).",
     "work.c8.link": "Projektzusammenfassung (PDF) →",
 
-    "work.c3.title": "Plattformen für offene Mobilitätsdaten",
-    "work.c3.role": "Wissenschaftlicher Mitarbeiter · EDIH.TH, Bauhaus Weimar",
-    "work.c3.body":
-      "Interaktive Plattformen zur Datenexploration und digitale Dateninfrastrukturen für " +
-      "offene Mobilitätsdaten, entwickelt im Rahmen der Data-Science-Beratung öffentlicher " +
-      "Institutionen am European Digital Innovation Hub Thüringen.",
-    "work.c3.link": "Zum Code →",
     "work.c4.title": "Discovering Cities – Workshop &amp; Austausch",
     "work.c4.role": "Projektkoordinator · DAAD, Weimar ↔ Amman",
     "work.c4.body":
