@@ -100,6 +100,7 @@
       "evidenzbasierte Verkehrssicherheitsanalyse. Läuft vollständig im Browser " +
       "(DuckDB-WASM + deck.gl).",
     "work.c1.link": "Live-App öffnen →",
+    "work.c1.link2": "Technische Fallstudie →",
     "work.c7.title": "Heterogene Industrien — Şişhanes Bottom-up-Fabrik",
     "work.c7.role": "Masterarbeit, mit Ali Farhan · Hochschule Anhalt, Dessau · Istanbul 2013",
     "work.c7.body":

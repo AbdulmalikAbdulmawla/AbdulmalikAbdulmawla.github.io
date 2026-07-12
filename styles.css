@@ -233,6 +233,10 @@ main { padding: 2.5rem 0 3rem; }
 .card-role { font-size: .8rem; color: var(--muted); margin: 0 0 .7rem; text-transform: uppercase; letter-spacing: .04em; }
 .card-body p { font-size: .96rem; margin: 0 0 1rem; }
 .card-link { font-weight: 700; font-size: .95rem; margin-top: auto; }
+/* second, non-stretched card link — no ::after overlay (it would sit on top of the first
+   link's stretched hit-area and steal the whole card); z-index lifts it above that overlay */
+.card-link--plain { margin-top: .35rem; position: relative; z-index: 2; }
+.card-link--plain::after { content: none; }
 
 /* ---------- RESEARCH STAT STRIP ----------
    Numbers hand-maintained from the ResearchGate profile (see the HTML comment).
