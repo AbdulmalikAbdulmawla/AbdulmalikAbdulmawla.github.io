@@ -131,6 +131,16 @@
       "integrieren. Eine Kooperation der Bauhaus Weimar, ETH Zürich, AIT Wien und des " +
       "FCL Singapur (GPL v3).",
     "work.c2.link": "Zur Toolbox →",
+    "work.c8.title": "Blankenburger Süden — Interaktive Masterplan-Analyse",
+    "work.c8.role": "Consultant &amp; Tool-Entwickler · DecodingSpaces GbR für TSPA, Berlin, 2019",
+    "work.c8.body":
+      "Ein entwurfsbegleitendes Werkzeug für eines der größten Stadtentwicklungsgebiete " +
+      "Berlins: Planer definieren Typologien, Parzellierung und Dichte – das Werkzeug " +
+      "antwortet mit Bewegungssimulation im Straßennetz, Dichte-Visualisierung und " +
+      "vorgeschlagenen Tramhaltestellen, während der Entwurf sich entwickelt, und meldet " +
+      "jede Variante in den gemeinsamen Workflow des Teams zurück (C#, R, Grasshopper, QGIS).",
+    "work.c8.link": "Projektzusammenfassung (PDF) →",
+
     "work.c3.title": "Plattformen für offene Mobilitätsdaten",
     "work.c3.role": "Wissenschaftlicher Mitarbeiter · EDIH.TH, Bauhaus Weimar",
     "work.c3.body":
