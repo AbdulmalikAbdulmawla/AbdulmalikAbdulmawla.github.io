@@ -25,7 +25,8 @@
      unfall  — accident points + hotspot; cursor = inspection lens
      toolbox — a street network that draws itself; cursor = gravity well
      flows   — particles on bendable mobility corridors
-     venn    — exchange between three communities
+     camp    — Amman camp fabric; the cursor's selection box reads
+               local density against the surroundings (live ratio)
      miner   — live (weighted) least-squares regression
      sishane — atelier semilattice; cursor = a new production centre
                that condenses extra dependency links around itself
@@ -379,90 +380,100 @@
   }
 
   /* ============================================================
-     Scene 4 · venn — three breathing communities (Weimar, Amman,
-     the workshop cohort) drifting on slow Lissajous paths while
-     particles migrate between them along arcs — an exchange
-     project. The cursor softly attracts the constellation and
-     raises the exchange rate.
+     Scene 4 · camp — the Amman workshop tool, replayed. A dense
+     fine-grain neighbourhood fabric from above (the refugee-camp
+     morphology of Amman): tight building rows, narrow alleys, one
+     main street. A selection box rides under the cursor and reads
+     the LOCAL density against the whole fabric — buildings inside
+     tint red (denser) or blue (sparser) and the live ratio prints
+     at the box corner. Untouched (touch), the box surveys on its
+     own along a slow path.
      ============================================================ */
-  function makeVenn() {
-    var w = 0, h = 0, discs = [], parts = [], acc = 0;
-    var curT = 0;
-    var DEFS = [
-      { u: [0.375, 0.5], r: 0.3,   color: "blue" },
-      { u: [0.625, 0.5], r: 0.3,   color: "red" },
-      { u: [0.5, 0.75],  r: 0.225, color: "yellow" }
-    ];
-
-    function spawnParticle(inf) {
-      if (parts.length >= 60) return;
-      var i = (Math.random() * discs.length) | 0;
-      var j = (i + 1 + ((Math.random() * (discs.length - 1)) | 0)) % discs.length;
-      var A = discs[i], B = discs[j];
-      var mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2;
-      var dx = B.x - A.x, dy = B.y - A.y;
-      var bend = rand(-0.4, 0.4);
-      parts.push({
-        from: i, to: j, s: 0, sp: rand(0.006, 0.013),
-        ax: A.x, ay: A.y, bx: B.x, by: B.y,
-        cx: mx - dy * bend, cy: my + dx * bend,
-        color: A.color
-      });
-    }
+  function makeCamp() {
+    var w = 0, h = 0, blds = [], globalDen = 1;
+    var box = { x: 0, y: 0, bw: 0, bh: 0 };
+    var ratio = 1, curT = 0, curPtr = null;
 
     return {
       init: function (cw, ch) {
-        w = cw; h = ch; discs = []; parts = []; acc = 0;
-        var rs = Math.min(w / 1.6, h);            // radius scale keeps the trio inside
-        for (var i = 0; i < DEFS.length; i++) {
-          var d = DEFS[i];
-          discs.push({
-            bx: d.u[0] * w, by: d.u[1] * h, r: d.r * rs, color: P[d.color],
-            fx: rand(0.00013, 0.00023), fy: rand(0.0001, 0.0002),
-            px: rand(0, 6.28), py: rand(0, 6.28), x: 0, y: 0
-          });
+        w = cw; h = ch; blds = [];
+        box.bw = w * 0.3; box.bh = h * 0.32;
+        box.x = w / 2; box.y = h / 2;
+        var s1 = w * 0.32, s2 = w * 0.68, sy = h * 0.54;   // two alleys + the main street
+        var y = 6, tot = 0;
+        while (y < h - 12) {
+          var rowH = rand(9, 13);
+          if (Math.abs(y + rowH / 2 - sy) < 8) { y += rand(9, 12); continue; }
+          var x = rand(3, 8);
+          while (x < w - 9) {
+            var bw = rand(7, 17);
+            var a1 = s1 + 8 * Math.sin(y * 0.05), a2 = s2 + 9 * Math.sin(y * 0.04 + 2);
+            if ((x < a1 + 3 && x + bw > a1 - 7) || (x < a2 + 3 && x + bw > a2 - 7)) { x += bw + rand(7, 11); continue; }
+            if (Math.random() < 0.11) { x += bw + rand(2, 5); continue; }
+            var bh = rowH - 2.4;
+            blds.push({ x: x, y: y, bw: bw, bh: bh, sh: Math.random() });
+            tot += bw * bh;
+            x += bw + rand(2, 4.5);
+          }
+          y += rowH;
         }
+        globalDen = tot / (w * h) || 1;
       },
       step: function (dt, t, ptr) {
-        curT = t;
-        for (var i = 0; i < discs.length; i++) {
-          var d = discs[i];
-          d.x = d.bx + 7 * Math.sin(t * d.fx + d.px);
-          d.y = d.by + 5 * Math.sin(t * d.fy + d.py);
-          if (ptr.over) {                          // constellation follows, softly
-            d.x += (ptr.x - d.bx) * 0.08 * ptr.inf;
-            d.y += (ptr.y - d.by) * 0.08 * ptr.inf;
-          }
+        curT = t; curPtr = ptr;
+        var tx, ty;
+        if (ptr.over) { tx = ptr.x; ty = ptr.y; }
+        else {                                    // the box surveys on its own (touch)
+          tx = w * (0.5 + 0.3 * Math.sin(t * 0.00019));
+          ty = h * (0.5 + 0.28 * Math.sin(t * 0.00027 + 1.2));
         }
-        acc += dt * 16.667 * (1 + 1.5 * (ptr.over ? ptr.inf : 0));
-        if (acc > 620) { acc = 0; spawnParticle(); }
-        for (var m = parts.length - 1; m >= 0; m--) {
-          var p = parts[m];
-          p.s += p.sp * dt;
-          if (p.s >= 1) { parts.splice(m, 1); }
+        box.x += (tx - box.x) * Math.min(0.09 * dt, 1);
+        box.y += (ty - box.y) * Math.min(0.09 * dt, 1);
+        // built area inside the box vs. the fabric's overall density
+        var x0 = box.x - box.bw / 2, x1 = box.x + box.bw / 2;
+        var y0 = box.y - box.bh / 2, y1 = box.y + box.bh / 2;
+        var acc = 0;
+        for (var i = 0; i < blds.length; i++) {
+          var b = blds[i];
+          var ox = Math.min(x1, b.x + b.bw) - Math.max(x0, b.x);
+          var oy = Math.min(y1, b.y + b.bh) - Math.max(y0, b.y);
+          if (ox > 0 && oy > 0) acc += ox * oy;
         }
+        var r = (acc / (box.bw * box.bh)) / globalDen;
+        ratio += (r - ratio) * Math.min(0.12 * dt, 1);
       },
       draw: function (ctx, cw, ch) {
+        var ptr = curPtr;
         ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch);
-
-        ctx.globalCompositeOperation = "multiply";
-        for (var i = 0; i < discs.length; i++) {
-          var d = discs[i];
-          var breathe = 1 + 0.03 * Math.sin(curT * 0.0011 + i * 2.1);
-          ctx.globalAlpha = 0.38;
-          ctx.fillStyle = d.color;
-          ctx.beginPath(); ctx.arc(d.x, d.y, d.r * breathe, 0, 6.2832); ctx.fill();
+        var amt = ptr ? (ptr.over ? ptr.inf : (COARSE ? 0.85 : ptr.inf)) : 0;
+        var x0 = box.x - box.bw / 2, x1 = box.x + box.bw / 2;
+        var y0 = box.y - box.bh / 2, y1 = box.y + box.bh / 2;
+        var hot = clamp((ratio - 1) * 1.8, -1, 1); // denser → red, sparser → blue
+        for (var i = 0; i < blds.length; i++) {
+          var b = blds[i];
+          var cx = b.x + b.bw / 2, cy = b.y + b.bh / 2;
+          var inside = amt > 0.03 && cx > x0 && cx < x1 && cy > y0 && cy < y1;
+          if (inside) {
+            ctx.fillStyle = hot >= 0 ? P.red : P.blue;
+            ctx.globalAlpha = (0.3 + 0.5 * Math.abs(hot)) * amt + 0.18 * (1 - amt);
+          } else {
+            ctx.fillStyle = P.soft;
+            ctx.globalAlpha = 0.16 + 0.13 * b.sh;
+          }
+          ctx.fillRect(b.x, b.y, b.bw, b.bh);
         }
-        ctx.globalCompositeOperation = "source-over";
-
-        for (var m = 0; m < parts.length; m++) {
-          var p = parts[m], t1 = p.s, u = 1 - t1;
-          // quadratic arc from source to destination disc centre
-          var x = u * u * p.ax + 2 * u * t1 * p.cx + t1 * t1 * p.bx;
-          var y = u * u * p.ay + 2 * u * t1 * p.cy + t1 * t1 * p.by;
-          ctx.globalAlpha = 0.85 * Math.min(p.s / 0.12, (1 - p.s) / 0.12, 1);
-          ctx.fillStyle = p.color;
-          ctx.beginPath(); ctx.arc(x, y, 1.9, 0, 6.2832); ctx.fill();
+        if (amt > 0.03) {
+          ctx.globalAlpha = 0.85 * amt;
+          ctx.strokeStyle = P.soft; ctx.lineWidth = 1.6;
+          ctx.strokeRect(x0, y0, box.bw, box.bh);
+          // the live density readout — numerals only, no i18n needed
+          ctx.globalAlpha = 0.9 * amt;
+          ctx.fillStyle = hot >= 0 ? P.red : P.blue;
+          ctx.font = "600 11px system-ui, -apple-system, 'Segoe UI', sans-serif";
+          ctx.textAlign = "left";
+          var lx = clamp(x1 + 5, 4, cw - 42);
+          var ly = clamp(y0 + 4, 12, ch - 6);
+          ctx.fillText("×" + ratio.toFixed(2), lx, ly);
         }
         ctx.globalAlpha = 1;
       }
@@ -1123,7 +1134,7 @@
   }
 
   /* ---------------- engine ---------------- */
-  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, venn: makeVenn, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
+  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, camp: makeCamp, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
   var DPR_CAP = 2;
   /* touch devices have no hover, so the hover-gate would keep scenes dead
      forever there — instead visible cards play on their own (the IO already

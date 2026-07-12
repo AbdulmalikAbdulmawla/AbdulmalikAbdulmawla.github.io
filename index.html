@@ -145,38 +145,56 @@
             <div class="card-media" data-art="sishane" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
-                <!-- walking-distance dependency ranges (40 / 80 / 160 m) -->
-                <g fill="none" stroke="#d5dae1" stroke-dasharray="4 4">
-                  <circle cx="150" cy="105" r="34"/>
-                  <circle cx="150" cy="105" r="62"/>
-                  <circle cx="150" cy="105" r="92"/>
+                <!-- the semilattice: overlapping atelier groups (sets that share members) -->
+                <g stroke-width="1.2">
+                  <ellipse cx="108" cy="80" rx="94" ry="62" fill="#e0a92e" fill-opacity=".09" stroke="#e0a92e" stroke-opacity=".4" transform="rotate(-8 108 80)"/>
+                  <ellipse cx="196" cy="70" rx="86" ry="56" fill="#c8452f" fill-opacity=".09" stroke="#c8452f" stroke-opacity=".4" transform="rotate(6 196 70)"/>
+                  <ellipse cx="212" cy="126" rx="90" ry="58" fill="#2b6cb0" fill-opacity=".09" stroke="#2b6cb0" stroke-opacity=".4" transform="rotate(-5 212 126)"/>
+                  <ellipse cx="112" cy="140" rx="80" ry="50" fill="#9aa3ad" fill-opacity=".09" stroke="#9aa3ad" stroke-opacity=".4" transform="rotate(4 112 140)"/>
                 </g>
-                <!-- dependency edges, width = intensity -->
-                <g stroke="#475160" opacity=".5" stroke-linecap="round">
-                  <line x1="150" y1="105" x2="118" y2="78" stroke-width="3.5"/>
-                  <line x1="150" y1="105" x2="187" y2="88" stroke-width="3"/>
-                  <line x1="150" y1="105" x2="132" y2="146" stroke-width="2.5"/>
-                  <line x1="150" y1="105" x2="207" y2="132" stroke-width="1.5"/>
-                  <line x1="118" y1="78" x2="92" y2="52" stroke-width="1.5"/>
-                  <line x1="187" y1="88" x2="222" y2="58" stroke-width="1.5"/>
-                  <line x1="187" y1="88" x2="238" y2="96" stroke-width="1"/>
-                  <line x1="132" y1="146" x2="96" y2="162" stroke-width="1"/>
-                  <line x1="150" y1="105" x2="76" y2="118" stroke-width="1"/>
-                  <line x1="207" y1="132" x2="252" y2="158" stroke-width="1"/>
+                <!-- sparse base links — some ateliers stay unconnected -->
+                <g stroke="#475160" stroke-width="1" opacity=".38">
+                  <line x1="34" y1="42" x2="82" y2="28"/>
+                  <line x1="216" y1="32" x2="258" y2="66"/>
+                  <line x1="46" y1="92" x2="86" y2="118"/>
+                  <line x1="240" y1="118" x2="276" y2="142"/>
+                  <line x1="118" y1="162" x2="162" y2="176"/>
+                  <line x1="196" y1="88" x2="228" y2="72"/>
+                  <line x1="64" y1="160" x2="86" y2="118"/>
                 </g>
-                <!-- ateliers, coloured by trade -->
+                <!-- the ONE selected atelier links to its local group -->
+                <circle cx="150" cy="96" r="46" fill="none" stroke="#475160" stroke-opacity=".38" stroke-dasharray="4 4"/>
+                <g stroke="#e0a92e" stroke-width="1.5" opacity=".7">
+                  <line x1="150" y1="96" x2="118" y2="72"/>
+                  <line x1="150" y1="96" x2="186" y2="112"/>
+                  <line x1="150" y1="96" x2="132" y2="128"/>
+                  <line x1="150" y1="96" x2="180" y2="66"/>
+                </g>
+                <!-- ateliers, spread; coloured by trade -->
                 <g>
-                  <circle cx="150" cy="105" r="10" fill="#c8452f"/>
-                  <circle cx="118" cy="78" r="7" fill="#2b6cb0"/>
-                  <circle cx="187" cy="88" r="7" fill="#e0a92e"/>
-                  <circle cx="132" cy="146" r="6" fill="#2b6cb0"/>
-                  <circle cx="207" cy="132" r="6" fill="#e0a92e"/>
-                  <circle cx="92" cy="52" r="5" fill="#9aa3ad"/>
-                  <circle cx="222" cy="58" r="5" fill="#c8452f"/>
-                  <circle cx="238" cy="96" r="4" fill="#9aa3ad"/>
-                  <circle cx="96" cy="162" r="5" fill="#9aa3ad"/>
-                  <circle cx="76" cy="118" r="5" fill="#2b6cb0"/>
-                  <circle cx="252" cy="158" r="4" fill="#e0a92e"/>
+                  <circle cx="150" cy="96" r="6" fill="#e0a92e"/>
+                  <circle cx="118" cy="72" r="3.5" fill="#2b6cb0"/>
+                  <circle cx="186" cy="112" r="3.5" fill="#9aa3ad"/>
+                  <circle cx="132" cy="128" r="3.5" fill="#c8452f"/>
+                  <circle cx="180" cy="66" r="3.5" fill="#2b6cb0"/>
+                  <circle cx="34" cy="42" r="3" fill="#c8452f"/>
+                  <circle cx="82" cy="28" r="3" fill="#9aa3ad"/>
+                  <circle cx="146" cy="22" r="3" fill="#e0a92e"/>
+                  <circle cx="216" cy="32" r="3" fill="#2b6cb0"/>
+                  <circle cx="258" cy="66" r="3" fill="#c8452f"/>
+                  <circle cx="296" cy="36" r="3" fill="#9aa3ad"/>
+                  <circle cx="46" cy="92" r="3" fill="#e0a92e"/>
+                  <circle cx="86" cy="118" r="3" fill="#2b6cb0"/>
+                  <circle cx="196" cy="88" r="3" fill="#c8452f"/>
+                  <circle cx="228" cy="72" r="3" fill="#e0a92e"/>
+                  <circle cx="240" cy="118" r="3" fill="#9aa3ad"/>
+                  <circle cx="276" cy="142" r="3" fill="#2b6cb0"/>
+                  <circle cx="26" cy="150" r="3" fill="#2b6cb0"/>
+                  <circle cx="64" cy="160" r="3" fill="#c8452f"/>
+                  <circle cx="118" cy="162" r="3" fill="#9aa3ad"/>
+                  <circle cx="162" cy="176" r="3" fill="#e0a92e"/>
+                  <circle cx="222" cy="162" r="3" fill="#c8452f"/>
+                  <circle cx="290" cy="178" r="3" fill="#2b6cb0"/>
                 </g>
               </svg>
             </div>
@@ -346,14 +364,18 @@
           </article>
 
           <article class="card">
-            <div class="card-media" data-art="venn" aria-hidden="true">
+            <!-- The Amman workshop tool: a dense camp-fabric neighbourhood from above;
+                 the selection box reads local density against the surroundings. The
+                 "camp" canvas scene (card-art.js) puts the box under the cursor. -->
+            <div class="card-media" data-art="camp" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
-                <g fill-opacity=".45">
-                  <circle cx="120" cy="100" r="60" fill="#2b6cb0"/>
-                  <circle cx="200" cy="100" r="60" fill="#c8452f"/>
-                  <circle cx="160" cy="150" r="45" fill="#e0a92e"/>
-                </g>
+                <path fill="#d9dde3" d="M3.1 6h9.8v9.2h-9.8zM61.2 6h13.5v9.2h-13.5zM117.0 6h10.4v9.2h-10.4zM164.0 6h14.3v9.2h-14.3zM197.6 6h13.2v9.2h-13.2zM259.1 6h13.4v9.2h-13.4zM288.8 6h13.5v9.2h-13.5zM6.2 17.6h12.6v10.6h-12.6zM39.7 17.6h10.2v10.6h-10.2zM71.6 17.6h13.6v10.6h-13.6zM124.3 17.6h12.8v10.6h-12.8zM162.9 17.6h13.3v10.6h-13.3zM191.3 17.6h12.3v10.6h-12.3zM241.3 17.6h13.4v10.6h-13.4zM273.5 17.6h9.6v10.6h-9.6zM304.4 17.6h13.4v10.6h-13.4zM37.5 30.5h15.8v9.7h-15.8zM68.0 30.5h7.9v9.7h-7.9zM115.9 30.5h9.7v9.7h-9.7zM141.6 30.5h9.0v9.7h-9.0zM171.9 30.5h8.2v9.7h-8.2zM198.4 30.5h7.7v9.7h-7.7zM246.5 30.5h9.1v9.7h-9.1zM276.7 30.5h15.1v9.7h-15.1zM308.5 30.5h14.3v9.7h-14.3zM18.0 42.6h8.9v7.0h-8.9zM44.1 42.6h11.4v7.0h-11.4zM70.5 42.6h16.7v7.0h-16.7zM120.7 42.6h10.8v7.0h-10.8zM152.1 42.6h16.6v7.0h-16.6zM189.0 42.6h16.7v7.0h-16.7zM247.7 42.6h8.6v7.0h-8.6zM271.0 42.6h9.4v7.0h-9.4zM297.6 42.6h11.2v7.0h-11.2zM21.2 52.0h13.7v10.3h-13.7zM74.7 52.0h9.1v10.3h-9.1zM129.3 52.0h14.0v10.3h-14.0zM180.1 52.0h8.3v10.3h-8.3zM228.8 52.0h13.3v10.3h-13.3zM263.6 52.0h11.2v10.3h-11.2zM294.3 52.0h14.4v10.3h-14.4zM22.6 64.7h15.3v6.6h-15.3zM52.8 64.7h15.0v6.6h-15.0zM108.7 64.7h11.1v6.6h-11.1zM229.9 64.7h9.2v6.6h-9.2zM254.9 64.7h7.2v6.6h-7.2zM283.3 64.7h13.4v6.6h-13.4zM3.9 73.7h16.6v10.5h-16.6zM36.9 73.7h13.1v10.5h-13.1zM69.5 73.7h7.0v10.5h-7.0zM238.0 73.7h11.3v10.5h-11.3zM267.1 73.7h11.7v10.5h-11.7zM6.4 86.6h9.2v9.6h-9.2zM31.2 86.6h7.7v9.6h-7.7zM54.7 86.6h9.4v9.6h-9.4zM101.9 86.6h16.6v9.6h-16.6zM242.4 86.6h14.7v9.6h-14.7zM286.3 86.6h8.4v9.6h-8.4zM37.6 119.1h14.5v10.2h-14.5zM71.1 119.1h13.0v10.2h-13.0zM239.8 119.1h17.0v10.2h-17.0zM279.2 119.1h16.5v10.2h-16.5zM309.9 119.1h12.6v10.2h-12.6zM19.2 131.8h15.2v9.7h-15.2zM47.6 131.8h16.6v9.7h-16.6zM79.3 131.8h8.0v9.7h-8.0zM131.6 131.8h11.3v9.7h-11.3zM160.7 131.8h8.1v9.7h-8.1zM190.7 131.8h14.3v9.7h-14.3zM247.6 131.8h9.7v9.7h-9.7zM271.8 131.8h11.6v9.7h-11.6zM296.2 131.8h9.1v9.7h-9.1zM7.7 143.8h7.9v6.6h-7.9zM37.0 143.8h11.9v6.6h-11.9zM63.1 143.8h12.8v6.6h-12.8zM115.5 143.8h9.5v6.6h-9.5zM139.6 143.8h8.9v6.6h-8.9zM181.6 143.8h9.3v6.6h-9.3zM232.0 143.8h8.3v6.6h-8.3zM262.4 143.8h11.4v6.6h-11.4zM3.7 152.9h12.6v6.8h-12.6zM32.6 152.9h14.9v6.8h-14.9zM66.4 152.9h16.9v6.8h-16.9zM121.3 152.9h13.6v6.8h-13.6zM163.9 152.9h14.1v6.8h-14.1zM199.0 152.9h13.3v6.8h-13.3zM254.5 152.9h7.7v6.8h-7.7zM282.2 152.9h8.2v6.8h-8.2zM3.2 162.1h11.3v6.9h-11.3zM29.1 162.1h12.8v6.9h-12.8zM62.2 162.1h14.6v6.9h-14.6zM122.4 162.1h7.9v6.9h-7.9zM149.6 162.1h13.9v6.9h-13.9zM186.2 162.1h10.1v6.9h-10.1zM239.0 162.1h11.1v6.9h-11.1zM271.5 162.1h9.0v6.9h-9.0zM298.6 162.1h16.7v6.9h-16.7zM41.7 171.4h15.3v7.2h-15.3zM77.0 171.4h16.8v7.2h-16.8zM134.9 171.4h9.8v7.2h-9.8zM168.1 171.4h9.8v7.2h-9.8zM200.8 171.4h12.4v7.2h-12.4zM251.7 171.4h12.7v7.2h-12.7zM279.6 171.4h15.1v7.2h-15.1zM5.5 181.0h12.9v6.7h-12.9zM37.1 181.0h14.2v6.7h-14.2zM68.0 181.0h10.4v6.7h-10.4zM120.7 181.0h14.2v6.7h-14.2zM185.7 181.0h15.7v6.7h-15.7zM246.2 181.0h8.5v6.7h-8.5zM275.2 181.0h15.7v6.7h-15.7z"/>
+                <path fill="#cfd4db" d="M16.7 6h13.8v9.2h-13.8zM77.3 6h12.9v9.2h-12.9zM144.5 6h15.5v9.2h-15.5zM182.7 6h10.8v9.2h-10.8zM235.4 6h9.3v9.2h-9.3zM275.3 6h9.1v9.2h-9.1zM304.7 6h14.3v9.2h-14.3zM22.9 17.6h14.8v10.6h-14.8zM52.4 17.6h16.4v10.6h-16.4zM89.5 17.6h11.6v10.6h-11.6zM140.2 17.6h9.2v10.6h-9.2zM179.2 17.6h7.6v10.6h-7.6zM224.8 17.6h13.8v10.6h-13.8zM257.8 17.6h11.5v10.6h-11.5zM285.6 17.6h16.1v10.6h-16.1zM5.7 30.5h14.8v9.7h-14.8zM56.1 30.5h7.6v9.7h-7.6zM78.0 30.5h14.6v9.7h-14.6zM128.6 30.5h9.1v9.7h-9.1zM155.1 30.5h13.5v9.7h-13.5zM182.9 30.5h12.9v9.7h-12.9zM235.1 30.5h7.7v9.7h-7.7zM260.0 30.5h12.7v9.7h-12.7zM294.0 30.5h11.3v9.7h-11.3zM5.0 42.6h10.4v7.0h-10.4zM30.0 42.6h9.8v7.0h-9.8zM58.9 42.6h7.5v7.0h-7.5zM91.3 42.6h8.7v7.0h-8.7zM134.2 42.6h14.8v7.0h-14.8zM172.0 42.6h14.2v7.0h-14.2zM230.7 42.6h12.8v7.0h-12.8zM258.5 42.6h8.9v7.0h-8.9zM284.6 42.6h9.5v7.0h-9.5zM4.0 52.0h14.2v10.3h-14.2zM55.6 52.0h17.0v10.3h-17.0zM114.5 52.0h10.7v10.3h-10.7zM165.8 52.0h10.0v10.3h-10.0zM190.8 52.0h12.5v10.3h-12.5zM245.4 52.0h16.1v10.3h-16.1zM276.9 52.0h14.7v10.3h-14.7zM3.4 64.7h15.8v6.6h-15.8zM40.3 64.7h8.3v6.6h-8.3zM72.0 64.7h9.1v6.6h-9.1zM217.6 64.7h8.1v6.6h-8.1zM242.2 64.7h10.1v6.6h-10.1zM264.9 64.7h15.6v6.6h-15.6zM301.1 64.7h12.4v6.6h-12.4zM22.8 73.7h11.3v10.5h-11.3zM52.9 73.7h12.8v10.5h-12.8zM104.0 73.7h13.7v10.5h-13.7zM252.9 73.7h11.6v10.5h-11.6zM295.1 73.7h13.3v10.5h-13.3zM17.7 86.6h9.4v9.6h-9.4zM42.5 86.6h8.9v9.6h-8.9zM66.2 86.6h14.5v9.6h-14.5zM229.2 86.6h9.6v9.6h-9.6zM273.2 86.6h9.7v9.6h-9.7zM5.9 119.1h14.0v10.2h-14.0zM56.6 119.1h11.2v10.2h-11.2zM105.2 119.1h10.4v10.2h-10.4zM260.5 119.1h14.8v10.2h-14.8zM297.7 119.1h8.5v10.2h-8.5zM3.8 131.8h13.1v9.7h-13.1zM36.7 131.8h7.3v9.7h-7.3zM68.0 131.8h7.8v9.7h-7.8zM111.9 131.8h16.8v9.7h-16.8zM146.2 131.8h10.4v9.7h-10.4zM172.3 131.8h15.3v9.7h-15.3zM231.9 131.8h11.8v9.7h-11.8zM261.4 131.8h7.9v9.7h-7.9zM286.4 131.8h7.3v9.7h-7.3zM308.1 131.8h15.8v9.7h-15.8zM18.8 143.8h14.6v6.6h-14.6zM51.2 143.8h9.2v6.6h-9.2zM79.3 143.8h11.3v6.6h-11.3zM127.5 143.8h8.2v6.6h-8.2zM151.6 143.8h14.2v6.6h-14.2zM192.9 143.8h12.3v6.6h-12.3zM243.5 143.8h15.7v6.6h-15.7zM275.9 143.8h16.4v6.6h-16.4zM20.9 152.9h8.2v6.8h-8.2zM50.8 152.9h11.5v6.8h-11.5zM86.9 152.9h13.1v6.8h-13.1zM148.4 152.9h12.9v6.8h-12.9zM181.1 152.9h13.9v6.8h-13.9zM237.0 152.9h13.5v6.8h-13.5zM265.0 152.9h14.5v6.8h-14.5zM294.2 152.9h16.4v6.8h-16.4zM17.1 162.1h7.9v6.9h-7.9zM46.4 162.1h13.7v6.9h-13.7zM80.4 162.1h16.2v6.9h-16.2zM133.1 162.1h13.7v6.9h-13.7zM167.9 162.1h15.1v6.9h-15.1zM200.8 162.1h11.0v6.9h-11.0zM253.1 162.1h14.6v6.9h-14.6zM284.9 162.1h11.4v6.9h-11.4zM23.3 171.4h16.1v7.2h-16.1zM60.8 171.4h12.1v7.2h-12.1zM118.7 171.4h12.1v7.2h-12.1zM147.7 171.4h16.3v7.2h-16.3zM181.4 171.4h17.0v7.2h-17.0zM237.8 171.4h10.2v7.2h-10.2zM268.4 171.4h7.4v7.2h-7.4zM298.4 171.4h15.2v7.2h-15.2zM22.6 181.0h11.4v6.7h-11.4zM55.0 181.0h8.5v6.7h-8.5zM82.0 181.0h15.5v6.7h-15.5zM150.3 181.0h16.2v6.7h-16.2zM228.3 181.0h15.0v6.7h-15.0zM258.1 181.0h14.9v6.7h-14.9zM293.5 181.0h16.1v6.7h-16.1z"/>
+                <!-- buildings inside the selection, tinted by local density -->
+                <path fill="#c8452f" opacity=".55" d="M122.2 64.7h16.3v6.6h-16.3zM142.9 64.7h15.1v6.6h-15.1zM160.1 64.7h14.4v6.6h-14.4zM178.8 64.7h15.0v6.6h-15.0zM119.9 73.7h13.6v10.5h-13.6zM136.3 73.7h15.5v10.5h-15.5zM154.5 73.7h10.1v10.5h-10.1zM167.6 73.7h10.0v10.5h-10.0zM180.7 73.7h16.4v10.5h-16.4zM120.6 86.6h9.5v9.6h-9.5zM133.3 86.6h15.0v9.6h-15.0zM152.7 86.6h13.0v9.6h-13.0zM169.9 86.6h13.1v9.6h-13.1zM186.3 86.6h15.3v9.6h-15.3zM118.6 119.1h8.7v10.2h-8.7zM162.5 119.1h8.4v10.2h-8.4zM173.0 119.1h10.8v10.2h-10.8zM186.6 119.1h14.6v10.2h-14.6z"/>
+                <!-- the density-selection box -->
+                <rect x="118" y="64" width="96" height="64" fill="none" stroke="#475160" stroke-width="2"/>
               </svg>
             </div>
             <div class="card-body">
