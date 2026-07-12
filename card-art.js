@@ -25,8 +25,9 @@
      unfall  — accident points + hotspot; cursor = inspection lens
      toolbox — a street network that draws itself; cursor = gravity well
      flows   — particles on bendable mobility corridors
-     camp    — Amman camp fabric; the cursor's selection box reads
-               local density against the surroundings (live ratio)
+     dcities — the joined Amman+Erfurt map (the owner's project
+               banner) under one centrality analysis; the cursor
+               is the analysis probe (reticle) revealing weights
      miner   — live (weighted) least-squares regression
      sishane — atelier semilattice; cursor = a new production centre
                that condenses extra dependency links around itself
@@ -380,100 +381,190 @@
   }
 
   /* ============================================================
-     Scene 4 · camp — the Amman workshop tool, replayed. A dense
-     fine-grain neighbourhood fabric from above (the refugee-camp
-     morphology of Amman): tight building rows, narrow alleys, one
-     main street. A selection box rides under the cursor and reads
-     the LOCAL density against the whole fabric — buildings inside
-     tint red (denser) or blue (sparser) and the live ratio prints
-     at the box corner. Untouched (touch), the box surveys on its
-     own along a slow path.
+     Scene 4 · dcities — the Discovering Cities banner, replayed:
+     the owner's joined Amman+Erfurt map. Dense angular fabric
+     (Amman, left) blends into perimeter blocks with courtyards
+     and greens (Erfurt, right) under ONE street-network
+     centrality analysis (red artery → ochre → yellow → blue).
+     The cursor is the analysis probe: a small reticle under
+     which the network shows its full colours and weights; away
+     from it the analysis rests faint. Untouched (touch), the
+     probe surveys the map on its own.
      ============================================================ */
-  function makeCamp() {
-    var w = 0, h = 0, blds = [], globalDen = 1;
-    var box = { x: 0, y: 0, bw: 0, bh: 0 };
-    var ratio = 1, curT = 0, curPtr = null;
+  function makeDcities() {
+    var w = 0, h = 0, blocks = [], lines = [], curT = 0;
+    var probe = { x: 0, y: 0, amt: 0 };
+    var KC = { ga: "#d7dbe2", gb: "#ccd2da", warm: "#d9cec6", green: "#b1c6b3" };
+    var segs = [];                                // flat list for block clearance
+
+    function dseg(px, py, a, b) {
+      var dx = b.x - a.x, dy = b.y - a.y, L = dx * dx + dy * dy;
+      var t = L === 0 ? 0 : clamp(((px - a.x) * dx + (py - a.y) * dy) / L, 0, 1);
+      var qx = a.x + t * dx, qy = a.y + t * dy;
+      return Math.sqrt((px - qx) * (px - qx) + (py - qy) * (py - qy));
+    }
+    function rectPoly(cx, cy, cw2, ch2, rot) {
+      var ca = Math.cos(rot), sa = Math.sin(rot), out = [];
+      var cs = [[-cw2 / 2, -ch2 / 2], [cw2 / 2, -ch2 / 2], [cw2 / 2, ch2 / 2], [-cw2 / 2, ch2 / 2]];
+      for (var i = 0; i < 4; i++) {
+        out.push({ x: cx + cs[i][0] * ca - cs[i][1] * sa, y: cy + cs[i][0] * sa + cs[i][1] * ca });
+      }
+      return out;
+    }
+    function yAt(pts, x) {
+      for (var i = 0; i < pts.length - 1; i++) {
+        if (pts[i].x <= x && x <= pts[i + 1].x) {
+          var f = (x - pts[i].x) / (pts[i + 1].x - pts[i].x || 1);
+          return pts[i].y + f * (pts[i + 1].y - pts[i].y);
+        }
+      }
+      return pts[pts.length - 1].y;
+    }
 
     return {
       init: function (cw, ch) {
-        w = cw; h = ch; blds = [];
-        box.bw = w * 0.3; box.bh = h * 0.32;
-        box.x = w / 2; box.y = h / 2;
-        var s1 = w * 0.32, s2 = w * 0.68, sy = h * 0.54;   // two alleys + the main street
-        var y = 6, tot = 0;
-        while (y < h - 12) {
-          var rowH = rand(9, 13);
-          if (Math.abs(y + rowH / 2 - sy) < 8) { y += rand(9, 12); continue; }
-          var x = rand(3, 8);
-          while (x < w - 9) {
-            var bw = rand(7, 17);
-            var a1 = s1 + 8 * Math.sin(y * 0.05), a2 = s2 + 9 * Math.sin(y * 0.04 + 2);
-            if ((x < a1 + 3 && x + bw > a1 - 7) || (x < a2 + 3 && x + bw > a2 - 7)) { x += bw + rand(7, 11); continue; }
-            if (Math.random() < 0.11) { x += bw + rand(2, 5); continue; }
-            var bh = rowH - 2.4;
-            blds.push({ x: x, y: y, bw: bw, bh: bh, sh: Math.random() });
-            tot += bw * bh;
-            x += bw + rand(2, 4.5);
+        w = cw; h = ch; blocks = []; lines = []; segs = [];
+        var kx = w / 320, ky = h / 200, i, x, y;
+        // 4 banded routes: wobbly on the Amman side, calm on the Erfurt side
+        var BANDS = [
+          { color: P.blue,   width: 1.9, y0: 26,  lo: 16,  hi: 40,  wl: 8,  wr: 3 },
+          { color: P.ochre,  width: 2.7, y0: 66,  lo: 52,  hi: 86,  wl: 11, wr: 4 },
+          { color: P.red,    width: 3.4, y0: 112, lo: 98,  hi: 134, wl: 13, wr: 4 },
+          { color: P.yellow, width: 2.3, y0: 164, lo: 150, hi: 182, wl: 11, wr: 5 }
+        ];
+        var XS = [0, 28, 60, 95, 130, 165, 200, 240, 280, 320];
+        var routes = [];
+        for (i = 0; i < BANDS.length; i++) {
+          var B = BANDS[i], pts = [], yy = B.y0;
+          for (var k = 0; k < XS.length; k++) {
+            var f = XS[k] / 320;
+            yy = clamp(yy + rand(-1, 1) * (B.wl * (1 - f) + B.wr * f), B.lo, B.hi);
+            pts.push({ x: XS[k] * kx, y: yy * ky });
           }
-          y += rowH;
+          routes.push(pts);
+          lines.push({ color: B.color, width: B.width, pts: pts, route: true });
         }
-        globalDen = tot / (w * h) || 1;
+        // connectors: crooked alleys left, straight streets right
+        var CXS = [16, 36, 56, 76, 96, 116, 136, 156, 182, 212, 244, 276, 304];
+        for (i = 0; i < CXS.length; i++) {
+          var cx = CXS[i], left = cx < 165;
+          for (var p2 = 0; p2 < 3; p2++) {
+            if (Math.random() > (left ? 0.75 : 0.62)) continue;
+            var ya = yAt(routes[p2], cx * kx), yb = yAt(routes[p2 + 1], cx * kx);
+            var kink = (left ? rand(-5, 5) : rand(-1, 1)) * kx;
+            lines.push({
+              color: "#9aa3ad", width: 1.2, route: false,
+              pts: [{ x: cx * kx, y: ya }, { x: cx * kx + kink, y: (ya + yb) / 2 }, { x: cx * kx, y: yb }]
+            });
+          }
+        }
+        for (i = 0; i < lines.length; i++) {
+          for (var s = 0; s < lines[i].pts.length - 1; s++) {
+            segs.push([lines[i].pts[s], lines[i].pts[s + 1]]);
+          }
+        }
+        function clear(px, py) {
+          var m = 1e9;
+          for (var q = 0; q < segs.length; q++) m = Math.min(m, dseg(px, py, segs[q][0], segs[q][1]));
+          return m;
+        }
+        // Amman: tight small angular blocks
+        x = 2 * kx;
+        while (x < 172 * kx) {
+          var cellA = rand(10.5, 13) * kx;
+          y = 2 * ky;
+          while (y < h - 4 * ky) {
+            var bx = x + cellA / 2 + rand(-1.2, 1.2) * kx, by = y + cellA / 2 + rand(-1.2, 1.2) * ky;
+            if (clear(bx, by) > 4.8 * kx && Math.random() > 0.04) {
+              blocks.push({
+                poly: rectPoly(bx, by, rand(0.78, 0.98) * cellA, rand(0.72, 0.95) * cellA, rand(-0.23, 0.23)),
+                kind: Math.random() < 0.55 ? "ga" : "gb", hole: null
+              });
+            }
+            y += cellA;
+          }
+          x += cellA;
+        }
+        // Erfurt: large perimeter blocks with courtyards + greens
+        x = 172 * kx;
+        while (x < w - 4 * kx) {
+          var cellE = rand(23, 28) * kx;
+          y = 3 * ky;
+          while (y < h - 6 * ky) {
+            var ex = x + cellE / 2 + rand(-1, 1) * kx, ey = y + cellE / 2 + rand(-1, 1) * ky;
+            if (clear(ex, ey) > 7.5 * kx && Math.random() > 0.06) {
+              var bw2 = rand(0.82, 0.96) * cellE, bh2 = rand(0.75, 0.93) * cellE;
+              var rot2 = rand(-0.045, 0.045), r3 = Math.random();
+              blocks.push({
+                poly: rectPoly(ex, ey, bw2, bh2, rot2),
+                kind: r3 < 0.18 ? "green" : (r3 < 0.6 ? "warm" : "ga"),
+                hole: r3 >= 0.18 && Math.random() < 0.8 ? rectPoly(ex, ey, bw2 * 0.44, bh2 * 0.4, rot2) : null
+              });
+            }
+            y += cellE;
+          }
+          x += cellE;
+        }
+        probe.x = w / 2; probe.y = h / 2;
       },
       step: function (dt, t, ptr) {
-        curT = t; curPtr = ptr;
-        var tx, ty;
-        if (ptr.over) { tx = ptr.x; ty = ptr.y; }
-        else {                                    // the box surveys on its own (touch)
-          tx = w * (0.5 + 0.3 * Math.sin(t * 0.00019));
-          ty = h * (0.5 + 0.28 * Math.sin(t * 0.00027 + 1.2));
+        curT = t;
+        var tx, ty, amt;
+        if (ptr.over) { tx = ptr.x; ty = ptr.y; amt = ptr.inf; }
+        else {                                    // the probe surveys on its own (touch)
+          tx = w * (0.5 + 0.34 * Math.sin(t * 0.00019));
+          ty = h * (0.5 + 0.3 * Math.sin(t * 0.00027 + 1.2));
+          amt = COARSE ? 0.85 : ptr.inf;
         }
-        box.x += (tx - box.x) * Math.min(0.09 * dt, 1);
-        box.y += (ty - box.y) * Math.min(0.09 * dt, 1);
-        // built area inside the box vs. the fabric's overall density
-        var x0 = box.x - box.bw / 2, x1 = box.x + box.bw / 2;
-        var y0 = box.y - box.bh / 2, y1 = box.y + box.bh / 2;
-        var acc = 0;
-        for (var i = 0; i < blds.length; i++) {
-          var b = blds[i];
-          var ox = Math.min(x1, b.x + b.bw) - Math.max(x0, b.x);
-          var oy = Math.min(y1, b.y + b.bh) - Math.max(y0, b.y);
-          if (ox > 0 && oy > 0) acc += ox * oy;
-        }
-        var r = (acc / (box.bw * box.bh)) / globalDen;
-        ratio += (r - ratio) * Math.min(0.12 * dt, 1);
+        probe.x += (tx - probe.x) * Math.min(0.1 * dt, 1);
+        probe.y += (ty - probe.y) * Math.min(0.1 * dt, 1);
+        probe.amt += (amt - probe.amt) * Math.min(0.1 * dt, 1);
       },
       draw: function (ctx, cw, ch) {
-        var ptr = curPtr;
+        var i, j;
         ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch);
-        var amt = ptr ? (ptr.over ? ptr.inf : (COARSE ? 0.85 : ptr.inf)) : 0;
-        var x0 = box.x - box.bw / 2, x1 = box.x + box.bw / 2;
-        var y0 = box.y - box.bh / 2, y1 = box.y + box.bh / 2;
-        var hot = clamp((ratio - 1) * 1.8, -1, 1); // denser → red, sparser → blue
-        for (var i = 0; i < blds.length; i++) {
-          var b = blds[i];
-          var cx = b.x + b.bw / 2, cy = b.y + b.bh / 2;
-          var inside = amt > 0.03 && cx > x0 && cx < x1 && cy > y0 && cy < y1;
-          if (inside) {
-            ctx.fillStyle = hot >= 0 ? P.red : P.blue;
-            ctx.globalAlpha = (0.3 + 0.5 * Math.abs(hot)) * amt + 0.18 * (1 - amt);
-          } else {
-            ctx.fillStyle = P.soft;
-            ctx.globalAlpha = 0.16 + 0.13 * b.sh;
+        // the joined fabric
+        for (i = 0; i < blocks.length; i++) {
+          var b = blocks[i];
+          ctx.fillStyle = KC[b.kind]; ctx.globalAlpha = 1;
+          ctx.beginPath();
+          ctx.moveTo(b.poly[0].x, b.poly[0].y);
+          for (j = 1; j < 4; j++) ctx.lineTo(b.poly[j].x, b.poly[j].y);
+          ctx.closePath(); ctx.fill();
+          if (b.hole) {
+            ctx.fillStyle = P.tint;
+            ctx.beginPath();
+            ctx.moveTo(b.hole[0].x, b.hole[0].y);
+            for (j = 1; j < 4; j++) ctx.lineTo(b.hole[j].x, b.hole[j].y);
+            ctx.closePath(); ctx.fill();
           }
-          ctx.fillRect(b.x, b.y, b.bw, b.bh);
         }
-        if (amt > 0.03) {
-          ctx.globalAlpha = 0.85 * amt;
-          ctx.strokeStyle = P.soft; ctx.lineWidth = 1.6;
-          ctx.strokeRect(x0, y0, box.bw, box.bh);
-          // the live density readout — numerals only, no i18n needed
-          ctx.globalAlpha = 0.9 * amt;
-          ctx.fillStyle = hot >= 0 ? P.red : P.blue;
-          ctx.font = "600 11px system-ui, -apple-system, 'Segoe UI', sans-serif";
-          ctx.textAlign = "left";
-          var lx = clamp(x1 + 5, 4, cw - 42);
-          var ly = clamp(y0 + 4, 12, ch - 6);
-          ctx.fillText("×" + ratio.toFixed(2), lx, ly);
+        // the analysis: faint at rest, full colour + weight under the probe
+        ctx.lineCap = "round"; ctx.lineJoin = "round";
+        for (i = 0; i < lines.length; i++) {
+          var L = lines[i];
+          for (j = 0; j < L.pts.length - 1; j++) {
+            var a = L.pts[j], b2 = L.pts[j + 1];
+            var mx = (a.x + b2.x) / 2 - probe.x, my = (a.y + b2.y) / 2 - probe.y;
+            var wgt = gauss(mx * mx + my * my, 62) * probe.amt;
+            ctx.strokeStyle = L.color;
+            ctx.globalAlpha = (L.route ? 0.4 : 0.5) + 0.55 * wgt;
+            ctx.lineWidth = L.width + (L.route ? 1.6 : 0.8) * wgt;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b2.x, b2.y); ctx.stroke();
+          }
+        }
+        // the probe reticle — the analyst's cursor
+        if (probe.amt > 0.03) {
+          var s = 13;
+          ctx.globalAlpha = 0.75 * probe.amt;
+          ctx.strokeStyle = P.ink; ctx.lineWidth = 1.2;
+          ctx.strokeRect(probe.x - s, probe.y - s, s * 2, s * 2);
+          ctx.beginPath();
+          ctx.moveTo(probe.x - s - 4, probe.y); ctx.lineTo(probe.x - s + 3, probe.y);
+          ctx.moveTo(probe.x + s + 4, probe.y); ctx.lineTo(probe.x + s - 3, probe.y);
+          ctx.moveTo(probe.x, probe.y - s - 4); ctx.lineTo(probe.x, probe.y - s + 3);
+          ctx.moveTo(probe.x, probe.y + s + 4); ctx.lineTo(probe.x, probe.y + s - 3);
+          ctx.stroke();
         }
         ctx.globalAlpha = 1;
       }
@@ -1134,7 +1225,7 @@
   }
 
   /* ---------------- engine ---------------- */
-  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, camp: makeCamp, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
+  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, dcities: makeDcities, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
   var DPR_CAP = 2;
   /* touch devices have no hover, so the hover-gate would keep scenes dead
      forever there — instead visible cards play on their own (the IO already
