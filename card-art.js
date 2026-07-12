@@ -739,100 +739,170 @@
   }
 
   /* ============================================================
-     Scene 7 · sishane — the atelier dependency network as a
-     semilattice. A near-tree of base links connects the ateliers;
-     the cursor (or, untouched, a slowly roaming point) acts as a
-     new production centre: node pairs near it grow EXTRA links —
-     overlapping sub-networks, Alexander's semilattice against the
-     tree — making the network multicentric wherever you point.
-     Dashed walking-range rings echo the thesis diagrams.
+     Scene 7 · sishane — the atelier network as a SEMILATTICE.
+     Spread-out ateliers; a deliberately sparse base net (some
+     ateliers stay unconnected). The semilattice itself is the
+     prominent layer: soft overlapping group-hulls — sets that
+     SHARE members, Alexander's semilattice against the tree.
+     The pointer's influence is small and local: it selects the
+     single nearest atelier, which quietly links to its own local
+     group — one emergent centre, everything else at rest.
      ============================================================ */
   function makeSishane() {
-    var w = 0, h = 0, nds = [], base = [], pairs = [], seen = {};
-    var curT = 0, cen = { x: 0, y: 0, amt: 0 };
-    var LINK = 78;                                // max reach of an extra link (px)
+    var w = 0, h = 0, nds = [], base = [], groups = [], curT = 0;
+    var act = { i: -1, amt: 0 };
+    var R_LOCAL = 62;                             // reach of the selected atelier's group
+    var SLOT = 3200;                              // ambient dwell per atelier (touch)
 
-    function addBase(a, b) {
-      if (a < 0 || b < 0) return;
-      var k = a < b ? a + ":" + b : b + ":" + a;
-      if (seen[k]) return;
-      seen[k] = true;
-      base.push({ a: nds[a], b: nds[b] });
-      nds[a].deg++; nds[b].deg++;
+    function hull(pts) {                          // Andrew monotone chain
+      var p = pts.slice().sort(function (a, b) { return a.x - b.x || a.y - b.y; });
+      if (p.length < 3) return p;
+      function cr(o, a, b) { return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x); }
+      var lo = [], up = [], i;
+      for (i = 0; i < p.length; i++) {
+        while (lo.length > 1 && cr(lo[lo.length - 2], lo[lo.length - 1], p[i]) <= 0) lo.pop();
+        lo.push(p[i]);
+      }
+      for (i = p.length - 1; i >= 0; i--) {
+        while (up.length > 1 && cr(up[up.length - 2], up[up.length - 1], p[i]) <= 0) up.pop();
+        up.push(p[i]);
+      }
+      lo.pop(); up.pop();
+      return lo.concat(up);
     }
 
     return {
       init: function (cw, ch) {
-        w = cw; h = ch; nds = []; base = []; pairs = []; seen = {};
-        var CL = [[0.3, 0.4], [0.64, 0.52], [0.45, 0.76]];   // atelier clusters
+        w = cw; h = ch; nds = []; base = []; groups = [];
         var COLORS = [P.red, P.blue, P.yellow, "#9aa3ad"];
-        var i, j;
-        for (i = 0; i < 26; i++) {
-          var c = CL[i % CL.length];
+        var i, j, k;
+        // spread the ateliers: jittered grid cells, a few left empty
+        var cols = 7, rows = 4, cells = [];
+        for (i = 0; i < cols * rows; i++) cells.push(i);
+        for (i = cells.length - 1; i > 0; i--) {
+          j = (Math.random() * (i + 1)) | 0;
+          k = cells[i]; cells[i] = cells[j]; cells[j] = k;
+        }
+        for (i = 0; i < 21; i++) {
+          var cell = cells[i], cc = cell % cols, cr2 = (cell / cols) | 0;
           nds.push({
-            hx: clamp(c[0] * w + (rand(-1, 1) + rand(-1, 1)) * w * 0.13, 8, w - 8),
-            hy: clamp(c[1] * h + (rand(-1, 1) + rand(-1, 1)) * h * 0.15, 8, h - 8),
+            hx: clamp((cc + 0.5 + rand(-0.34, 0.34)) / cols * w, 10, w - 10),
+            hy: clamp((cr2 + 0.5 + rand(-0.34, 0.34)) / rows * h, 10, h - 10),
             dx: 0, dy: 0, deg: 0, ph: rand(0, 6.28),
             color: COLORS[(Math.random() * COLORS.length) | 0]
           });
         }
-        // base near-tree: nearest neighbour, sometimes the second — sparse on purpose
+        // sparse base net: nearest neighbour, only sometimes — leaves loners
+        var seen = {};
         for (i = 0; i < nds.length; i++) {
-          var b1 = 1e9, b2 = 1e9, n1 = -1, n2 = -1;
+          if (Math.random() > 0.6) continue;      // this atelier stays unconnected (for now)
+          var b1 = 1e9, n1 = -1;
           for (j = 0; j < nds.length; j++) {
             if (j === i) continue;
             var dx = nds[j].hx - nds[i].hx, dy = nds[j].hy - nds[i].hy, d = dx * dx + dy * dy;
-            if (d < b1) { b2 = b1; n2 = n1; b1 = d; n1 = j; }
-            else if (d < b2) { b2 = d; n2 = j; }
+            if (d < b1) { b1 = d; n1 = j; }
           }
-          addBase(i, n1);
-          if (Math.random() < 0.35) addBase(i, n2);
+          var key = i < n1 ? i + ":" + n1 : n1 + ":" + i;
+          if (n1 >= 0 && !seen[key]) {
+            seen[key] = true;
+            base.push({ a: nds[i], b: nds[n1] });
+            nds[i].deg++; nds[n1].deg++;
+          }
         }
-        // candidate pairs for cursor-born links (close, not already linked)
-        for (i = 0; i < nds.length; i++) {
-          for (j = i + 1; j < nds.length; j++) {
-            if (seen[i + ":" + j]) continue;
-            var px = nds[j].hx - nds[i].hx, py = nds[j].hy - nds[i].hy;
-            if (px * px + py * py < LINK * LINK) pairs.push({ a: nds[i], b: nds[j] });
+        // the semilattice: 4 groups anchored at neighbourly positions with a
+        // generous radius, so adjacent groups SHARE members — overlapping sets
+        var R_GROUP = Math.min(w, h) * 0.62;
+        var ANCHORS = [[0.28, 0.32], [0.68, 0.28], [0.36, 0.72], [0.74, 0.7]];
+        for (k = 0; k < ANCHORS.length; k++) {
+          var axp = ANCHORS[k][0] * w, ayp = ANCHORS[k][1] * h;
+          var sBest = 1e9, sI = 0;
+          for (i = 0; i < nds.length; i++) {
+            var adx = nds[i].hx - axp, ady = nds[i].hy - ayp, ad = adx * adx + ady * ady;
+            if (ad < sBest) { sBest = ad; sI = i; }
           }
+          var s = nds[sI], mem = [];
+          for (i = 0; i < nds.length; i++) {
+            var gdx = nds[i].hx - s.hx, gdy = nds[i].hy - s.hy;
+            if (gdx * gdx + gdy * gdy < R_GROUP * R_GROUP) mem.push(nds[i]);
+          }
+          if (mem.length >= 3) groups.push({ color: COLORS[k % COLORS.length], mem: mem });
         }
       },
       step: function (dt, t, ptr) {
         curT = t;
-        var cx, cy, amt;
-        if (ptr.over) { cx = ptr.x; cy = ptr.y; amt = ptr.inf; }
-        else {                                    // roaming centre keeps touch devices alive
-          cx = w * (0.5 + 0.34 * Math.sin(t * 0.00021));
-          cy = h * (0.5 + 0.3 * Math.sin(t * 0.00016 + 1.7));
-          amt = COARSE ? 0.9 : ptr.inf;
+        // choose the ONE active atelier: nearest to the cursor (close by),
+        // or — untouched, on touch — a slow rotation through the ateliers
+        var target = -1, tAmt = 0, i;
+        if (ptr.over) {
+          var best = 1e9;
+          for (i = 0; i < nds.length; i++) {
+            var dx = nds[i].hx - ptr.x, dy = nds[i].hy - ptr.y, d = dx * dx + dy * dy;
+            if (d < best) { best = d; target = i; }
+          }
+          if (best > 100 * 100) { target = -1; }
+          else {
+            tAmt = ptr.inf;
+            // sticky selection: keep the current atelier unless the new one
+            // is clearly closer — no flip-flop at midpoints between two nodes
+            if (act.i >= 0 && act.i !== target) {
+              var kdx = nds[act.i].hx - ptr.x, kdy = nds[act.i].hy - ptr.y;
+              if (kdx * kdx + kdy * kdy < best * 1.6) target = act.i;
+            }
+          }
+        } else if (COARSE) {
+          target = ((t / SLOT) | 0) % nds.length;
+          tAmt = 0.85 * Math.sin(Math.PI * ((t % SLOT) / SLOT));
         }
-        cen.x = cx; cen.y = cy; cen.amt = amt;
-        for (var i = 0; i < nds.length; i++) {
-          var n = nds[i];
-          var ddx = cx - n.hx, ddy = cy - n.hy;
-          var g = 0.22 * gauss(ddx * ddx + ddy * ddy, 85) * amt;
-          n.dx += (ddx * g - n.dx) * Math.min(0.1 * dt, 1);
-          n.dy += (ddy * g - n.dy) * Math.min(0.1 * dt, 1);
+        if (act.i !== target) {                   // fade out, then hand over
+          act.amt += (0 - act.amt) * Math.min(0.14 * dt, 1);
+          if (act.amt < 0.05) act.i = target;
+        } else {
+          act.amt += (tAmt - act.amt) * Math.min(0.08 * dt, 1);
+        }
+        // only the local group around the selected atelier moves — gently
+        var a = act.i >= 0 ? nds[act.i] : null;
+        for (i = 0; i < nds.length; i++) {
+          var n = nds[i], tx = 0, ty = 0;
+          if (a && n !== a) {
+            var ddx = a.hx - n.hx, ddy = a.hy - n.hy;
+            var g = 0.09 * gauss(ddx * ddx + ddy * ddy, R_LOCAL) * act.amt;
+            tx = ddx * g; ty = ddy * g;
+          }
+          n.dx += (tx - n.dx) * Math.min(0.09 * dt, 1);
+          n.dy += (ty - n.dy) * Math.min(0.09 * dt, 1);
         }
       },
       draw: function (ctx, cw, ch) {
-        var t = curT, i;
+        var t = curT, i, j;
         ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch);
 
-        // walking-range rings around the active centre (the thesis' 40/80 m)
-        if (cen.amt > 0.03) {
-          ctx.save();
-          ctx.setLineDash([4, 4]);
-          ctx.strokeStyle = P.soft; ctx.lineWidth = 1;
-          ctx.globalAlpha = 0.3 * cen.amt;
-          ctx.beginPath(); ctx.arc(cen.x, cen.y, 34, 0, 6.2832); ctx.stroke();
-          ctx.globalAlpha = 0.18 * cen.amt;
-          ctx.beginPath(); ctx.arc(cen.x, cen.y, 62, 0, 6.2832); ctx.stroke();
-          ctx.restore();
+        // the semilattice, prominent: soft hulls of OVERLAPPING groups
+        for (i = 0; i < groups.length; i++) {
+          var g = groups[i], pts = [], cx = 0, cy = 0;
+          for (j = 0; j < g.mem.length; j++) { cx += g.mem[j].hx + g.mem[j].dx; cy += g.mem[j].hy + g.mem[j].dy; }
+          cx /= g.mem.length; cy /= g.mem.length;
+          var breathe = 13 + 2.5 * Math.sin(t * 0.0009 + i * 1.9);
+          for (j = 0; j < g.mem.length; j++) {
+            var px = g.mem[j].hx + g.mem[j].dx, py = g.mem[j].hy + g.mem[j].dy;
+            var vx = px - cx, vy = py - cy, vl = Math.sqrt(vx * vx + vy * vy) || 1;
+            pts.push({ x: px + vx / vl * breathe, y: py + vy / vl * breathe });
+          }
+          var hp = hull(pts);
+          if (hp.length < 3) continue;
+          ctx.beginPath();                         // smooth closed curve through hull midpoints
+          var m0x = (hp[0].x + hp[1].x) / 2, m0y = (hp[0].y + hp[1].y) / 2;
+          ctx.moveTo(m0x, m0y);
+          for (j = 1; j <= hp.length; j++) {
+            var p1 = hp[j % hp.length], p2 = hp[(j + 1) % hp.length];
+            ctx.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+          }
+          ctx.closePath();
+          ctx.globalAlpha = 0.09; ctx.fillStyle = g.color; ctx.fill();
+          ctx.globalAlpha = 0.4; ctx.strokeStyle = g.color; ctx.lineWidth = 1.2; ctx.stroke();
         }
 
-        // the sparse base network (the tree the semilattice argues against)
-        ctx.strokeStyle = P.soft; ctx.lineWidth = 1.1; ctx.globalAlpha = 0.45;
+        // the sparse base net — thin, quiet
+        ctx.strokeStyle = P.soft; ctx.lineWidth = 1; ctx.globalAlpha = 0.38;
         ctx.beginPath();
         for (i = 0; i < base.length; i++) {
           var e = base[i];
@@ -841,31 +911,36 @@
         }
         ctx.stroke();
 
-        // extra links condense around the centre → overlapping sub-networks
-        if (cen.amt > 0.02) {
-          for (i = 0; i < pairs.length; i++) {
-            var pr = pairs[i];
-            var ax = pr.a.hx + pr.a.dx, ay = pr.a.hy + pr.a.dy;
-            var bx = pr.b.hx + pr.b.dx, by = pr.b.hy + pr.b.dy;
-            var mx = (ax + bx) / 2 - cen.x, my = (ay + by) / 2 - cen.y;
-            var wgt = gauss(mx * mx + my * my, 58) * cen.amt;
-            if (wgt < 0.05) continue;
-            ctx.globalAlpha = 0.8 * wgt;
-            ctx.strokeStyle = P.red;
-            ctx.lineWidth = 0.8 + 1.7 * wgt;
-            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+        // the ONE selected atelier connects to its local group
+        if (act.i >= 0 && act.amt > 0.03) {
+          var a = nds[act.i], ax = a.hx + a.dx, ay = a.hy + a.dy;
+          ctx.save();
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = P.soft; ctx.lineWidth = 1;
+          ctx.globalAlpha = 0.38 * act.amt;
+          ctx.beginPath(); ctx.arc(ax, ay, R_LOCAL, 0, 6.2832); ctx.stroke();
+          ctx.restore();
+          for (i = 0; i < nds.length; i++) {
+            if (i === act.i) continue;
+            var n = nds[i];
+            var ldx = n.hx + n.dx - ax, ldy = n.hy + n.dy - ay;
+            var wgt = gauss(ldx * ldx + ldy * ldy, R_LOCAL * 0.85) * act.amt;
+            if (wgt < 0.08) continue;
+            ctx.globalAlpha = 0.85 * wgt;
+            ctx.strokeStyle = a.color;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(n.hx + n.dx, n.hy + n.dy); ctx.stroke();
           }
         }
 
-        // ateliers — degree-sized, breathing, swelling near the centre
+        // ateliers — small, breathing; only the selected one grows
         for (i = 0; i < nds.length; i++) {
-          var n = nds[i];
-          var cdx = n.hx + n.dx - cen.x, cdy = n.hy + n.dy - cen.y;
-          var near = gauss(cdx * cdx + cdy * cdy, 70) * cen.amt;
-          var r = (2.2 + 0.55 * n.deg) * (0.94 + 0.06 * Math.sin(t * 0.0018 + n.ph)) * (1 + 0.55 * near);
-          ctx.globalAlpha = 0.7 + 0.3 * near;
-          ctx.fillStyle = n.color;
-          ctx.beginPath(); ctx.arc(n.hx + n.dx, n.hy + n.dy, r, 0, 6.2832); ctx.fill();
+          var nd = nds[i];
+          var r = (2.4 + 0.5 * nd.deg) * (0.95 + 0.05 * Math.sin(t * 0.0016 + nd.ph));
+          if (i === act.i) r += 2.2 * act.amt;
+          ctx.globalAlpha = 0.85;
+          ctx.fillStyle = nd.color;
+          ctx.beginPath(); ctx.arc(nd.hx + nd.dx, nd.hy + nd.dy, r, 0, 6.2832); ctx.fill();
         }
         ctx.globalAlpha = 1;
       }
