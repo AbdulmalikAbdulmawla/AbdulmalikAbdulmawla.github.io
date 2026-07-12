@@ -11,11 +11,12 @@
   var DE = {
     "hero.eyebrow": "Computational Urban Design · Raumökonomische Forschung",
     "hero.lede":
-      "Ich dekodiere urbane Rohdaten und mache daraus parametrisierte Analysemethoden, " +
-      "damit evidenzbasierte Entscheidungen und Entwürfe leichtfallen. Meine Forschung " +
-      "fragt, wie Städte wirtschaftlichem Handeln seine räumliche Freiheit geben können – " +
-      "von informellen Werkstattnetzwerken bis zum Handel auf Straßenebene. Doktorand an " +
-      "der Bauhaus-Universität Weimar.",
+      "Ich dekodiere urbane Rohdaten und parametrisiere die Methoden, um sie zu " +
+      "erkunden – damit evidenzbasierte Entscheidungen und Entwürfe leichtfallen. Meine " +
+      "Forschung richtet das auf eine Frage: Wo kann sich wirtschaftliches Handeln in der " +
+      "Stadt verorten – und wie bleibt städtischer Raum offen für die kleinen Ökonomien " +
+      "und Kollektive, die Menschen von unten aufbauen? Doktorand an der " +
+      "Bauhaus-Universität Weimar.",
     "hero.cv": "Lebenslauf (PDF) herunterladen ↓",
 
     "tab.work": "Arbeiten",
@@ -28,21 +29,19 @@
 
     "rs.h": "Forschungsstatement",
     "rs.p1":
-      "Seit meiner Bachelorarbeit treibt mich eine Überzeugung an: Wer eigenständige " +
-      "Produktion in kleinen, dichten Quartieren stärkt, schafft heterogenere, " +
-      "selbsttragende Gemeinschaften. Ich erforsche die <em>räumliche Freiheit " +
-      "wirtschaftlichen Handelns</em> – wo sich kleine Ökonomien verorten, wie sich " +
-      "informelle Produktionsnetzwerke organisieren und wie eine Stadt auf die räumlichen " +
-      "Bedürfnisse ihrer Bewohner hören kann, damit eine Geschäftsgründung nicht mit " +
-      "hohen Schulden beginnen muss.",
-    "rs.p2":
-      "Meine Masterarbeit kartierte Şişhane, Istanbuls hundertjähriges " +
-      "Leuchten-Handwerksquartier, als Netzwerk voneinander abhängiger Werkstätten – eine " +
-      "Bottom-up-Fabrik. 2016 kam ich an die Bauhaus-Universität Weimar, um diese Frage " +
-      "„mit aktuelleren Daten und Werkzeugen“ reifen zu lassen: ein Jahrzehnt des " +
-      "Werkzeugbaus – parametrische Analyse-Plug-ins, statistische Toolchains, " +
-      "browserbasierte Datenplattformen –, die urbane Rohdaten in Evidenz über die " +
-      "Alltagsökonomie der Städte verwandeln.",
+      "Eine Überzeugung trägt meine Arbeit seit meiner Bachelorarbeit: " +
+      "<strong>Eigenständige Produktion in kleinen, dichten Quartieren zu stärken, macht " +
+      "Gemeinschaften heterogener und selbsttragender.</strong> Zuerst erprobt habe ich " +
+      "sie in Istanbuls Şişhane-Viertel – ich kartierte die Abhängigkeitsnetzwerke der " +
+      "Handwerksateliers und simulierte ihre informellen Produktionslinien als eine " +
+      "Bottom-up-Fabrik (Masterarbeit, 2013). Danach habe ich ein Jahrzehnt an der " +
+      "Bauhaus-Universität Weimar erworben, was diese Frage verlangte – parametrische " +
+      "Spatial-Query-Methoden, die Aktivitäten auf Straßenebene mit den umgebenden " +
+      "Stadtformen verknüpfen, statistisches Werkzeug (DeCodingSpaces Toolbox, mineR) und " +
+      "offene Datenplattformen. Die Methode bleibt konstant: <strong>Rohdaten dekodieren, " +
+      "die Analyse parametrisieren und die Evidenz die Entscheidung tragen lassen</strong> " +
+      "– damit Städte die Kraft kleiner ökonomischer Kollektive verstehen und ihr Raum " +
+      "geben können.",
 
     "about.h": "Über mich",
     "about.p1":
@@ -102,15 +101,15 @@
       "(DuckDB-WASM + deck.gl).",
     "work.c1.link": "Live-App öffnen →",
     "work.c7.title": "Heterogene Industrien — Şişhanes Bottom-up-Fabrik",
-    "work.c7.role": "Masterarbeit, mit Ali Farhan · Hochschule Anhalt (DIA), 2013",
+    "work.c7.role": "Masterarbeit, mit Ali Farhan · Hochschule Anhalt, Dessau · Istanbul 2013",
     "work.c7.body":
-      "Şişhane, Istanbul: ein hundertjähriges informelles Leuchten-Handwerksquartier, " +
-      "durch kommerzielle Gentrifizierung von 10.000 Ateliers auf unter 3.000 gedrängt. " +
-      "Wir kartierten das Produktionsnetzwerk der Handwerker, quantifizierten die " +
-      "Abhängigkeiten der Werkstatttypen untereinander – nach Intensität und Gehdistanz – " +
-      "und ließen das Quartier aus dieser Logik neu wachsen: regelbasierte " +
-      "Atelier-Cluster, ein Dachnetz sozialer Räume und eine generative Wohnschicht. " +
-      "Eine Bottom-up-Fabrik, von innen heraus revitalisiert.",
+      "Istanbuls Şişhane-Viertel produziert seit über einem Jahrhundert Leuchten: " +
+      "Tausende kleiner Ateliers, die als eine dezentrale, informelle Produktionslinie " +
+      "arbeiten. Wir kartierten die Abhängigkeitsnetzwerke der Ateliers und simulierten " +
+      "ihr Verhalten mit agentenbasierten Modellen über 3D-Zellulärautomaten – und " +
+      "entschlüsselten so, wie eine selbstorganisierte Ökonomie über Generationen robust " +
+      "bleibt, und schlugen vor, wie sich das Viertel verdichten lässt, ohne seine " +
+      "Produzenten durch Gentrifizierung zu verdrängen.",
     "work.c7.link": "Thesis (PDF) anfragen →",
     "work.c6.title": "Aktive Fassaden kartieren — Einzelhandel &amp; Stadtform",
     "work.c6.role": "Erstautor · 13. Space Syntax Symposium, Bergen",
