@@ -110,7 +110,7 @@
       "entschlüsselten so, wie eine selbstorganisierte Ökonomie über Generationen robust " +
       "bleibt, und schlugen vor, wie sich das Viertel verdichten lässt, ohne seine " +
       "Produzenten durch Gentrifizierung zu verdrängen.",
-    "work.c7.link": "Thesis (PDF) anfragen →",
+    "work.c7.link": "Zum Poster — SimAUD 2016 (PDF) →",
     "work.c6.title": "Aktive Fassaden kartieren — Einzelhandel &amp; Stadtform",
     "work.c6.role": "Erstautor · 13. Space Syntax Symposium, Bergen",
     "work.c6.body":
