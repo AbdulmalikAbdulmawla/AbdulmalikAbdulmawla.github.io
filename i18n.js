@@ -156,8 +156,6 @@
     "work.c5.link": "Zum Beitrag →",
 
     "stats.pubs": "Publikationen",
-    "stats.reads.n": "12.000+",
-    "stats.reads": "Aufrufe",
     "stats.cites": "Zitationen",
     "stats.rg": "ResearchGate-Profil →",
 
@@ -178,8 +176,9 @@
     "exp.e2.date": "Apr. – Nov. 2023",
     "exp.e2.role": "Doktorand – Informatik in der Architektur und Urbanistik (InfAU)",
     "exp.e2.body":
-      "Übergangsphase mit Fokus auf die eigene Dissertation und die Planung der nächsten Etappe " +
-      "meiner Forschungslaufbahn.",
+      "Zwischen zwei Forschungsverträgen eine Phase in Vollzeit für die eigene Dissertation — die " +
+      "Promotion (eingeschrieben Nov. 2018) läuft parallel zu meinen Forschungsstellen, nicht danach — " +
+      "und für die Planung der nächsten Etappe meiner Forschungslaufbahn.",
     "exp.e3.date": "Dez. 2017 – Jan. 2019",
     "exp.e3.role": "Projektkoordinator – DAAD-Austauschprojekt „Discovering Cities“",
     "exp.e3.body":

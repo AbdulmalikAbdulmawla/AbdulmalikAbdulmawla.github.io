@@ -11,6 +11,15 @@ Hand-written **static HTML + CSS**. No framework, no Vite, no `node_modules`, no
 This is deliberate (lowest upkeep, instant GitHub Pages deploy). Sibling platform apps are
 Vite+React — this one is intentionally NOT. Do not scaffold a build system here.
 
+## Known conscious trade-offs
+- **German is invisible to crawlers/scrapers** (owner decision 2026-07-12): the JS-only i18n
+  serves English HTML to any non-JS fetcher — Google, ATS scrapers, WebFetch-style tools — and
+  `?lang=de` doesn't change that. Accepted: human reviewers use the DE toggle in a real browser,
+  and the no-build rule outweighs the SEO/scraper loss. Don't "fix" this with a second static DE
+  page or a build step unless the owner asks.
+- **ResearchGate "Reads" tile removed 2026-07-12** (3 independent reviewers read it as a vanity
+  metric that lowers trust). The stat strip keeps publications + citations only — don't re-add reads.
+
 ## Layout — landing hero + tabbed workspace
 Not a long scroll. A constant **hero** sits on top; below it a sticky **tab bar** swaps between 5
 panels — **Work · Research · Teaching · Experience · About** (Research = publications; Teaching =
