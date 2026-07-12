@@ -27,6 +27,10 @@
      flows   — particles on bendable mobility corridors
      venn    — exchange between three communities
      miner   — live (weighted) least-squares regression
+     sishane — atelier semilattice; cursor = a new production centre
+               that condenses extra dependency links around itself
+     blanken — masterplan parcels cut by a tram line whose points
+               snap toward the cursor, re-cutting the geometry live
    ============================================================ */
 (function () {
   "use strict";
@@ -734,8 +738,317 @@
     };
   }
 
+  /* ============================================================
+     Scene 7 · sishane — the atelier dependency network as a
+     semilattice. A near-tree of base links connects the ateliers;
+     the cursor (or, untouched, a slowly roaming point) acts as a
+     new production centre: node pairs near it grow EXTRA links —
+     overlapping sub-networks, Alexander's semilattice against the
+     tree — making the network multicentric wherever you point.
+     Dashed walking-range rings echo the thesis diagrams.
+     ============================================================ */
+  function makeSishane() {
+    var w = 0, h = 0, nds = [], base = [], pairs = [], seen = {};
+    var curT = 0, cen = { x: 0, y: 0, amt: 0 };
+    var LINK = 78;                                // max reach of an extra link (px)
+
+    function addBase(a, b) {
+      if (a < 0 || b < 0) return;
+      var k = a < b ? a + ":" + b : b + ":" + a;
+      if (seen[k]) return;
+      seen[k] = true;
+      base.push({ a: nds[a], b: nds[b] });
+      nds[a].deg++; nds[b].deg++;
+    }
+
+    return {
+      init: function (cw, ch) {
+        w = cw; h = ch; nds = []; base = []; pairs = []; seen = {};
+        var CL = [[0.3, 0.4], [0.64, 0.52], [0.45, 0.76]];   // atelier clusters
+        var COLORS = [P.red, P.blue, P.yellow, "#9aa3ad"];
+        var i, j;
+        for (i = 0; i < 26; i++) {
+          var c = CL[i % CL.length];
+          nds.push({
+            hx: clamp(c[0] * w + (rand(-1, 1) + rand(-1, 1)) * w * 0.13, 8, w - 8),
+            hy: clamp(c[1] * h + (rand(-1, 1) + rand(-1, 1)) * h * 0.15, 8, h - 8),
+            dx: 0, dy: 0, deg: 0, ph: rand(0, 6.28),
+            color: COLORS[(Math.random() * COLORS.length) | 0]
+          });
+        }
+        // base near-tree: nearest neighbour, sometimes the second — sparse on purpose
+        for (i = 0; i < nds.length; i++) {
+          var b1 = 1e9, b2 = 1e9, n1 = -1, n2 = -1;
+          for (j = 0; j < nds.length; j++) {
+            if (j === i) continue;
+            var dx = nds[j].hx - nds[i].hx, dy = nds[j].hy - nds[i].hy, d = dx * dx + dy * dy;
+            if (d < b1) { b2 = b1; n2 = n1; b1 = d; n1 = j; }
+            else if (d < b2) { b2 = d; n2 = j; }
+          }
+          addBase(i, n1);
+          if (Math.random() < 0.35) addBase(i, n2);
+        }
+        // candidate pairs for cursor-born links (close, not already linked)
+        for (i = 0; i < nds.length; i++) {
+          for (j = i + 1; j < nds.length; j++) {
+            if (seen[i + ":" + j]) continue;
+            var px = nds[j].hx - nds[i].hx, py = nds[j].hy - nds[i].hy;
+            if (px * px + py * py < LINK * LINK) pairs.push({ a: nds[i], b: nds[j] });
+          }
+        }
+      },
+      step: function (dt, t, ptr) {
+        curT = t;
+        var cx, cy, amt;
+        if (ptr.over) { cx = ptr.x; cy = ptr.y; amt = ptr.inf; }
+        else {                                    // roaming centre keeps touch devices alive
+          cx = w * (0.5 + 0.34 * Math.sin(t * 0.00021));
+          cy = h * (0.5 + 0.3 * Math.sin(t * 0.00016 + 1.7));
+          amt = COARSE ? 0.9 : ptr.inf;
+        }
+        cen.x = cx; cen.y = cy; cen.amt = amt;
+        for (var i = 0; i < nds.length; i++) {
+          var n = nds[i];
+          var ddx = cx - n.hx, ddy = cy - n.hy;
+          var g = 0.22 * gauss(ddx * ddx + ddy * ddy, 85) * amt;
+          n.dx += (ddx * g - n.dx) * Math.min(0.1 * dt, 1);
+          n.dy += (ddy * g - n.dy) * Math.min(0.1 * dt, 1);
+        }
+      },
+      draw: function (ctx, cw, ch) {
+        var t = curT, i;
+        ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch);
+
+        // walking-range rings around the active centre (the thesis' 40/80 m)
+        if (cen.amt > 0.03) {
+          ctx.save();
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = P.soft; ctx.lineWidth = 1;
+          ctx.globalAlpha = 0.3 * cen.amt;
+          ctx.beginPath(); ctx.arc(cen.x, cen.y, 34, 0, 6.2832); ctx.stroke();
+          ctx.globalAlpha = 0.18 * cen.amt;
+          ctx.beginPath(); ctx.arc(cen.x, cen.y, 62, 0, 6.2832); ctx.stroke();
+          ctx.restore();
+        }
+
+        // the sparse base network (the tree the semilattice argues against)
+        ctx.strokeStyle = P.soft; ctx.lineWidth = 1.1; ctx.globalAlpha = 0.45;
+        ctx.beginPath();
+        for (i = 0; i < base.length; i++) {
+          var e = base[i];
+          ctx.moveTo(e.a.hx + e.a.dx, e.a.hy + e.a.dy);
+          ctx.lineTo(e.b.hx + e.b.dx, e.b.hy + e.b.dy);
+        }
+        ctx.stroke();
+
+        // extra links condense around the centre → overlapping sub-networks
+        if (cen.amt > 0.02) {
+          for (i = 0; i < pairs.length; i++) {
+            var pr = pairs[i];
+            var ax = pr.a.hx + pr.a.dx, ay = pr.a.hy + pr.a.dy;
+            var bx = pr.b.hx + pr.b.dx, by = pr.b.hy + pr.b.dy;
+            var mx = (ax + bx) / 2 - cen.x, my = (ay + by) / 2 - cen.y;
+            var wgt = gauss(mx * mx + my * my, 58) * cen.amt;
+            if (wgt < 0.05) continue;
+            ctx.globalAlpha = 0.8 * wgt;
+            ctx.strokeStyle = P.red;
+            ctx.lineWidth = 0.8 + 1.7 * wgt;
+            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+          }
+        }
+
+        // ateliers — degree-sized, breathing, swelling near the centre
+        for (i = 0; i < nds.length; i++) {
+          var n = nds[i];
+          var cdx = n.hx + n.dx - cen.x, cdy = n.hy + n.dy - cen.y;
+          var near = gauss(cdx * cdx + cdy * cdy, 70) * cen.amt;
+          var r = (2.2 + 0.55 * n.deg) * (0.94 + 0.06 * Math.sin(t * 0.0018 + n.ph)) * (1 + 0.55 * near);
+          ctx.globalAlpha = 0.7 + 0.3 * near;
+          ctx.fillStyle = n.color;
+          ctx.beginPath(); ctx.arc(n.hx + n.dx, n.hy + n.dy, r, 0, 6.2832); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+    };
+  }
+
+  /* ============================================================
+     Scene 8 · blanken — the masterplan as negotiable geometry.
+     Density-coloured parcels sit on a street grid; the proposed
+     tram line runs across them, its vertices snapping toward the
+     cursor. Wherever the line crosses a parcel, the parcel is CUT
+     along it — the halves part like a design decision taking
+     effect, wider near the cursor — and a tram dot rides the line.
+     ============================================================ */
+  function makeBlanken() {
+    var w = 0, h = 0, parcels = [], pts = [], tramS = 0;
+    var curT = 0, cen = { x: 0, y: 0, amt: 0 };
+    var LINE_U = [[-0.02, 0.9], [0.3, 0.68], [0.62, 0.32], [1.02, 0.13]];
+    var ROWS = [[0.08, 0.27], [0.38, 0.6], [0.72, 0.93]];
+    var COLS = [[0.06, 0.27], [0.34, 0.58], [0.65, 0.81], [0.87, 0.98]];
+
+    function area(poly) {
+      var s = 0;
+      for (var i = 0; i < poly.length; i++) {
+        var p = poly[i], q = poly[(i + 1) % poly.length];
+        s += p.x * q.y - q.x * p.y;
+      }
+      return Math.abs(s / 2);
+    }
+    function clipHalf(poly, ax, ay, nx, ny) {     // keep the side where (p-a)·n ≥ 0
+      var out = [];
+      for (var i = 0; i < poly.length; i++) {
+        var p = poly[i], q = poly[(i + 1) % poly.length];
+        var dp = (p.x - ax) * nx + (p.y - ay) * ny;
+        var dq = (q.x - ax) * nx + (q.y - ay) * ny;
+        if (dp >= 0) out.push(p);
+        if ((dp >= 0) !== (dq >= 0)) {
+          var tt = dp / (dp - dq);
+          out.push({ x: p.x + (q.x - p.x) * tt, y: p.y + (q.y - p.y) * tt });
+        }
+      }
+      return out;
+    }
+    function fillPoly(ctx, poly, ox, oy) {
+      ctx.beginPath();
+      ctx.moveTo(poly[0].x + ox, poly[0].y + oy);
+      for (var i = 1; i < poly.length; i++) ctx.lineTo(poly[i].x + ox, poly[i].y + oy);
+      ctx.closePath(); ctx.fill();
+    }
+
+    return {
+      init: function (cw, ch) {
+        w = cw; h = ch; parcels = []; pts = []; tramS = 0;
+        var COLORS = [P.blue, P.red, P.yellow, "#9aa3ad"];
+        var ci = 0;
+        for (var r = 0; r < ROWS.length; r++) {
+          for (var c = 0; c < COLS.length; c++) {
+            var x0 = COLS[c][0] * w, x1 = COLS[c][1] * w;
+            var y0 = ROWS[r][0] * h, y1 = ROWS[r][1] * h;
+            parcels.push({
+              poly: [{ x: x0, y: y0 }, { x: x1, y: y0 }, { x: x1, y: y1 }, { x: x0, y: y1 }],
+              cx: (x0 + x1) / 2, cy: (y0 + y1) / 2,
+              color: COLORS[(ci++) % COLORS.length],
+              op: rand(0.34, 0.55)
+            });
+          }
+        }
+        for (var k = 0; k < LINE_U.length; k++) {
+          pts.push({
+            hx: LINE_U[k][0] * w, hy: LINE_U[k][1] * h,
+            x: LINE_U[k][0] * w, y: LINE_U[k][1] * h,
+            ph: rand(0, 6.28)
+          });
+        }
+      },
+      step: function (dt, t, ptr) {
+        curT = t;
+        var amt = ptr.over ? ptr.inf : (COARSE ? 0.85 : ptr.inf);
+        cen.x = ptr.x; cen.y = ptr.y; cen.amt = ptr.over ? amt : 0;
+        for (var k = 0; k < pts.length; k++) {
+          var p = pts[k];
+          // ambient sway keeps the cut alive; the cursor snaps vertices toward it
+          var tx = p.hx + 5 * Math.sin(t * 0.00042 + p.ph);
+          var ty = p.hy + 8 * Math.sin(t * 0.00033 + p.ph * 1.9) * (COARSE || ptr.over ? 1 : amt);
+          if (ptr.over) {
+            var ddx = ptr.x - p.hx, ddy = ptr.y - p.hy;
+            var g = 0.6 * gauss(ddx * ddx + ddy * ddy, 105) * ptr.inf;
+            tx += ddx * g; ty += ddy * g;
+          }
+          p.x += (tx - p.x) * Math.min(0.09 * dt, 1);
+          p.y += (ty - p.y) * Math.min(0.09 * dt, 1);
+        }
+        tramS += 0.0014 * dt;
+        if (tramS > 1) tramS -= 1;
+      },
+      draw: function (ctx, cw, ch) {
+        var i, k;
+        ctx.fillStyle = P.tint; ctx.fillRect(0, 0, cw, ch);
+
+        // street grid between the parcel rows/columns
+        ctx.strokeStyle = P.hair; ctx.lineWidth = 1.5; ctx.globalAlpha = 1;
+        ctx.beginPath();
+        for (i = 0; i < ROWS.length - 1; i++) {
+          var gy = (ROWS[i][1] + ROWS[i + 1][0]) / 2 * ch;
+          ctx.moveTo(0, gy); ctx.lineTo(cw, gy);
+        }
+        for (i = 0; i < COLS.length - 1; i++) {
+          var gx = (COLS[i][1] + COLS[i + 1][0]) / 2 * cw;
+          ctx.moveTo(gx, 0); ctx.lineTo(gx, ch);
+        }
+        ctx.stroke();
+
+        // parcels — cut along whichever tram segment crosses them
+        for (i = 0; i < parcels.length; i++) {
+          var pc = parcels[i];
+          var cut = null;
+          for (k = 0; k < pts.length - 1; k++) {
+            var a = pts[k], b = pts[k + 1];
+            // quick bbox reject against the parcel
+            if (Math.max(a.x, b.x) < pc.poly[0].x || Math.min(a.x, b.x) > pc.poly[1].x ||
+                Math.max(a.y, b.y) < pc.poly[0].y || Math.min(a.y, b.y) > pc.poly[2].y) continue;
+            var nx = -(b.y - a.y), ny = b.x - a.x;
+            var nl = Math.sqrt(nx * nx + ny * ny) || 1;
+            nx /= nl; ny /= nl;
+            var h1 = clipHalf(pc.poly, a.x, a.y, nx, ny);
+            var h2 = clipHalf(pc.poly, a.x, a.y, -nx, -ny);
+            if (h1.length > 2 && h2.length > 2 && area(h1) > 12 && area(h2) > 12) {
+              cut = { h1: h1, h2: h2, nx: nx, ny: ny };
+              break;
+            }
+          }
+          ctx.globalAlpha = pc.op;
+          ctx.fillStyle = pc.color;
+          if (cut) {
+            var ddx = pc.cx - cen.x, ddy = pc.cy - cen.y;
+            var gap = 2.4 + 7 * gauss(ddx * ddx + ddy * ddy, 95) * cen.amt;
+            fillPoly(ctx, cut.h1, cut.nx * gap, cut.ny * gap);
+            fillPoly(ctx, cut.h2, -cut.nx * gap, -cut.ny * gap);
+          } else {
+            fillPoly(ctx, pc.poly, 0, 0);
+          }
+        }
+
+        // the tram line, its stops, and the tram
+        ctx.save();
+        ctx.setLineDash([7, 4]);
+        ctx.strokeStyle = P.soft; ctx.lineWidth = 2.4; ctx.globalAlpha = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (k = 1; k < pts.length; k++) ctx.lineTo(pts[k].x, pts[k].y);
+        ctx.stroke();
+        ctx.restore();
+        for (k = 1; k < pts.length - 1; k++) {     // interior points = suggested stops
+          ctx.globalAlpha = 0.95;
+          ctx.fillStyle = P.tint; ctx.strokeStyle = P.soft; ctx.lineWidth = 2.2;
+          ctx.beginPath(); ctx.arc(pts[k].x, pts[k].y, 5, 0, 6.2832); ctx.fill(); ctx.stroke();
+        }
+        // tram dot riding the polyline (arc-length parametrised)
+        var lens = [], total = 0;
+        for (k = 0; k < pts.length - 1; k++) {
+          var sdx = pts[k + 1].x - pts[k].x, sdy = pts[k + 1].y - pts[k].y;
+          var sl = Math.sqrt(sdx * sdx + sdy * sdy);
+          lens.push(sl); total += sl;
+        }
+        var dist = tramS * total;
+        for (k = 0; k < lens.length; k++) {
+          if (dist <= lens[k] || k === lens.length - 1) {
+            var f = clamp(dist / (lens[k] || 1), 0, 1);
+            ctx.globalAlpha = 0.95; ctx.fillStyle = P.ochre;
+            ctx.beginPath();
+            ctx.arc(lerp(pts[k].x, pts[k + 1].x, f), lerp(pts[k].y, pts[k + 1].y, f), 3.4, 0, 6.2832);
+            ctx.fill();
+            break;
+          }
+          dist -= lens[k];
+        }
+        ctx.globalAlpha = 1;
+      }
+    };
+  }
+
   /* ---------------- engine ---------------- */
-  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, venn: makeVenn, miner: makeMiner, frontage: makeFrontage };
+  var SCENES = { unfall: makeUnfall, toolbox: makeToolbox, flows: makeFlows, venn: makeVenn, miner: makeMiner, frontage: makeFrontage, sishane: makeSishane, blanken: makeBlanken };
   var DPR_CAP = 2;
   /* touch devices have no hover, so the hover-gate would keep scenes dead
      forever there — instead visible cards play on their own (the IO already

@@ -140,8 +140,9 @@
 
           <article class="card">
             <!-- Şişhane dependency network: walking-range rings + intensity-weighted edges.
-                 Deliberately static (no data-art) — the hand-drawn diagram IS the motif. -->
-            <div class="card-media" aria-hidden="true">
+                 The SVG is the no-JS/motion-off/print fallback; the "sishane" canvas scene
+                 (card-art.js) grows a multicentric semilattice around the cursor. -->
+            <div class="card-media" data-art="sishane" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <!-- walking-distance dependency ranges (40 / 80 / 160 m) -->
@@ -275,9 +276,10 @@
           </article>
 
           <article class="card">
-            <!-- Blankenburger Süden: masterplan parcels with density blocks + proposed tram
-                 line with suggested stops. Static (no data-art) — the diagram is the motif. -->
-            <div class="card-media" aria-hidden="true">
+            <!-- Blankenburger Süden: masterplan parcels + proposed tram line with stops.
+                 The SVG is the no-JS/motion-off/print fallback; the "blanken" canvas scene
+                 (card-art.js) snaps the line toward the cursor and cuts the parcels along it. -->
+            <div class="card-media" data-art="blanken" aria-hidden="true">
               <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="200" fill="#f7f8fa"/>
                 <!-- street grid -->
