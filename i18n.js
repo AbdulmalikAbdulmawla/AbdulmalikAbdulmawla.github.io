@@ -11,9 +11,10 @@
   var DE = {
     "hero.eyebrow": "Computational Urban Design · Raumökonomische Forschung",
     "hero.lede":
-      "Ich entwickle Forschungswerkzeuge, die urbane Daten in Evidenz verwandeln – " +
-      "und verknüpfe dabei räumliche Strukturen mit lokaler Wertschöpfung, " +
-      "Dienstleistungsökonomien und der Resilienz städtischer Systeme. Doktorand an " +
+      "Ich dekodiere urbane Rohdaten und mache daraus parametrisierte Analysemethoden, " +
+      "damit evidenzbasierte Entscheidungen und Entwürfe leichtfallen. Meine Forschung " +
+      "fragt, wie Städte wirtschaftlichem Handeln seine räumliche Freiheit geben können – " +
+      "von informellen Werkstattnetzwerken bis zum Handel auf Straßenebene. Doktorand an " +
       "der Bauhaus-Universität Weimar.",
     "hero.cv": "Lebenslauf (PDF) herunterladen ↓",
 
@@ -24,6 +25,24 @@
     "tab.about": "Über mich",
 
     "research.h": "Forschung",
+
+    "rs.h": "Forschungsstatement",
+    "rs.p1":
+      "Seit meiner Bachelorarbeit treibt mich eine Überzeugung an: Wer eigenständige " +
+      "Produktion in kleinen, dichten Quartieren stärkt, schafft heterogenere, " +
+      "selbsttragende Gemeinschaften. Ich erforsche die <em>räumliche Freiheit " +
+      "wirtschaftlichen Handelns</em> – wo sich kleine Ökonomien verorten, wie sich " +
+      "informelle Produktionsnetzwerke organisieren und wie eine Stadt auf die räumlichen " +
+      "Bedürfnisse ihrer Bewohner hören kann, damit eine Geschäftsgründung nicht mit " +
+      "hohen Schulden beginnen muss.",
+    "rs.p2":
+      "Meine Masterarbeit kartierte Şişhane, Istanbuls hundertjähriges " +
+      "Leuchten-Handwerksquartier, als Netzwerk voneinander abhängiger Werkstätten – eine " +
+      "Bottom-up-Fabrik. 2016 kam ich an die Bauhaus-Universität Weimar, um diese Frage " +
+      "„mit aktuelleren Daten und Werkzeugen“ reifen zu lassen: ein Jahrzehnt des " +
+      "Werkzeugbaus – parametrische Analyse-Plug-ins, statistische Toolchains, " +
+      "browserbasierte Datenplattformen –, die urbane Rohdaten in Evidenz über die " +
+      "Alltagsökonomie der Städte verwandeln.",
 
     "about.h": "Über mich",
     "about.p1":
@@ -82,6 +101,17 @@
       "evidenzbasierte Verkehrssicherheitsanalyse. Läuft vollständig im Browser " +
       "(DuckDB-WASM + deck.gl).",
     "work.c1.link": "Live-App öffnen →",
+    "work.c7.title": "Heterogene Industrien — Şişhanes Bottom-up-Fabrik",
+    "work.c7.role": "Masterarbeit, mit Ali Farhan · Hochschule Anhalt (DIA), 2013",
+    "work.c7.body":
+      "Şişhane, Istanbul: ein hundertjähriges informelles Leuchten-Handwerksquartier, " +
+      "durch kommerzielle Gentrifizierung von 10.000 Ateliers auf unter 3.000 gedrängt. " +
+      "Wir kartierten das Produktionsnetzwerk der Handwerker, quantifizierten die " +
+      "Abhängigkeiten der Werkstatttypen untereinander – nach Intensität und Gehdistanz – " +
+      "und ließen das Quartier aus dieser Logik neu wachsen: regelbasierte " +
+      "Atelier-Cluster, ein Dachnetz sozialer Räume und eine generative Wohnschicht. " +
+      "Eine Bottom-up-Fabrik, von innen heraus revitalisiert.",
+    "work.c7.link": "Thesis (PDF) anfragen →",
     "work.c6.title": "Aktive Fassaden kartieren — Einzelhandel &amp; Stadtform",
     "work.c6.role": "Erstautor · 13. Space Syntax Symposium, Bergen",
     "work.c6.body":

@@ -60,9 +60,11 @@
       <p class="eyebrow" data-i18n="hero.eyebrow">Computational Urban Design · Spatial-Economic Research</p>
       <h1 class="hero-name">Abdulmalik<br>Abdulmawla</h1>
       <p class="lede" data-i18n="hero.lede">
-        I build research tools that turn urban data into evidence &mdash; linking spatial
-        structure to local value creation, service economies, and the resilience of
-        urban systems. PhD candidate at the Bauhaus-Universit&auml;t Weimar.
+        I decode raw urban data and turn it into parametrised analysis methods, so
+        that evidence-based decisions and designs come easily. My research asks how
+        cities can give economic activity its spatial freedom &mdash; from informal
+        workshop networks to street-level trade. PhD candidate at the
+        Bauhaus-Universit&auml;t Weimar.
       </p>
 
       <nav class="profile-links" aria-label="Profiles and contact">
@@ -133,6 +135,63 @@
                 (DuckDB-WASM + deck.gl).
               </p>
               <a class="card-link" href="https://www.uni-weimar.de/~vewa2645/VSP_Unfallatlas/VSP_Unfallatlas.html" target="_blank" rel="noopener" data-i18n="work.c1.link">Open the live app &rarr;</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <!-- Şişhane dependency network: walking-range rings + intensity-weighted edges.
+                 Deliberately static (no data-art) — the hand-drawn diagram IS the motif. -->
+            <div class="card-media" aria-hidden="true">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="200" fill="#f7f8fa"/>
+                <!-- walking-distance dependency ranges (40 / 80 / 160 m) -->
+                <g fill="none" stroke="#d5dae1" stroke-dasharray="4 4">
+                  <circle cx="150" cy="105" r="34"/>
+                  <circle cx="150" cy="105" r="62"/>
+                  <circle cx="150" cy="105" r="92"/>
+                </g>
+                <!-- dependency edges, width = intensity -->
+                <g stroke="#475160" opacity=".5" stroke-linecap="round">
+                  <line x1="150" y1="105" x2="118" y2="78" stroke-width="3.5"/>
+                  <line x1="150" y1="105" x2="187" y2="88" stroke-width="3"/>
+                  <line x1="150" y1="105" x2="132" y2="146" stroke-width="2.5"/>
+                  <line x1="150" y1="105" x2="207" y2="132" stroke-width="1.5"/>
+                  <line x1="118" y1="78" x2="92" y2="52" stroke-width="1.5"/>
+                  <line x1="187" y1="88" x2="222" y2="58" stroke-width="1.5"/>
+                  <line x1="187" y1="88" x2="238" y2="96" stroke-width="1"/>
+                  <line x1="132" y1="146" x2="96" y2="162" stroke-width="1"/>
+                  <line x1="150" y1="105" x2="76" y2="118" stroke-width="1"/>
+                  <line x1="207" y1="132" x2="252" y2="158" stroke-width="1"/>
+                </g>
+                <!-- ateliers, coloured by trade -->
+                <g>
+                  <circle cx="150" cy="105" r="10" fill="#c8452f"/>
+                  <circle cx="118" cy="78" r="7" fill="#2b6cb0"/>
+                  <circle cx="187" cy="88" r="7" fill="#e0a92e"/>
+                  <circle cx="132" cy="146" r="6" fill="#2b6cb0"/>
+                  <circle cx="207" cy="132" r="6" fill="#e0a92e"/>
+                  <circle cx="92" cy="52" r="5" fill="#9aa3ad"/>
+                  <circle cx="222" cy="58" r="5" fill="#c8452f"/>
+                  <circle cx="238" cy="96" r="4" fill="#9aa3ad"/>
+                  <circle cx="96" cy="162" r="5" fill="#9aa3ad"/>
+                  <circle cx="76" cy="118" r="5" fill="#2b6cb0"/>
+                  <circle cx="252" cy="158" r="4" fill="#e0a92e"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 data-i18n="work.c7.title">Heterogeneous Industries &mdash; &#350;i&#351;hane&rsquo;s Bottom-Up Factory</h3>
+              <p class="card-role" data-i18n="work.c7.role">Master thesis, with Ali Farhan &middot; Hochschule Anhalt (DIA), 2013</p>
+              <p data-i18n="work.c7.body">
+                &#350;i&#351;hane, Istanbul: a century-old informal lighting-craft quarter,
+                squeezed by commercial gentrification from 10,000 ateliers to under 3,000.
+                We mapped the artisans&rsquo; production network, quantified how workshop
+                types depend on one another &mdash; by intensity and walking distance &mdash;
+                and regrew the district from that logic: rule-based atelier clusters, a
+                rooftop network of social spaces, and a generative housing layer. A
+                bottom-up factory, revitalized from within.
+              </p>
+              <a class="card-link" href="mailto:abdulmalik.abdulmawla@uni-weimar.de?subject=Master%20thesis%20PDF%20request" data-i18n="work.c7.link">Request the thesis (PDF) &rarr;</a>
             </div>
           </article>
 
@@ -301,6 +360,28 @@
           <span class="panel-num" aria-hidden="true">02</span>
           <h2 data-i18n="research.h">Research</h2>
         </header>
+
+        <h3 class="sub-h" data-i18n="rs.h">Research statement</h3>
+        <div class="prose">
+          <p data-i18n="rs.p1">
+            Since my undergraduate thesis, one conviction has driven my work: empowering
+            autonomous production in small, dense neighbourhoods generates more
+            heterogeneous, self-sufficient communities. I study the <em>spatial freedom
+            of economic activities</em> &mdash; where small economies locate, how informal
+            production networks organise themselves, and how a city can listen to its
+            inhabitants&rsquo; spatial needs so that opening a business does not have to
+            begin in deep debt.
+          </p>
+          <p data-i18n="rs.p2">
+            My master&rsquo;s thesis mapped &#350;i&#351;hane, Istanbul&rsquo;s century-old
+            lighting-craft quarter, as a network of interdependent workshops &mdash; a
+            bottom-up factory. I joined the Bauhaus-Universit&auml;t Weimar in 2016 to
+            mature that question &ldquo;with more actualized data and tools&rdquo;: a decade
+            of building computational instruments &mdash; parametric analysis plug-ins,
+            statistical toolchains, browser-based data platforms &mdash; that turn raw
+            urban data into evidence about the everyday economy of cities.
+          </p>
+        </div>
 
         <!-- Stats source: researchgate.net/profile/Abdulmalik-Abdulmawla, checked 2026-07-07.
              Hand-maintained — re-check ~2×/year and update the three numbers (+ DE "stats.reads.n"). -->
