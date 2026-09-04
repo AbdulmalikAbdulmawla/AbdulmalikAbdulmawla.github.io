@@ -9,7 +9,7 @@
   "use strict";
 
   var DE = {
-    "hero.eyebrow": "Werkzeuge für räumliche Daten: Architektur, Städtebau, Mobilität, Stadtökonomie",
+    "hero.eyebrow": "Werkzeuge für räumliche Daten: Architektur, Stadt und Land, Mobilität, Stadtökonomie",
     "hero.lede":
       "Seit vielen Jahren baue ich Werkzeuge für den Entwurf, die Erzeugung und die " +
       "Analyse räumlicher Daten in Architektur, Städtebau und Stadtökonomie. " +
@@ -47,8 +47,12 @@
 
     "about.h": "Über mich",
     "about.p1":
-      "Ich baue Werkzeuge für den Entwurf, die Erzeugung und die Analyse räumlicher Daten in " +
-      "Architektur, Städtebau und Stadtökonomie. Ich komme aus der Forschung: " +
+      "Mich interessiert das Lösen räumlicher Probleme, in Architektur, Stadt und Land, Ökonomie " +
+      "und Mobilität. Ich bin überzeugt, dass jede komplexe Aufgabe und jeder Umgang mit Daten " +
+      "verlangt, das Problem intelligent in seine Kernparameter zu zerlegen und jedes Element so " +
+      "weit zu vereinfachen, dass ein menschlich handhabbarer Maßstab entsteht. So arbeitet auch " +
+      "die Natur: Komplexe Systeme bestehen nicht aus komplexen Teilen, sondern aus sehr " +
+      "einfachen, die intelligent zusammengesetzt sind. Ich komme aus der Forschung: " +
       "Die Technik ist eine meiner Stärken, meine wichtigste aber ist das rechnerische Denken " +
       "über räumliche Datenprobleme, verbunden mit der Fähigkeit, mich in das jeweilige " +
       "Anwendungsfeld einzuarbeiten, von einfachen bis zu komplexen Zielen. Der Anspruch dabei: " +
