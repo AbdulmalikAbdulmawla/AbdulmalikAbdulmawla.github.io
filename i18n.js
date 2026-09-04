@@ -9,14 +9,16 @@
   "use strict";
 
   var DE = {
-    "hero.eyebrow": "Computational Urban Design · Raumökonomische Forschung",
+    "hero.eyebrow": "Werkzeuge für räumliche Daten: Architektur, Städtebau, Mobilität, Stadtökonomie",
     "hero.lede":
-      "Ich dekodiere urbane Rohdaten und parametrisiere die Methoden, um sie zu " +
-      "erkunden – damit evidenzbasierte Entscheidungen und Entwürfe leichtfallen. Meine " +
-      "Forschung richtet das auf eine Frage: Wo kann sich wirtschaftliches Handeln in der " +
-      "Stadt verorten – und wie bleibt städtischer Raum offen für die kleinen Ökonomien " +
-      "und Kollektive, die Menschen von unten aufbauen? Doktorand an der " +
-      "Bauhaus-Universität Weimar.",
+      "Seit vielen Jahren baue ich Werkzeuge für den Entwurf, die Erzeugung und die " +
+      "Analyse räumlicher Daten in Architektur, Städtebau und Stadtökonomie. " +
+      "Ich komme aus der Forschung: Die Technik ist eine meiner Stärken, meine wichtigste " +
+      "aber ist das rechnerische Denken über räumliche Datenprobleme, verbunden mit der " +
+      "Fähigkeit, mich in das jeweilige Anwendungsfeld einzuarbeiten. Aktuell: eine " +
+      "browserbasierte Analyseplattform für Deutschlands amtliche Unfalldaten und meine " +
+      "Promotion an der Bauhaus-Universität Weimar zur Frage, wo sich Einzelhandel in " +
+      "einer Stadt ansiedelt (Promotion laufend).",
     "hero.cv": "Lebenslauf (PDF) herunterladen ↓",
 
     "tab.work": "Arbeiten",
@@ -45,23 +47,31 @@
 
     "about.h": "Über mich",
     "about.p1":
-      "Ich bin Raumökonomie-Forscher und Computational Urban Designer. Meine Arbeit " +
-      "untersucht städtische Strukturen im Verhältnis zu lokaler Wertschöpfung, " +
-      "Dienstleistungsökonomien und Resilienz – und verknüpft räumliche Konfiguration " +
-      "empirisch mit ökonomischer Dynamik, um eine nachhaltige Stadt- und " +
-      "Regionalentwicklung zu unterstützen.",
+      "Ich baue Werkzeuge für den Entwurf, die Erzeugung und die Analyse räumlicher Daten in " +
+      "Architektur, Städtebau und Stadtökonomie. Ich komme aus der Forschung: " +
+      "Die Technik ist eine meiner Stärken, meine wichtigste aber ist das rechnerische Denken " +
+      "über räumliche Datenprobleme, verbunden mit der Fähigkeit, mich in das jeweilige " +
+      "Anwendungsfeld einzuarbeiten, von einfachen bis zu komplexen Zielen. Der Anspruch dabei: " +
+      "die beste Balance zwischen Nutzererlebnis und fortgeschrittenen wissenschaftlichen " +
+      "Analysemethoden.",
     "about.p2":
-      "Methodisch arbeite ich mit GIS, Netzwerkanalyse, agentenbasierter Simulation und " +
-      "datengetriebenen Verfahren (Python, R, C#). Mein Promotionsprojekt untersucht die " +
-      "raumökonomische Dynamik lokaler Produktions- und Dienstleistungsstrukturen: " +
-      "<em>„Räumliche Abhängigkeit des städtischen Einzelhandels: detaillierte Methoden " +
-      "zur Verortung von Aktivitäten auf Straßenebene“</em> (Betreuer: Prof. Dr. Reinhard König).",
+      "Meine Werkzeuge sind in Entwicklungsschritten gewachsen, getragen von demselben Interesse, " +
+      "erst lokal, später im Browser: von Simulation und agentenbasierten Modellen über statistische " +
+      "Analyse und parametrischen Stadtentwurf bis zu browserbasierten Analyseplattformen, gebaut mit " +
+      "Technologien auf dem Stand der Technik bis hin zur KI-gestützten Programmierung mit mehreren " +
+      "Agenten. Ich arbeite an den Systemen hinter den Werkzeugen: Datenmodelle, Methoden und " +
+      "Schnittstellen. Mein Promotionsprojekt (laufend, Bauhaus-Universität Weimar) fragt, wo sich " +
+      "Einzelhandel in einer Stadt ansiedelt: <em>„Spatial dependency of urban retail: detailed " +
+      "methods for positioning street-level activities“</em> (Betreuer: Prof. Dr. Reinhard König).",
     "about.p3":
-      "Über fast zwei Jahrzehnte – von der Architekturpraxis in Ägypten und den VAE bis zu " +
-      "einem Jahrzehnt Lehre und Forschung in Deutschland, Ägypten, Jordanien und Äthiopien – " +
-      "habe ich immer wieder die Werkzeuge gebaut, die Analysen reproduzierbar machen: von " +
-      "Grasshopper-Plug-ins für die räumliche Datenanalyse bis hin zu interaktiven " +
-      "Web-Plattformen für Open-Data-Exploration und evidenzbasiertes Entwerfen.",
+      "Ich erkenne früh, wo Nutzer eines Werkzeugs stolpern, entwickle Methoden gemeinsam mit " +
+      "denen, die sie benutzen werden, und vermittle komplexe räumliche Berechnung seit vielen " +
+      "Jahren an sehr unterschiedliche Zielgruppen: Studierende, Fachkolleginnen und Fachkollegen " +
+      "und öffentliche Verwaltungen am European Digital Innovation Hub Mid Germany. Neue Felder " +
+      "erschließe ich mir aus ähnlicher Erfahrung: Mit der M-Uko 2012, dem amtlichen Regelwerk " +
+      "der Unfallauswertung, habe ich mir einen fremden Fachstandard von der ersten Begegnung bis " +
+      "zur Produktreife erarbeitet. Zehn Jahre Arbeit in Deutschland, davor fünf Jahre im Nahen " +
+      "Osten, haben mich gelehrt, mich schnell in neue Umgebungen und Aufgaben einzuarbeiten.",
 
     "edu.h": "Ausbildung",
     "edu.li1":
@@ -95,10 +105,13 @@
     "work.c1.title": "VSP&nbsp;Unfallatlas – Verkehrssicherheits-Explorer",
     "work.c1.role": "Alleiniger Entwickler · Bauhaus Weimar, EDIH.TH",
     "work.c1.body":
-      "Eine interaktive Web-Plattform zur Exploration deutscher Unfalldaten: räumliche " +
-      "Aggregation, Erkennung von Unfallhäufungsstellen und statistische Methoden für eine " +
-      "evidenzbasierte Verkehrssicherheitsanalyse. Läuft vollständig im Browser " +
-      "(DuckDB-WASM + deck.gl).",
+      "Eine interaktive Web-Plattform zur Exploration der amtlichen deutschen Unfalldaten: " +
+      "die amtliche Auswertungsmethodik M-Uko 2012 als interaktives Werkzeug, mit räumlicher " +
+      "Aggregation, Erkennung von Unfallhäufungsstellen und den statistischen Methoden einer " +
+      "evidenzbasierten Verkehrssicherheitsanalyse. Zehn Jahrgänge mit wechselnden Spalten in " +
+      "einer Staging-Schicht vereint; von einem Entwickler von Ende zu Ende gebaut, KI-gestützt " +
+      "mit Claude Code, mit Continuous Integration und versionierten Releases. Läuft " +
+      "vollständig im Browser (DuckDB-WASM + deck.gl).",
     "work.c1.link": "Live-App öffnen →",
     "work.c1.link2": "Technische Fallstudie →",
     "work.c7.title": "Heterogene Industrien — Şişhanes Bottom-up-Fabrik",
@@ -166,14 +179,16 @@
       'target="_blank" rel="noopener">ResearchGate</a>.',
 
     "exp.h": "Berufserfahrung",
-    "exp.e1.date": "Dez. 2023 – heute",
+    "exp.e1.date": "Dez. 2023 – Sep. 2026",
     "exp.e1.role": "Wissenschaftlicher Mitarbeiter – Professur Verkehrssystemplanung",
     "exp.e1.body":
-      "Erhebung und Analyse offener Mobilitätsdaten, Entwicklung interaktiver Plattformen zur " +
-      "Datenexploration und Data-Science-Beratung öffentlicher Institutionen – inklusive Schulungen " +
-      "für Verwaltungen zu europäischen Standards für offene Mobilitätsdaten, Unterstützung bei " +
-      "der Datenveröffentlichung auf der Mobilithek sowie Betreuung studentischer Projekte und " +
-      "Masterarbeiten (Digital Transport Research Lab).",
+      "Konzeption und Entwicklung interaktiver Geodaten-Plattformen, darunter die browserbasierte " +
+      "Analyseplattform für Deutschlands amtliche Unfalldaten (Alleinentwicklung: Datenmodell, " +
+      "Open-Data-Pipelines, WebGL-Karte, Continuous Integration, versionierte Releases; die amtliche " +
+      "Auswertungsmethodik M-Uko 2012 als interaktives Werkzeug); Data-Science-Beratung öffentlicher " +
+      "Institutionen und Schulungen für Verwaltungen zu offenen Geodaten und europäischen " +
+      "Datenstandards, inklusive Datenveröffentlichung auf der Mobilithek; Betreuung studentischer " +
+      "Projekte und Masterarbeiten (Digital Transport Research Lab).",
     "exp.e2.date": "Apr. – Nov. 2023",
     "exp.e2.role": "Doktorand – Informatik in der Architektur und Urbanistik (InfAU)",
     "exp.e2.body":
@@ -229,7 +244,7 @@
     "teaching.h": "Lehre",
     "sem.h": "Universitätsseminare",
     "sem.list":
-      "<li><strong>2023 – heute</strong> – Digital Traffic Simulation Lab · Open Mobility Data · " +
+      "<li><strong>2023 – 2026</strong> – Digital Traffic Simulation Lab · Open Mobility Data · " +
       "Rent-a-Data-Scientist – Professur Verkehrssystemplanung, Bauhaus-Universität Weimar</li>" +
       "<li><strong>2016 – 2023</strong> – Algorithmic Architecture · Parametric Urban Design &amp; Analysis · " +
       "SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II · Circular Urbanism – InfAR/InfAU, Bauhaus-Universität Weimar</li>" +
@@ -239,7 +254,7 @@
     "sup.body":
       "Laufend: Betreuung von Masterarbeiten und studentischen Projekten – am InfAR/InfAU " +
       "(2016–2023) und im Digital Transport Research Lab der Professur Verkehrssystemplanung " +
-      "(seit 2023).",
+      "(2023–2026).",
     "worg.h": "Organisierte Workshops",
     "worg.list":
       "<li><strong>2018</strong> – <a href=\"https://toolbox.decodingspaces.net/discovering-cities-workshop-amman/\" target=\"_blank\" rel=\"noopener\">Discovering Cities Workshop</a>, German-Jordanian University, Amman</li>" +
@@ -254,12 +269,20 @@
       "<li><strong>2012</strong> – 13. Architekturbiennale Venedig, „Maribor 2112 YC“, Slowenischer Pavillon</li>",
 
     "skills.h": "Kompetenzen",
-    "skills.g1": "Programmierung",
-    "skills.g2": "Räumlich &amp; analytisch",
+    "skills.g1": "Räumliche Daten &amp; Analyse",
+    "skills.g1list":
+      "<li>Amtliche Geodaten (ALKIS, LoD2 / CityGML, WFS / OGC)</li><li>OpenStreetMap</li>" +
+      "<li>Räumliches SQL (DuckDB, GeoParquet)</li><li>QGIS</li><li>Netzwerkanalyse</li>" +
+      "<li>Space Syntax</li><li>Statistik (R)</li>",
+    "skills.g2": "Werkzeug- &amp; Anwendungsentwicklung",
     "skills.g2list":
-      "<li>GIS</li><li>Netzwerkanalyse</li><li>Agentenbasierte Simulation</li>" +
-      "<li>Space Syntax</li><li>Räumliche Datenverarbeitung</li>",
-    "skills.g3": "Modellierung &amp; Medien",
+      "<li>Python</li><li>TypeScript / JavaScript (React, deck.gl)</li><li>C# (Grasshopper)</li>" +
+      "<li>Simulation &amp; agentenbasierte Modelle</li><li>Git, Continuous Integration</li>" +
+      "<li>KI-gestützte Entwicklung (Claude Code)</li>",
+    "skills.g3": "Lehre &amp; Beratung",
+    "skills.g3list":
+      "<li>Seminare</li><li>Workshops</li><li>Schulung öffentlicher Verwaltungen</li>",
+    "skills.g5": "Entwurf &amp; Gestaltung",
     "skills.g4": "Sprachen",
     "skills.g4list":
       "<li>Arabisch (Muttersprache)</li><li>Englisch (fließend)</li><li>Deutsch (sehr gut)</li>",
@@ -295,12 +318,13 @@
     try { localStorage.setItem(STORE, lang); } catch (e) {}
   }
 
-  // initial language: ?lang= wins, then stored preference, else English
+  // initial language: ?lang= wins, then stored preference, else GERMAN (owner 2026-09-04;
+  // English stays the in-HTML text for crawlers and the toggle, as designed 2026-07-12)
   var initial = new URLSearchParams(location.search).get("lang");
   if (initial !== "de" && initial !== "en") {
     try { initial = localStorage.getItem(STORE); } catch (e) { initial = null; }
   }
-  apply(initial === "de" ? "de" : "en");
+  apply(initial === "en" ? "en" : "de");
 
   if (toggle) {
     toggle.addEventListener("click", function () {

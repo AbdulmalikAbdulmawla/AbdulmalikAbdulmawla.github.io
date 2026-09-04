@@ -19,6 +19,24 @@ Vite+React — this one is intentionally NOT. Do not scaffold a build system her
   page or a build step unless the owner asks.
 - **ResearchGate "Reads" tile removed 2026-07-12** (3 independent reviewers read it as a vanity
   metric that lowers trust). The stat strip keeps publications + citations only — don't re-add reads.
+- **The site STARTS IN GERMAN (owner decision 2026-09-04):** with no stored choice and no `?lang=`,
+  `i18n.js` applies DE on load; English stays the in-HTML text (crawlers, no-JS) and the toggle
+  (`?lang=en` or a stored choice wins). A brief English flash before `i18n.js` runs is accepted.
+- **Identity copy follows the self-presentation doctrine (2026-09-04):** hero eyebrow/lede, About,
+  skills groups, the current post and the Unfallatlas card carry the owner's canonical statement
+  (memory `user_self_presentation_doctrine`). **Never add anything about the Weimar retail database**
+  (no card, screenshots, repo link or data) until the owner has published that research. Years are
+  never compressed (all 11 Experience entries stay). Discovering Cities stays a Work card (the
+  Eckardt reference letter always accompanies applications). Card order since 04.09: Unfallatlas ·
+  Active Frontages · DeCodingSpaces · Blankenburger Süden · Discovering Cities · mineR · Şişhane.
+- **The four-field line (owner 2026-09-04, late):** hero eyebrow = „Werkzeuge für räumliche Daten:
+  Architektur, Städtebau, Mobilität, Stadtökonomie" / EN mirror; the lead sentence keeps the triad
+  „Architektur, Städtebau und Stadtökonomie". **Mobility is named ONLY in that line and in the
+  Dec 2023 – Sep 2026 entry** (seminar titles and „Mobilithek" inside that entry are facts and stay);
+  never in About, the lead, card tags or the meta description. „Data Science" lives only in the
+  machine-facing `<title>`/og:title. The chair's hub is **„European Digital Innovation Hub Mid
+  Germany"** (verified 2026-09-04; coordinator business name Bauhaus.Mobility, with the dot; the EU
+  catalogue URL still says edih-thuringia and still resolves) — old name once in parentheses.
 
 ## Layout — landing hero + tabbed workspace
 Not a long scroll. A constant **hero** sits on top; below it a sticky **tab bar** swaps between 5
@@ -72,9 +90,9 @@ owner's own Windows has "Animation effects" off, and WCAG 2.2.2 wants a pause co
 | `boids.js` | Hero motif: Reynolds boids flocking node-to-node across a procedural street network on a `<canvas>`. The pointer — mouse or finger — is an attractor: the flock streams toward it and orbits (seek/orbit/ring-spring weights at the top of the file are the tuning dials); releases smoothly on pointer-leave, 2.5 s idle, or `pointercancel` (scroll takeover on touch). Decorative + aria-hidden; freezes to a static frame while `motion-off` (resumes/refreezes on `motionchange`); pauses when the hero is off-screen (IntersectionObserver) or the tab is hidden. No deps. |
 | `card-art.js` | Generative canvas scenes for the 7 work cards, injected over the SVG diagrams and bound by `.card-media[data-art]` (`unfall` lens · `sishane` semilattice with one local active centre (sticky selection) · `frontage` active-frontage strips + gravity-accessibility probe (SSS13 paper) · `toolbox` self-drawing network · `blanken` tram line cutting masterplan parcels (half-plane clip) · `dcities` the joined Amman+Erfurt banner map under one centrality analysis, cursor = analysis reticle (replaced `venn`→`camp`→`dcities` 2026-07-12, owner iterations) · `miner` live weighted least-squares). One shared rAF engine: only visible scenes tick (IntersectionObserver — hidden tab panels pause for free), self-halts when none; a scene draws **only while hovered** (+ ease-out tail), freezing on its last frame; window-level pointer tracking (canvases are `pointer-events:none`, stretched card links stay clickable); DPR ≤ 2; on touch (`hover:none`/`pointer:coarse`) visible scenes free-run and finger-press = hover; a finger lift or scroll takeover latches the hover for `TOUCH_HOLD` (2.5 s) instead of dropping it — any touch on a card is a trigger. Engine stops under `motion-off` (canvases CSS-hidden, SVGs return). No deps. |
 | `tabs.js` | Accessible tabs (APG pattern): click + Arrow/Home/End keys, `aria-selected`, roving tabindex, hash deep-link + alias map. ~70 lines, no deps. |
-| `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML default; German strings in the `DE` dict keyed by `data-i18n`. Publications intentionally NOT translated. Persisted in `localStorage`; `?lang=de` forces German. |
+| `i18n.js` | Vanilla EN⇄DE toggle. English is the in-HTML text; German strings in the `DE` dict keyed by `data-i18n`. **Initial language = German** (owner 2026-09-04) unless `?lang=en` or a stored choice says otherwise. Publications intentionally NOT translated. Persisted in `localStorage`. Parity 112/112 keys as of 2026-09-04. |
 | `assets/` | `favicon.svg` · `portrait.jpg` (800×800, from `…/Abdulmawla Pictures/VSP Malik/DSCF79421.jpg`) · `og.png` (1200×630 social-share card, wired via `og:image`/`twitter:card`) · `Abdulmawla-CV.pdf` (EN) + `Abdulmawla-Lebenslauf.pdf` (DE) — the hero CV link (`#cv-link`) swaps file + `download` name per language in `i18n.js`. |
-| `cv/` | Regeneration sources: `cv.html` (EN CV) · `lebenslauf.html` (DE Lebenslauf) · `og.html` (social card). Rebuild via headless Edge — PDFs: `msedge --headless --no-pdf-header-footer --print-to-pdf=assets\Abdulmawla-CV.pdf cv\cv.html`; OG image: `msedge --headless --window-size=1200,630 --screenshot=assets\og.png cv\og.html`. |
+| `cv/` | Regeneration sources: `cv.html` (EN CV) · `lebenslauf.html` (DE Lebenslauf) · `og.html` (social card). **v2 layout since 2026-09-04:** two fixed A4 `.page` sections (`height: 297mm; overflow: hidden`), 60 mm grey sidebar (portrait · contact · languages · skills on p1; teaching · workshops · recognition · competitions on p2) + main column (profile · experience p1; experience cont. · education · publications p2), section marks in the site's category colours, name in Segoe UI Variable Display; **keep the CSS identical in both files**; no em-dashes; the early architecture posts use `.row.tight`. Rebuild via headless Edge with **absolute** output paths (a relative `--print-to-pdf` path silently writes nowhere): `msedge --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="<abs>\assets\Abdulmawla-Lebenslauf.pdf" "file:///<abs>/cv/lebenslauf.html"`; then verify page count = 2 and that the last words of each page are the footer (pypdf), and rasterise with `pdftoppm -png -r 80` (WinGet poppler) to eyeball clipping — an overflowing page clips silently. OG image: `msedge --headless --window-size=1200,630 --screenshot=assets\og.png cv\og.html`. |
 | `.nojekyll` | GitHub Pages serves files verbatim. |
 
 ## i18n — how to edit bilingual content

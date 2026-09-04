@@ -6,18 +6,18 @@
   <!-- the site is deliberately light-only: block browser/OS dark-mode auto-darkening -->
   <meta name="color-scheme" content="only light" />
   <title>Abdulmalik Abdulmawla — Computational Urban Design · Spatial Data Science</title>
-  <meta name="description" content="Abdulmalik Abdulmawla — computational urban designer and spatial data scientist for urban & mobility data: research tools for evidence-based, data-driven urban design and urban economy." />
+  <meta name="description" content="Abdulmalik Abdulmawla, computational urban designer: tools for the design, generation and analysis of spatial data in architecture, urbanism and city economy. Bauhaus-Universität Weimar." />
   <meta name="author" content="Abdulmalik Abdulmawla" />
 
   <!-- Open Graph / social preview -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Abdulmalik Abdulmawla — Computational Urban Design · Spatial Data Science" />
-  <meta property="og:description" content="Spatial-economic researcher building research tools for evidence-based, data-driven urban design." />
+  <meta property="og:description" content="Tools for the design, generation and analysis of spatial data in architecture, urbanism and city economy. Computational thinking about spatial data problems, from research into practice." />
   <meta property="og:url" content="https://abdulmalikabdulmawla.github.io/" />
   <meta property="og:image" content="https://abdulmalikabdulmawla.github.io/assets/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Abdulmalik Abdulmawla — Computational Urban Design · Spatial-Economic Research" />
+  <meta property="og:image:alt" content="Abdulmalik Abdulmawla — Computational Urban Design · Spatial Data Science" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://abdulmalikabdulmawla.github.io/assets/og.png" />
 
@@ -59,14 +59,17 @@
     <!-- boids flocking across a street network — from swarm simulation to urban movement -->
     <canvas class="hero-canvas" aria-hidden="true"></canvas>
     <div class="wrap wrap-wide">
-      <p class="eyebrow" data-i18n="hero.eyebrow">Computational Urban Design · Spatial-Economic Research</p>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Spatial-data tools: Architecture, Urbanism, Mobility, City Economy</p>
       <h1 class="hero-name">Abdulmalik<br>Abdulmawla</h1>
       <p class="lede" data-i18n="hero.lede">
-        I decode raw urban data and parametrise the methods to explore it &mdash; so
-        that evidence-based decisions and designs come easily. My research points this
-        at one question: where can economic activity locate in the city, and how does
-        urban space stay open for the small economies and collectives people build
-        from below? PhD candidate at the Bauhaus-Universit&auml;t Weimar.
+        For many years I have been building tools for the design, generation and
+        analysis of spatial data in architecture, urbanism and city economy. I come
+        from research: technology is one of my strengths, but my main
+        one is computational thinking about spatial data problems, together with the
+        capacity to work my way into the field the data serves. Current work: a
+        browser-based analysis platform for Germany&rsquo;s official accident data, and my
+        doctoral research at the Bauhaus-Universit&auml;t Weimar on where retail settles
+        in a city (PhD in progress).
       </p>
 
       <nav class="profile-links" aria-label="Profiles and contact">
@@ -131,89 +134,17 @@
               <h3 data-i18n="work.c1.title">VSP&nbsp;Unfallatlas &mdash; Road-Safety Explorer</h3>
               <p class="card-role" data-i18n="work.c1.role">Sole developer &middot; Bauhaus Weimar, EDIH.TH</p>
               <p data-i18n="work.c1.body">
-                An interactive web platform for exploring German road-accident data:
-                spatial aggregation, blackspot detection, and statistical methods for
-                evidence-based traffic-safety analysis. Runs entirely in the browser
+                An interactive web platform for exploring Germany&rsquo;s official
+                road-accident data: the official M-Uko 2012 evaluation method turned into
+                an interactive tool, with spatial aggregation, blackspot detection and the
+                statistical methods behind evidence-based traffic-safety analysis. Ten
+                yearly datasets with changing schemas unified in one staging layer; built
+                end to end by one developer, AI-assisted with Claude Code, with continuous
+                integration and versioned releases. Runs entirely in the browser
                 (DuckDB-WASM + deck.gl).
               </p>
               <a class="card-link" href="https://www.uni-weimar.de/~vewa2645/VSP_Unfallatlas/VSP_Unfallatlas.html" target="_blank" rel="noopener" data-i18n="work.c1.link">Open the live app &rarr;</a>
               <a class="card-link card-link--plain" href="https://github.com/AbdulmalikAbdulmawla/unfallatlas-case-study" target="_blank" rel="noopener" data-i18n="work.c1.link2">Technical case study &rarr;</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <!-- Şişhane dependency network: walking-range rings + intensity-weighted edges.
-                 The SVG is the no-JS/motion-off/print fallback; the "sishane" canvas scene
-                 (card-art.js) grows a multicentric semilattice around the cursor. -->
-            <div class="card-media" data-art="sishane" aria-hidden="true">
-              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
-                <rect width="320" height="200" fill="#f7f8fa"/>
-                <!-- the semilattice: overlapping atelier groups (sets that share members) -->
-                <g stroke-width="1.2">
-                  <ellipse cx="108" cy="80" rx="94" ry="62" fill="#e0a92e" fill-opacity=".09" stroke="#e0a92e" stroke-opacity=".4" transform="rotate(-8 108 80)"/>
-                  <ellipse cx="196" cy="70" rx="86" ry="56" fill="#c8452f" fill-opacity=".09" stroke="#c8452f" stroke-opacity=".4" transform="rotate(6 196 70)"/>
-                  <ellipse cx="212" cy="126" rx="90" ry="58" fill="#2b6cb0" fill-opacity=".09" stroke="#2b6cb0" stroke-opacity=".4" transform="rotate(-5 212 126)"/>
-                  <ellipse cx="112" cy="140" rx="80" ry="50" fill="#9aa3ad" fill-opacity=".09" stroke="#9aa3ad" stroke-opacity=".4" transform="rotate(4 112 140)"/>
-                </g>
-                <!-- sparse base links — some ateliers stay unconnected -->
-                <g stroke="#475160" stroke-width="1" opacity=".38">
-                  <line x1="34" y1="42" x2="82" y2="28"/>
-                  <line x1="216" y1="32" x2="258" y2="66"/>
-                  <line x1="46" y1="92" x2="86" y2="118"/>
-                  <line x1="240" y1="118" x2="276" y2="142"/>
-                  <line x1="118" y1="162" x2="162" y2="176"/>
-                  <line x1="196" y1="88" x2="228" y2="72"/>
-                  <line x1="64" y1="160" x2="86" y2="118"/>
-                </g>
-                <!-- the ONE selected atelier links to its local group -->
-                <circle cx="150" cy="96" r="46" fill="none" stroke="#475160" stroke-opacity=".38" stroke-dasharray="4 4"/>
-                <g stroke="#e0a92e" stroke-width="1.5" opacity=".7">
-                  <line x1="150" y1="96" x2="118" y2="72"/>
-                  <line x1="150" y1="96" x2="186" y2="112"/>
-                  <line x1="150" y1="96" x2="132" y2="128"/>
-                  <line x1="150" y1="96" x2="180" y2="66"/>
-                </g>
-                <!-- ateliers, spread; coloured by trade -->
-                <g>
-                  <circle cx="150" cy="96" r="6" fill="#e0a92e"/>
-                  <circle cx="118" cy="72" r="3.5" fill="#2b6cb0"/>
-                  <circle cx="186" cy="112" r="3.5" fill="#9aa3ad"/>
-                  <circle cx="132" cy="128" r="3.5" fill="#c8452f"/>
-                  <circle cx="180" cy="66" r="3.5" fill="#2b6cb0"/>
-                  <circle cx="34" cy="42" r="3" fill="#c8452f"/>
-                  <circle cx="82" cy="28" r="3" fill="#9aa3ad"/>
-                  <circle cx="146" cy="22" r="3" fill="#e0a92e"/>
-                  <circle cx="216" cy="32" r="3" fill="#2b6cb0"/>
-                  <circle cx="258" cy="66" r="3" fill="#c8452f"/>
-                  <circle cx="296" cy="36" r="3" fill="#9aa3ad"/>
-                  <circle cx="46" cy="92" r="3" fill="#e0a92e"/>
-                  <circle cx="86" cy="118" r="3" fill="#2b6cb0"/>
-                  <circle cx="196" cy="88" r="3" fill="#c8452f"/>
-                  <circle cx="228" cy="72" r="3" fill="#e0a92e"/>
-                  <circle cx="240" cy="118" r="3" fill="#9aa3ad"/>
-                  <circle cx="276" cy="142" r="3" fill="#2b6cb0"/>
-                  <circle cx="26" cy="150" r="3" fill="#2b6cb0"/>
-                  <circle cx="64" cy="160" r="3" fill="#c8452f"/>
-                  <circle cx="118" cy="162" r="3" fill="#9aa3ad"/>
-                  <circle cx="162" cy="176" r="3" fill="#e0a92e"/>
-                  <circle cx="222" cy="162" r="3" fill="#c8452f"/>
-                  <circle cx="290" cy="178" r="3" fill="#2b6cb0"/>
-                </g>
-              </svg>
-            </div>
-            <div class="card-body">
-              <h3 data-i18n="work.c7.title">Heterogeneous Industries &mdash; &#350;i&#351;hane&rsquo;s Bottom-Up Factory</h3>
-              <p class="card-role" data-i18n="work.c7.role">Master&rsquo;s thesis, with Ali Farhan &middot; Anhalt University Dessau &middot; Istanbul, 2013</p>
-              <p data-i18n="work.c7.body">
-                Istanbul&rsquo;s &#350;i&#351;hane quarter has produced lighting for over a
-                century: thousands of small ateliers acting as one decentralized, informal
-                production line. We mapped the ateliers&rsquo; dependency networks and
-                simulated their behaviour with agent-based models over 3D cellular
-                automata &mdash; decoding how a self-organized economy stays robust for
-                generations, and proposing how to densify the quarter without gentrifying
-                its producers away.
-              </p>
-              <a class="card-link" href="assets/Heterogeneous-Industries-Sishane-Summary.pdf" target="_blank" rel="noopener" data-i18n="work.c7.link">Project summary (PDF) &rarr;</a>
             </div>
           </article>
 
@@ -433,6 +364,82 @@
             </div>
           </article>
 
+          <article class="card">
+            <!-- Şişhane dependency network: walking-range rings + intensity-weighted edges.
+                 The SVG is the no-JS/motion-off/print fallback; the "sishane" canvas scene
+                 (card-art.js) grows a multicentric semilattice around the cursor. -->
+            <div class="card-media" data-art="sishane" aria-hidden="true">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="200" fill="#f7f8fa"/>
+                <!-- the semilattice: overlapping atelier groups (sets that share members) -->
+                <g stroke-width="1.2">
+                  <ellipse cx="108" cy="80" rx="94" ry="62" fill="#e0a92e" fill-opacity=".09" stroke="#e0a92e" stroke-opacity=".4" transform="rotate(-8 108 80)"/>
+                  <ellipse cx="196" cy="70" rx="86" ry="56" fill="#c8452f" fill-opacity=".09" stroke="#c8452f" stroke-opacity=".4" transform="rotate(6 196 70)"/>
+                  <ellipse cx="212" cy="126" rx="90" ry="58" fill="#2b6cb0" fill-opacity=".09" stroke="#2b6cb0" stroke-opacity=".4" transform="rotate(-5 212 126)"/>
+                  <ellipse cx="112" cy="140" rx="80" ry="50" fill="#9aa3ad" fill-opacity=".09" stroke="#9aa3ad" stroke-opacity=".4" transform="rotate(4 112 140)"/>
+                </g>
+                <!-- sparse base links — some ateliers stay unconnected -->
+                <g stroke="#475160" stroke-width="1" opacity=".38">
+                  <line x1="34" y1="42" x2="82" y2="28"/>
+                  <line x1="216" y1="32" x2="258" y2="66"/>
+                  <line x1="46" y1="92" x2="86" y2="118"/>
+                  <line x1="240" y1="118" x2="276" y2="142"/>
+                  <line x1="118" y1="162" x2="162" y2="176"/>
+                  <line x1="196" y1="88" x2="228" y2="72"/>
+                  <line x1="64" y1="160" x2="86" y2="118"/>
+                </g>
+                <!-- the ONE selected atelier links to its local group -->
+                <circle cx="150" cy="96" r="46" fill="none" stroke="#475160" stroke-opacity=".38" stroke-dasharray="4 4"/>
+                <g stroke="#e0a92e" stroke-width="1.5" opacity=".7">
+                  <line x1="150" y1="96" x2="118" y2="72"/>
+                  <line x1="150" y1="96" x2="186" y2="112"/>
+                  <line x1="150" y1="96" x2="132" y2="128"/>
+                  <line x1="150" y1="96" x2="180" y2="66"/>
+                </g>
+                <!-- ateliers, spread; coloured by trade -->
+                <g>
+                  <circle cx="150" cy="96" r="6" fill="#e0a92e"/>
+                  <circle cx="118" cy="72" r="3.5" fill="#2b6cb0"/>
+                  <circle cx="186" cy="112" r="3.5" fill="#9aa3ad"/>
+                  <circle cx="132" cy="128" r="3.5" fill="#c8452f"/>
+                  <circle cx="180" cy="66" r="3.5" fill="#2b6cb0"/>
+                  <circle cx="34" cy="42" r="3" fill="#c8452f"/>
+                  <circle cx="82" cy="28" r="3" fill="#9aa3ad"/>
+                  <circle cx="146" cy="22" r="3" fill="#e0a92e"/>
+                  <circle cx="216" cy="32" r="3" fill="#2b6cb0"/>
+                  <circle cx="258" cy="66" r="3" fill="#c8452f"/>
+                  <circle cx="296" cy="36" r="3" fill="#9aa3ad"/>
+                  <circle cx="46" cy="92" r="3" fill="#e0a92e"/>
+                  <circle cx="86" cy="118" r="3" fill="#2b6cb0"/>
+                  <circle cx="196" cy="88" r="3" fill="#c8452f"/>
+                  <circle cx="228" cy="72" r="3" fill="#e0a92e"/>
+                  <circle cx="240" cy="118" r="3" fill="#9aa3ad"/>
+                  <circle cx="276" cy="142" r="3" fill="#2b6cb0"/>
+                  <circle cx="26" cy="150" r="3" fill="#2b6cb0"/>
+                  <circle cx="64" cy="160" r="3" fill="#c8452f"/>
+                  <circle cx="118" cy="162" r="3" fill="#9aa3ad"/>
+                  <circle cx="162" cy="176" r="3" fill="#e0a92e"/>
+                  <circle cx="222" cy="162" r="3" fill="#c8452f"/>
+                  <circle cx="290" cy="178" r="3" fill="#2b6cb0"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 data-i18n="work.c7.title">Heterogeneous Industries &mdash; &#350;i&#351;hane&rsquo;s Bottom-Up Factory</h3>
+              <p class="card-role" data-i18n="work.c7.role">Master&rsquo;s thesis, with Ali Farhan &middot; Anhalt University Dessau &middot; Istanbul, 2013</p>
+              <p data-i18n="work.c7.body">
+                Istanbul&rsquo;s &#350;i&#351;hane quarter has produced lighting for over a
+                century: thousands of small ateliers acting as one decentralized, informal
+                production line. We mapped the ateliers&rsquo; dependency networks and
+                simulated their behaviour with agent-based models over 3D cellular
+                automata &mdash; decoding how a self-organized economy stays robust for
+                generations, and proposing how to densify the quarter without gentrifying
+                its producers away.
+              </p>
+              <a class="card-link" href="assets/Heterogeneous-Industries-Sishane-Summary.pdf" target="_blank" rel="noopener" data-i18n="work.c7.link">Project summary (PDF) &rarr;</a>
+            </div>
+          </article>
+
         </div>
       </section>
 
@@ -573,7 +580,7 @@
 
         <h3 class="sub-h" data-i18n="sem.h">University seminars</h3>
         <ul class="plain" data-i18n="sem.list">
-          <li><strong>2023 &ndash; present</strong> &mdash; Digital Traffic Simulation Lab &middot; Open Mobility Data &middot; Rent-a-Data-Scientist &mdash; Chair of Transport System Planning, Bauhaus-Universit&auml;t Weimar</li>
+          <li><strong>2023 &ndash; 2026</strong> &mdash; Digital Traffic Simulation Lab &middot; Open Mobility Data &middot; Rent-a-Data-Scientist &mdash; Chair of Transport System Planning, Bauhaus-Universit&auml;t Weimar</li>
           <li><strong>2016 &ndash; 2023</strong> &mdash; Algorithmic Architecture &middot; Parametric Urban Design &amp; Analysis &middot; SYNCITY&nbsp;I&nbsp;&amp;&nbsp;II &middot; Circular Urbanism &mdash; InfAR/InfAU, Bauhaus-Universit&auml;t Weimar</li>
           <li><strong>2018</strong> &mdash; Discovering Cities teaching seminar (DAAD exchange), Bauhaus-Universit&auml;t Weimar</li>
           <li><strong>2014 &ndash; 2016</strong> &mdash; Design 5 Studio &middot; Web Application in Architecture &mdash; AASTMT, Cairo (RIBA Part I programme)</li>
@@ -581,7 +588,7 @@
         <p data-i18n="sup.body">
           Ongoing: supervision of master&rsquo;s theses and student projects &mdash; at InfAR/InfAU
           (2016&ndash;2023) and in the Digital Transport Research Lab at the Chair of Transport
-          System Planning (since 2023).
+          System Planning (2023&ndash;2026).
         </p>
 
         <h3 class="sub-h" data-i18n="worg.h">Workshops organized</h3>
@@ -609,14 +616,16 @@
         </header>
         <ul class="timeline">
           <li>
-            <span class="tl-date" data-i18n="exp.e1.date">Dec 2023 &ndash; present</span>
+            <span class="tl-date" data-i18n="exp.e1.date">Dec 2023 &ndash; Sep 2026</span>
             <div class="tl-body">
               <h3 data-i18n="exp.e1.role">Research Associate &mdash; Chair of Transport System Planning</h3>
-              <p class="tl-org"><a href="https://www.uni-weimar.de/en/civil-and-environmental-engineering/chairs/transport-system-planning/" target="_blank" rel="noopener">Bauhaus-Universit&auml;t Weimar</a> &middot; Bauhaus Mobility / <a href="https://european-digital-innovation-hubs.ec.europa.eu/edih-catalogue/edih-thuringia" target="_blank" rel="noopener">EDIH.TH</a></p>
-              <p data-i18n="exp.e1.body">Collecting and analysing open mobility data, building interactive
-              data-exploration platforms, and advising public institutions in data science &mdash; including
-              training public administrations on European open-mobility-data standards, supporting dataset
-              publication on the national Mobilithek platform, and supervising student projects and
+              <p class="tl-org"><a href="https://www.uni-weimar.de/en/civil-and-environmental-engineering/chairs/transport-system-planning/" target="_blank" rel="noopener">Bauhaus-Universit&auml;t Weimar</a> &middot; Bauhaus.Mobility / <a href="https://european-digital-innovation-hubs.ec.europa.eu/edih-catalogue/edih-thuringia" target="_blank" rel="noopener">EDIH Mid Germany</a> (formerly EDIH Thuringia)</p>
+              <p data-i18n="exp.e1.body">Designing and building interactive geodata platforms, among them the
+              browser-based analysis platform for Germany&rsquo;s official accident data (sole developer: data
+              model, open-data pipelines, WebGL map, continuous integration, versioned releases; the official
+              M-Uko 2012 method as an interactive tool); advising public institutions in data science and
+              training public administrations in open geodata and European data standards, including dataset
+              publication on the national Mobilithek platform; supervising student projects and
               master&rsquo;s theses (Digital Transport Research Lab).</p>
             </div>
           </li>
@@ -724,24 +733,35 @@
         <div class="about-lead">
         <div class="prose">
           <p data-i18n="about.p1">
-            I am a spatial-economic researcher and computational urban designer. My work
-            examines urban structures in relation to local value creation, service
-            economies, and resilience &mdash; empirically linking spatial configuration to
-            economic dynamics in order to support sustainable urban and regional development.
+            I build tools for the design, generation and analysis of spatial data in
+            architecture, urbanism and city economy. I come from research:
+            technology is one of my strengths, but my main one is computational thinking
+            about spatial data problems, together with the capacity to work my way into
+            the field the data serves, from simple to complex objectives. The standard I
+            hold myself to: the best balance between user experience and advanced
+            scientific analysis methods.
           </p>
           <p data-i18n="about.p2">
-            Methodologically I work with GIS, network analysis, agent-based simulation, and
-            data-driven methods (Python, R, C#). My PhD project investigates the
-            spatial-economic dynamics of local production and service structures:
-            <em>&ldquo;Spatial dependency of urban retail: detailed methods for positioning
-            street-level activities&rdquo;</em> (supervisor: Prof. Dr. Reinhard K&ouml;nig).
+            My tools have grown in development steps, carried by one interest, first
+            locally, later in the browser: from simulation and agent-based models through
+            statistical analysis and parametric urban design to browser-based analysis
+            platforms, built with state-of-the-art technologies up to AI-assisted,
+            multi-agent coding. I work on the systems behind the tools: data models, methods
+            and interfaces. My PhD project (in progress, Bauhaus-Universit&auml;t Weimar) asks
+            where retail settles in a city: <em>&ldquo;Spatial dependency of urban retail:
+            detailed methods for positioning street-level activities&rdquo;</em>
+            (supervisor: Prof. Dr. Reinhard K&ouml;nig).
           </p>
           <p data-i18n="about.p3">
-            Across nearly two decades &mdash; from architectural practice in Egypt and the UAE
-            to a decade of teaching and research in Germany, Egypt, Jordan, and Ethiopia &mdash;
-            I have consistently built the tools that make analysis reproducible: from Grasshopper
-            plug-ins for spatial data analysis to interactive web platforms for open-data
-            exploration and evidence-based design.
+            I see early where the users of a tool will stumble, develop methods together
+            with the people who will use them, and have taught complex spatial computation
+            for many years to very different audiences: students, colleagues, and public
+            administrations at the European Digital Innovation Hub Mid Germany. New fields
+            I take on through similar experience: with M-Uko 2012, the official German
+            standard for accident analysis, I worked a foreign professional standard from
+            first exposure to finished product. Ten years of work in Germany, five years in
+            the Middle East before that, have taught me to work my way quickly into new
+            environments and tasks.
           </p>
         </div>
         <img class="about-portrait" src="assets/portrait.jpg" alt="Abdulmalik Abdulmawla" width="800" height="800" loading="lazy" />
@@ -770,23 +790,31 @@
         <h3 class="sub-h" data-i18n="skills.h">Skills</h3>
         <div class="skill-groups">
           <div class="skill-group">
-            <h4 data-i18n="skills.g1">Programming</h4>
-            <ul class="chips">
-              <li>Python</li><li>C#</li><li>R</li><li>Grasshopper</li>
-              <li>Java / Processing</li><li>vvvv</li><li>Arduino</li>
+            <h4 data-i18n="skills.g1">Spatial data &amp; analysis</h4>
+            <ul class="chips" data-i18n="skills.g1list">
+              <li>Official geodata (ALKIS, LoD2 / CityGML, WFS / OGC)</li><li>OpenStreetMap</li>
+              <li>Spatial SQL (DuckDB, GeoParquet)</li><li>QGIS</li><li>Network analysis</li>
+              <li>Space syntax</li><li>Statistics (R)</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h4 data-i18n="skills.g2">Spatial &amp; analytical</h4>
+            <h4 data-i18n="skills.g2">Tool &amp; application development</h4>
             <ul class="chips" data-i18n="skills.g2list">
-              <li>GIS</li><li>Network analysis</li><li>Agent-based simulation</li>
-              <li>Space syntax</li><li>Spatial data engineering</li>
+              <li>Python</li><li>TypeScript / JavaScript (React, deck.gl)</li><li>C# (Grasshopper)</li>
+              <li>Simulation &amp; agent-based models</li><li>Git, continuous integration</li>
+              <li>AI-assisted development (Claude Code)</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h4 data-i18n="skills.g3">Modelling &amp; media</h4>
+            <h4 data-i18n="skills.g3">Teaching &amp; consulting</h4>
+            <ul class="chips" data-i18n="skills.g3list">
+              <li>Seminars</li><li>Workshops</li><li>Training public administrations</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4 data-i18n="skills.g5">Design &amp; visualisation</h4>
             <ul class="chips">
-              <li>Rhino</li><li>AutoCAD</li><li>Revit</li><li>3ds Max</li>
+              <li>Rhino</li><li>AutoCAD</li><li>Revit</li>
               <li>Photoshop</li><li>Illustrator</li><li>InDesign</li>
             </ul>
           </div>
