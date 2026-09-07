@@ -68,6 +68,7 @@
   .side ul { list-style: none; }
   .side li { font-size: 8.3pt; line-height: 1.4; color: var(--ink-soft); margin-bottom: 1.1mm; padding-left: 3mm; text-indent: -3mm; }
   .side li b { color: var(--ink); }
+  .side .legend { font-size: 6.9pt; line-height: 1.35; color: var(--muted); margin-top: 4mm; }
 
   /* ---- main column ---- */
   .summary { font-size: 9pt; line-height: 1.36; color: var(--ink); margin-bottom: 1mm; }
@@ -141,7 +142,7 @@
 
     <h2 class="first">Profil</h2>
     <p class="summary conviction">Mich interessiert das Lösen räumlicher Probleme, in Architektur, Stadt und Land, Ökonomie und Mobilität. Ich bin überzeugt, dass jede komplexe Aufgabe und jeder Umgang mit Daten verlangt, das Problem intelligent in seine Kernparameter zu zerlegen und jedes Element so weit zu vereinfachen, dass ein menschlich handhabbarer Maßstab entsteht. So arbeitet auch die Natur: Komplexe Systeme bestehen nicht aus komplexen Teilen, sondern aus sehr einfachen, die intelligent zusammengesetzt sind.</p>
-    <p class="summary">Ich komme aus der Forschung und baue seit vielen Jahren Werkzeuge für den Entwurf, die Erzeugung und die Analyse räumlicher Daten. Die Technik ist eine meiner Stärken; meine wichtigste aber ist das rechnerische Denken über räumliche Datenprobleme: Ich zerlege Prozesse in ihre elementaren Bestandteile, übersetze sie in parametrische, interaktive Umgebungen und arbeite mich dafür in das jeweilige Anwendungsfeld ein, von einfachen bis zu komplexen Zielen. Dabei arbeite ich an den Systemen hinter den Werkzeugen, an Datenmodellen, Methoden und Schnittstellen, mit Technologien auf dem Stand der Technik: von agentenbasierter Simulation bis zur KI-gestützten Programmierung mit mehreren Agenten. Mein Anspruch ist die beste Balance zwischen Nutzererlebnis und fortgeschrittenen wissenschaftlichen Analysemethoden; ich erkenne früh, wo Nutzer eines Werkzeugs stolpern.</p>
+    <p class="summary">Ich komme aus der Forschung. Die Technik ist eine meiner Stärken; meine wichtigste ist das rechnerische Denken über räumliche Datenprobleme, verbunden mit der Fähigkeit, mich in das jeweilige Anwendungsfeld einzuarbeiten, von einfachen bis zu komplexen Zielen. Ich arbeite an den Systemen hinter den Werkzeugen, von agentenbasierter Simulation bis zur KI-gestützten Programmierung mit mehreren Agenten, und erkenne früh, wo Nutzer stolpern.</p>
 
     <h2 style="--mark: var(--green)">Berufserfahrung</h2>
 
@@ -150,7 +151,7 @@
       <div>
         <span class="role">Wissenschaftlicher Mitarbeiter, Professur Verkehrssystemplanung</span>
         <p class="org">Bauhaus-Universität Weimar · Bauhaus.Mobility / European Digital Innovation Hub Mid Germany (vormals EDIH Thüringen)</p>
-        <p class="txt">Konzeption und Entwicklung interaktiver Geodaten-Plattformen, darunter die browserbasierte Analyseplattform für Deutschlands amtliche Unfalldaten: Alleinentwicklung vom Datenmodell über die Open-Data-Pipelines bis zur WebGL-Karte, mit Continuous Integration und versionierten Releases; die amtliche Auswertungsmethodik M-Uko 2012 als interaktives Werkzeug. Data-Science-Beratung öffentlicher Institutionen, Schulungen für Verwaltungen zu offenen Geodaten und europäischen Datenstandards, Unterstützung bei der Datenveröffentlichung auf der Mobilithek. Betreuung studentischer Arbeiten (Digital Transport Research Lab).</p>
+        <p class="txt">Interaktive Geodaten-Plattformen, darunter die browserbasierte Analyseplattform für Deutschlands amtliche Unfalldaten (Alleinentwicklung; die amtliche Methodik M-Uko 2012 als interaktives Werkzeug); Data-Science-Beratung und Schulungen für Verwaltungen zu offenen Geodaten; Betreuung studentischer Arbeiten.</p>
       </div>
     </div>
 
@@ -159,7 +160,7 @@
       <div>
         <span class="role">Wissenschaftlicher Mitarbeiter, Informatik in der Architektur (InfAR, heute InfAU)</span>
         <p class="org">Bauhaus-Universität Weimar</p>
-        <p class="txt">Lehre rechnergestützter Methoden für Stadtplanung und Stadtanalyse; Entwicklung von Entwurfs- und Forschungswerkzeugen (DeCodingSpaces Toolbox, mineR); Betreuung von Masterarbeiten; Konferenzbeiträge (Space Syntax Symposium, eCAADe) und Unterstützung wissenschaftlicher Publikationen, Ausstellungen und Exkursionen.</p>
+        <p class="txt">Lehre rechnergestützter Methoden für Stadtplanung und -analyse; Entwicklung von Entwurfs- und Forschungswerkzeugen (DeCodingSpaces Toolbox, mineR); Betreuung von Masterarbeiten; Konferenzbeiträge (Space Syntax Symposium, eCAADe).</p>
       </div>
     </div>
 
@@ -168,7 +169,7 @@
       <div>
         <span class="role">Projektkoordinator, DAAD-Austauschprojekt „Discovering Cities“</span>
         <p class="org">Bauhaus-Universität Weimar und German-Jordanian University, Amman · parallel zur Stelle am InfAR</p>
-        <p class="txt">Verfassen des Projektantrags, Verwaltung der Projektfinanzen, Lehrseminar in Weimar und Vorbereitung des Workshops in Amman.</p>
+        <p class="txt">Projektantrag, Projektfinanzen, Lehrseminar in Weimar, Workshop in Amman.</p>
       </div>
     </div>
 
@@ -177,10 +178,32 @@
       <div>
         <span class="role">Mitautor, DeCodingSpaces Toolbox</span>
         <p class="org">DecodingSpaces GbR, Weimar</p>
-        <p class="txt">C#-Entwicklung für eine Grasshopper-Toolbox zur Stadtanalyse; Testing, Dokumentation und Beratung, darunter ein interaktives Masterplan-Analysewerkzeug für das Entwicklungsgebiet Blankenburger Süden (Auftraggeber: TSPA, Berlin, 2019).</p>
+        <p class="txt">C#-Entwicklung, Testing, Dokumentation und Beratung; interaktives Masterplan-Analysewerkzeug für Blankenburger Süden (TSPA, Berlin, 2019).</p>
       </div>
     </div>
 
+
+    <h2 style="--mark: var(--blue)">Ausbildung</h2>
+    <div class="row">
+      <span class="date">Nov. 2018 – heute</span>
+      <div>
+        <span class="role">Promotion, laufend · Informatik in der Architektur und Urbanistik (InfAU), Bauhaus-Universität Weimar</span>
+        <p class="txt">Arbeitstitel: „Spatial dependency of urban retail: detailed methods for positioning street-level activities“ · Betreuer: Prof. Dr. Reinhard König</p>
+      </div>
+    </div>
+    <div class="row">
+      <span class="date">2013</span>
+      <div>
+        <span class="role">Master of Arts in Architektur · Hochschule Anhalt, Dessau-Roßlau</span>
+        <p class="txt">Thesis: „Heterogeneous-Atelier Industry“ (mit Ali Farhan): Şişhanes Atelier-Netzwerke, kartiert und als Bottom-up-Fabrik simuliert</p>
+      </div>
+    </div>
+    <div class="row">
+      <span class="date">2007</span>
+      <div>
+        <span class="role">B.Sc. Architektur und Ingenieurwesen · Mansoura University, Ägypten</span>
+      </div>
+    </div>
 
     <p class="foot"><span>Abdulmalik Abdulmawla · Lebenslauf</span><span>Seite 1 von 2</span></p>
   </main>
@@ -191,19 +214,19 @@
   <aside class="side">
     <h2 class="first" style="--mark: var(--ochre)">Lehre</h2>
     <ul>
-      <li><b>2023 – 2026</b> · Digital Traffic Simulation Lab · Open Mobility Data · Rent-a-Data-Scientist, Professur Verkehrssystemplanung, Bauhaus-Universität Weimar</li>
-      <li><b>2016 – 2023</b> · Algorithmic Architecture · Parametric Urban Design and Analysis · SYNCITY I und II · Circular Urbanism, InfAR/InfAU, Bauhaus-Universität Weimar</li>
-      <li><b>2018</b> · Discovering-Cities-Lehrseminar (DAAD), Bauhaus-Universität Weimar</li>
-      <li><b>2014 – 2016</b> · Design 5 Studio · Web Application in Architecture, AASTMT, Kairo</li>
-      <li>Betreuung von Masterarbeiten und studentischen Projekten, 2016 – 2023 am InfAR/InfAU und 2023 – 2026 im Digital Transport Research Lab</li>
+      <li><b>2023 – 2026</b> · Digital Traffic Simulation Lab · Open Mobility Data · Rent-a-Data-Scientist · EDIH+BM.VSP.BUW</li>
+      <li><b>2016 – 2023</b> · Algorithmic Architecture · Parametric Urban Design and Analysis · SYNCITY I und II · Circular Urbanism · InfAU.BUW</li>
+      <li><b>2018</b> · Discovering-Cities-Lehrseminar (DAAD) · InfAU.BUW</li>
+      <li><b>2014 – 2016</b> · Design 5 Studio · Web Application in Architecture · AR.AASTMT</li>
+      <li>Betreuung von Masterarbeiten und Projekten · 2016 – 2023 InfAU.BUW · 2023 – 2026 DTRL.VSP.BUW</li>
     </ul>
 
     <h2 style="--mark: var(--ochre)">Workshops (Organisation)</h2>
     <ul>
-      <li><b>2018</b> · Discovering Cities Workshop, German-Jordanian University, Amman</li>
-      <li><b>2018</b> · Urban Analysis, Synthesis and Exploration with Grasshopper, eCAADe 2018, Łódź</li>
-      <li><b>2016</b> · Rural-to-Urban Transformation Workshop, Emerging City Lab, Addis Abeba</li>
-      <li><b>2015</b> · Simulating Agent-Based Systems using Processing, Kairo</li>
+      <li><b>2018</b> · Discovering Cities Workshop · GJU, Amman</li>
+      <li><b>2018</b> · Urban Analysis, Synthesis and Exploration with Grasshopper · eCAADe, Łódź</li>
+      <li><b>2016</b> · Rural-to-Urban Transformation Workshop · ECL, Addis Abeba</li>
+      <li><b>2015</b> · Simulating Agent-Based Systems using Processing · Kairo</li>
     </ul>
 
     <h2>Auszeichnung</h2>
@@ -217,6 +240,7 @@
       <li><b>2007</b> · 2. Platz, 4. National Architecture Students Competition, Universität Kairo</li>
       <li><b>2006</b> · 1. Platz, 3. National Architecture Students Competition, Universität Kairo</li>
     </ul>
+    <p class="legend">BUW Bauhaus-Universität Weimar · VSP Verkehrssystemplanung · InfAU Informatik in der Architektur und Urbanistik · EDIH+BM European Digital Innovation Hub Mid Germany, Bauhaus.Mobility · DTRL Digital Transport Research Lab · AASTMT Arab Academy for Science, Technology and Maritime Transport, Kairo · AR Architecture Department · GJU German-Jordanian University · ECL Emerging City Lab</p>
   </aside>
 
   <main class="main">
@@ -226,7 +250,7 @@
       <div>
         <span class="role">Wissenschaftlicher Mitarbeiter, Lehre und Computational Design</span>
         <p class="org">Arab Academy for Science, Technology and Maritime Transport (AASTMT), Kairo</p>
-        <p class="txt">Lehre von rechnergestütztem und parametrischem Entwerfen (Grasshopper, Processing, Arduino) in einem RIBA-Part-I-zertifizierten Programm.</p>
+        <p class="txt">Lehre von rechnergestütztem und parametrischem Entwerfen (Grasshopper, Processing, Arduino) im RIBA-Part-I-Programm.</p>
       </div>
     </div>
 
@@ -235,7 +259,7 @@
       <div>
         <span class="role">Mitgründer und Architekt, Gozour Studio</span>
         <p class="org">Mansoura, Ägypten</p>
-        <p class="txt">Entwurfsstudio und Architekturberatung: Wohn-, Bildungs- und Wettbewerbsprojekte, darunter der Lusail Underpass Competition, Katar.</p>
+        <p class="txt">Wohn-, Bildungs- und Wettbewerbsprojekte, darunter der Lusail Underpass Competition, Katar.</p>
       </div>
     </div>
     <div class="row tight">
@@ -264,28 +288,6 @@
       <div>
         <span class="role">Praktikant, Al Turath Engineering Consultancy, Abu Dhabi</span>
         <p class="org">CAD-Entwurf, Layout und Plotten vollständiger Projektsätze</p>
-      </div>
-    </div>
-
-    <h2 style="--mark: var(--blue)">Ausbildung</h2>
-    <div class="row">
-      <span class="date">Nov. 2018 – heute</span>
-      <div>
-        <span class="role">Promotion, laufend · Informatik in der Architektur und Urbanistik (InfAU), Bauhaus-Universität Weimar</span>
-        <p class="txt">Arbeitstitel: „Spatial dependency of urban retail: detailed methods for positioning street-level activities“ · Betreuer: Prof. Dr. Reinhard König</p>
-      </div>
-    </div>
-    <div class="row">
-      <span class="date">2013</span>
-      <div>
-        <span class="role">Master of Arts in Architektur · Hochschule Anhalt, Dessau-Roßlau</span>
-        <p class="txt">Thesis: „Heterogeneous-Atelier Industry“ (mit Ali Farhan): die informellen Atelier-Netzwerke von Şişhane, Istanbul, kartiert und als eine Bottom-up-Fabrik simuliert</p>
-      </div>
-    </div>
-    <div class="row">
-      <span class="date">2007</span>
-      <div>
-        <span class="role">B.Sc. Architektur und Ingenieurwesen · Fakultät für Ingenieurwesen, Mansoura University, Ägypten</span>
       </div>
     </div>
 

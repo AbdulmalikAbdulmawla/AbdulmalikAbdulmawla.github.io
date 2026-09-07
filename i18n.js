@@ -11,14 +11,11 @@
   var DE = {
     "hero.eyebrow": "Werkzeuge für räumliche Daten: Architektur, Stadt und Land, Mobilität, Stadtökonomie",
     "hero.lede":
-      "Seit vielen Jahren baue ich Werkzeuge für den Entwurf, die Erzeugung und die " +
-      "Analyse räumlicher Daten in Architektur, Städtebau und Stadtökonomie. " +
-      "Ich komme aus der Forschung: Die Technik ist eine meiner Stärken, meine wichtigste " +
-      "aber ist das rechnerische Denken über räumliche Datenprobleme, verbunden mit der " +
-      "Fähigkeit, mich in das jeweilige Anwendungsfeld einzuarbeiten. Aktuell: eine " +
-      "browserbasierte Analyseplattform für Deutschlands amtliche Unfalldaten und meine " +
-      "Promotion an der Bauhaus-Universität Weimar zur Frage, wo sich Einzelhandel in " +
-      "einer Stadt ansiedelt (Promotion laufend).",
+      "Seit vielen Jahren baue ich Werkzeuge für den Entwurf, die Erzeugung und die Analyse " +
+      "räumlicher Daten. Jede komplexe Aufgabe zerlege ich in ihre Kernparameter, bis ein " +
+      "menschlich handhabbarer Maßstab entsteht; so arbeitet auch die Natur: einfache Teile, " +
+      "intelligent zusammengesetzt. Ich komme aus der Forschung, Doktorand an der " +
+      "Bauhaus-Universität Weimar.",
     "hero.cv": "Lebenslauf (PDF) herunterladen ↓",
 
     "tab.work": "Arbeiten",
@@ -31,51 +28,31 @@
 
     "rs.h": "Forschungsstatement",
     "rs.p1":
-      "Eine Überzeugung trägt meine Arbeit seit meiner Bachelorarbeit: " +
-      "<strong>Eigenständige Produktion in kleinen, dichten Quartieren zu stärken, macht " +
-      "Gemeinschaften heterogener und selbsttragender.</strong> Zuerst erprobt habe ich " +
-      "sie in Istanbuls Şişhane-Viertel – ich kartierte die Abhängigkeitsnetzwerke der " +
-      "Handwerksateliers und simulierte ihre informellen Produktionslinien als eine " +
-      "Bottom-up-Fabrik (Masterarbeit, 2013). Danach habe ich ein Jahrzehnt an der " +
-      "Bauhaus-Universität Weimar erworben, was diese Frage verlangte – parametrische " +
-      "Spatial-Query-Methoden, die Aktivitäten auf Straßenebene mit den umgebenden " +
-      "Stadtformen verknüpfen, statistisches Werkzeug (DeCodingSpaces Toolbox, mineR) und " +
-      "offene Datenplattformen. Die Methode bleibt konstant: <strong>Rohdaten dekodieren, " +
-      "die Analyse parametrisieren und die Evidenz die Entscheidung tragen lassen</strong> " +
-      "– damit Städte die Kraft kleiner ökonomischer Kollektive verstehen und ihr Raum " +
-      "geben können.",
+      "Meine Forschung fragt, <strong>wo sich wirtschaftliches Handeln in der Stadt verortet " +
+      "und wie städtischer Raum offen bleibt für kleine Ökonomien</strong>. Begonnen in meiner " +
+      "Bachelorarbeit, einem Rehabilitations- und Wiedereingliederungszentrum für die Opfer der " +
+      "Weltkriegsminen bei El Alamein, Ägypten, in dem Genesung durch Produktion entsteht; " +
+      "fortgeführt in Istanbuls Şişhane-Viertel (Masterarbeit 2013) und in Weimar mit " +
+      "parametrischen Spatial-Query-Methoden, die Erdgeschossnutzungen mit der Stadtform " +
+      "verknüpfen; heute trägt sie meine Promotion zur Standortlogik des Einzelhandels.",
 
     "about.h": "Über mich",
     "about.p1":
-      "Mich interessiert das Lösen räumlicher Probleme, in Architektur, Stadt und Land, Ökonomie " +
-      "und Mobilität. Ich bin überzeugt, dass jede komplexe Aufgabe und jeder Umgang mit Daten " +
-      "verlangt, das Problem intelligent in seine Kernparameter zu zerlegen und jedes Element so " +
-      "weit zu vereinfachen, dass ein menschlich handhabbarer Maßstab entsteht. So arbeitet auch " +
-      "die Natur: Komplexe Systeme bestehen nicht aus komplexen Teilen, sondern aus sehr " +
-      "einfachen, die intelligent zusammengesetzt sind. Ich komme aus der Forschung: " +
-      "Die Technik ist eine meiner Stärken, meine wichtigste aber ist das rechnerische Denken " +
-      "über räumliche Datenprobleme, verbunden mit der Fähigkeit, mich in das jeweilige " +
-      "Anwendungsfeld einzuarbeiten, von einfachen bis zu komplexen Zielen. Der Anspruch dabei: " +
-      "die beste Balance zwischen Nutzererlebnis und fortgeschrittenen wissenschaftlichen " +
-      "Analysemethoden.",
+      "Die Technik ist eine meiner Stärken; meine wichtigste ist das rechnerische Denken über " +
+      "räumliche Datenprobleme: Prozesse in ihre elementaren Bestandteile zerlegen, in " +
+      "parametrische, interaktive Umgebungen übersetzen und mich in das jeweilige " +
+      "Anwendungsfeld einarbeiten, von einfachen bis zu komplexen Zielen. Meine Werkzeuge sind " +
+      "in Schritten gewachsen, von agentenbasierter Simulation bis zur KI-gestützten " +
+      "Programmierung mit mehreren Agenten.",
     "about.p2":
-      "Meine Werkzeuge sind in Entwicklungsschritten gewachsen, getragen von demselben Interesse, " +
-      "erst lokal, später im Browser: von Simulation und agentenbasierten Modellen über statistische " +
-      "Analyse und parametrischen Stadtentwurf bis zu browserbasierten Analyseplattformen, gebaut mit " +
-      "Technologien auf dem Stand der Technik bis hin zur KI-gestützten Programmierung mit mehreren " +
-      "Agenten. Ich arbeite an den Systemen hinter den Werkzeugen: Datenmodelle, Methoden und " +
-      "Schnittstellen. Mein Promotionsprojekt (laufend, Bauhaus-Universität Weimar) fragt, wo sich " +
-      "Einzelhandel in einer Stadt ansiedelt: <em>„Spatial dependency of urban retail: detailed " +
-      "methods for positioning street-level activities“</em> (Betreuer: Prof. Dr. Reinhard König).",
+      "Mein Anspruch: die beste Balance zwischen Nutzererlebnis und fortgeschrittener " +
+      "wissenschaftlicher Methode. Ich erkenne früh, wo Nutzer eines Werkzeugs stolpern, und " +
+      "vermittle komplexe räumliche Berechnung seit vielen Jahren an Studierende, Fachkollegen " +
+      "und öffentliche Verwaltungen.",
     "about.p3":
-      "Ich erkenne früh, wo Nutzer eines Werkzeugs stolpern, entwickle Methoden gemeinsam mit " +
-      "denen, die sie benutzen werden, und vermittle komplexe räumliche Berechnung seit vielen " +
-      "Jahren an sehr unterschiedliche Zielgruppen: Studierende, Fachkolleginnen und Fachkollegen " +
-      "und öffentliche Verwaltungen am European Digital Innovation Hub Mid Germany. Neue Felder " +
-      "erschließe ich mir aus ähnlicher Erfahrung: Mit der M-Uko 2012, dem amtlichen Regelwerk " +
-      "der Unfallauswertung, habe ich mir einen fremden Fachstandard von der ersten Begegnung bis " +
-      "zur Produktreife erarbeitet. Zehn Jahre Arbeit in Deutschland, davor fünf Jahre im Nahen " +
-      "Osten, haben mich gelehrt, mich schnell in neue Umgebungen und Aufgaben einzuarbeiten.",
+      "Zehn Jahre Deutschland, davor fünf Jahre Naher Osten: Neue Felder erschließe ich mir aus " +
+      "ähnlicher Erfahrung, zuletzt einen amtlichen Fachstandard von der ersten Begegnung bis " +
+      "zur Produktreife.",
 
     "edu.h": "Ausbildung",
     "edu.li1":
@@ -107,7 +84,7 @@
 
     "work.h": "Ausgewählte Arbeiten",
     "work.c1.title": "VSP&nbsp;Unfallatlas – Verkehrssicherheits-Explorer",
-    "work.c1.role": "Alleiniger Entwickler · Bauhaus Weimar, EDIH.TH",
+    "work.c1.role": "Alleiniger Entwickler · Bauhaus-Universität Weimar, EDIH Mid Germany",
     "work.c1.body":
       "Eine interaktive Web-Plattform zur Exploration der amtlichen deutschen Unfalldaten: " +
       "die amtliche Auswertungsmethodik M-Uko 2012 als interaktives Werkzeug, mit räumlicher " +
