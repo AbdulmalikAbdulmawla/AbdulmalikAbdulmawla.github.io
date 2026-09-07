@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>og-square source — screenshot at exactly 1200×1200 (LinkedIn compact card + any centre crop)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+    background: #f7f8fa; color: #1f2933; position: relative;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(#e0e3e8 1px, transparent 1px),
+      linear-gradient(90deg, #e0e3e8 1px, transparent 1px);
+    background-size: 75px 75px; opacity: .55;
+  }
+  svg.net { position: absolute; inset: 0; }
+  .scrim { position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse at 50% 58%, rgba(247,248,250,.96) 40%, rgba(247,248,250,.55) 70%, rgba(247,248,250,.1) 100%); }
+
+  /* everything that matters sits in the middle band (y 300–900), so a 1.91:1 centre crop still works */
+  .content { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .portrait-wrap { position: relative; width: 320px; height: 320px; margin-top: 300px; }
+  .portrait { width: 320px; height: 320px; object-fit: cover; border-radius: 50%; border: 7px solid #fff;
+    box-shadow: 0 10px 44px rgba(20,24,29,.18); position: relative; z-index: 2; }
+  .ring { position: absolute; border-radius: 50%; z-index: 1; }
+  .ring.blue   { inset: -24px; border: 3px solid #2b6cb0; opacity: .55; }
+  .ring.yellow { inset: -48px; border: 2px solid #e0a92e; opacity: .5; }
+  .dot { position: absolute; border-radius: 50%; z-index: 3; }
+  .dot.red    { width: 30px; height: 30px; background: #c8452f; top: 8px;  right: 16px; }
+  .dot.yellow { width: 20px; height: 20px; background: #e0a92e; bottom: 34px; left: -34px; }
+  .dot.blue   { width: 16px; height: 16px; background: #2b6cb0; top: 74px; left: -52px; }
+
+  h1 { font-size: 118px; line-height: .98; font-weight: 700; letter-spacing: -.02em; margin-top: 44px; }
+  .eyebrow { color: #c8452f; font-weight: 700; font-size: 26px; letter-spacing: .10em; text-transform: uppercase;
+    margin-top: 40px; max-width: 900px; line-height: 1.45; }
+  .url { margin-top: 26px; font-size: 30px; font-weight: 600; color: #2b6cb0; }
+
+  .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 22px; display: flex; z-index: 4; }
+  .strip span { height: 100%; }
+  .strip .b { background: #2b6cb0; flex: 3; } .strip .r { background: #c8452f; flex: 2; } .strip .y { background: #e0a92e; flex: 1; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <svg class="net" viewBox="0 0 1200 1200" fill="none">
+    <g stroke="#cfd5dc" stroke-width="2.5" opacity=".8">
+      <path d="M-20 980 L200 900 L420 950 L640 850 L880 910 L1100 810 L1240 850"/>
+      <path d="M200 900 L260 640 L440 560 L660 610 L840 500 L1070 560 L1240 470"/>
+      <path d="M420 950 L440 560"/><path d="M640 850 L660 610"/><path d="M880 910 L840 500"/><path d="M1100 810 L1070 560"/>
+      <path d="M260 640 L60 540 L-20 580"/><path d="M440 560 L380 300 L520 120 L760 60"/><path d="M660 610 L720 380 L980 300 L1240 220"/>
+      <path d="M840 500 L980 300"/><path d="M380 300 L120 240 L-20 280"/><path d="M520 120 L470 -20"/><path d="M720 380 L760 60"/>
+    </g>
+    <g stroke="#2b6cb0" stroke-width="4" opacity=".4"><path d="M-20 980 L200 900 L420 950 L640 850 L880 910"/></g>
+    <g opacity=".9">
+      <path d="M160 916 l24 -8 l-19 -14 z" fill="#2b6cb0"/><path d="M330 936 l25 5 l-13 -20 z" fill="#2b6cb0" opacity=".8"/>
+      <path d="M520 900 l23 -11 l-17 -15 z" fill="#c8452f"/><path d="M760 880 l25 7 l-14 -20 z" fill="#e0a92e"/>
+      <path d="M990 850 l24 -12 l-19 -13 z" fill="#2b6cb0" opacity=".7"/><path d="M420 330 l22 -13 l-19 -12 z" fill="#c8452f" opacity=".7"/>
+      <path d="M700 410 l24 -4 l-16 -18 z" fill="#e0a92e" opacity=".75"/><path d="M900 330 l22 -12 l-18 -12 z" fill="#2b6cb0" opacity=".7"/>
+    </g>
+    <g fill="#9aa3ad" opacity=".7">
+      <circle cx="200" cy="900" r="6"/><circle cx="420" cy="950" r="6"/><circle cx="640" cy="850" r="6"/><circle cx="880" cy="910" r="6"/>
+      <circle cx="1100" cy="810" r="6"/><circle cx="260" cy="640" r="6"/><circle cx="440" cy="560" r="6"/><circle cx="660" cy="610" r="6"/>
+      <circle cx="840" cy="500" r="6"/><circle cx="1070" cy="560" r="6"/><circle cx="380" cy="300" r="6"/><circle cx="720" cy="380" r="6"/>
+      <circle cx="980" cy="300" r="6"/><circle cx="520" cy="120" r="6"/>
+    </g>
+  </svg>
+  <div class="scrim"></div>
+
+  <div class="content">
+    <div class="portrait-wrap">
+      <span class="ring blue"></span><span class="ring yellow"></span>
+      <img class="portrait" src="../assets/portrait.jpg" alt="" />
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot blue"></span>
+    </div>
+    <h1>Abdulmalik<br>Abdulmawla</h1>
+    <p class="eyebrow">Spatial-data tools: Architecture, Urban and Rural Space, Mobility, City Economy</p>
+    <p class="url">abdulmalikabdulmawla.github.io</p>
+  </div>
+
+  <div class="strip"><span class="b"></span><span class="r"></span><span class="y"></span></div>
+</body>
+</html>
