@@ -11,11 +11,11 @@
   var DE = {
     "hero.eyebrow": "Werkzeuge für räumliche Daten: Architektur, Stadt und Land, Mobilität, Stadtökonomie",
     "hero.lede":
-      "Seit vielen Jahren baue ich Werkzeuge für den Entwurf, die Erzeugung und die Analyse " +
+      "Ich komme aus der Forschung und baue seit vielen Jahren Werkzeuge, mit denen sich " +
+      "räumliche Probleme lösen lassen: für den Entwurf, die Erzeugung und die Analyse " +
       "räumlicher Daten. Jede komplexe Aufgabe zerlege ich in ihre Kernparameter, bis ein " +
       "menschlich handhabbarer Maßstab entsteht; so arbeitet auch die Natur: einfache Teile, " +
-      "intelligent zusammengesetzt. Ich komme aus der Forschung, Doktorand an der " +
-      "Bauhaus-Universität Weimar.",
+      "intelligent zusammengesetzt. Derzeit Doktorand an der Bauhaus-Universität Weimar.",
     "hero.cv": "Lebenslauf (PDF) herunterladen ↓",
 
     "tab.work": "Arbeiten",
@@ -39,11 +39,11 @@
     "about.h": "Über mich",
     "about.p1":
       "Die Technik ist eine meiner Stärken; meine wichtigste ist das rechnerische Denken über " +
-      "räumliche Datenprobleme: Prozesse in ihre elementaren Bestandteile zerlegen, in " +
-      "parametrische, interaktive Umgebungen übersetzen und mich in das jeweilige " +
-      "Anwendungsfeld einarbeiten, von einfachen bis zu komplexen Zielen. Meine Werkzeuge sind " +
-      "in Schritten gewachsen, von agentenbasierter Simulation bis zur KI-gestützten " +
-      "Programmierung mit mehreren Agenten.",
+      "räumliche Datenprobleme, verbunden mit der Fähigkeit, mich in das jeweilige " +
+      "Anwendungsfeld einzuarbeiten, von einfachen bis zu komplexen Zielen. Meine Werkzeuge " +
+      "sind in Schritten gewachsen, von agentenbasierter Simulation bis zur KI-gestützten " +
+      "Programmierung mit mehreren Agenten; ich arbeite an den Systemen dahinter: Datenmodelle, " +
+      "Methoden, Schnittstellen.",
     "about.p2":
       "Mein Anspruch: die beste Balance zwischen Nutzererlebnis und fortgeschrittener " +
       "wissenschaftlicher Methode. Ich erkenne früh, wo Nutzer eines Werkzeugs stolpern, und " +
@@ -163,13 +163,11 @@
     "exp.e1.date": "Dez. 2023 – Sep. 2026",
     "exp.e1.role": "Wissenschaftlicher Mitarbeiter – Professur Verkehrssystemplanung",
     "exp.e1.body":
-      "Konzeption und Entwicklung interaktiver Geodaten-Plattformen, darunter die browserbasierte " +
-      "Analyseplattform für Deutschlands amtliche Unfalldaten (Alleinentwicklung: Datenmodell, " +
-      "Open-Data-Pipelines, WebGL-Karte, Continuous Integration, versionierte Releases; die amtliche " +
-      "Auswertungsmethodik M-Uko 2012 als interaktives Werkzeug); Data-Science-Beratung öffentlicher " +
-      "Institutionen und Schulungen für Verwaltungen zu offenen Geodaten und europäischen " +
-      "Datenstandards, inklusive Datenveröffentlichung auf der Mobilithek; Betreuung studentischer " +
-      "Projekte und Masterarbeiten (Digital Transport Research Lab).",
+      "Interaktive Geodaten-Plattformen, darunter die browserbasierte Analyseplattform für " +
+      "Deutschlands amtliche Unfalldaten (Alleinentwicklung; die amtliche Methodik M-Uko 2012 " +
+      "als interaktives Werkzeug); Data-Science-Beratung und Schulungen für Verwaltungen zu " +
+      "offenen Geodaten; Betreuung studentischer Projekte und Masterarbeiten (Digital Transport " +
+      "Research Lab).",
     "exp.e2.date": "Apr. – Nov. 2023",
     "exp.e2.role": "Doktorand – Informatik in der Architektur und Urbanistik (InfAU)",
     "exp.e2.body":
@@ -179,32 +177,29 @@
     "exp.e3.date": "Dez. 2017 – Jan. 2019",
     "exp.e3.role": "Projektkoordinator – DAAD-Austauschprojekt „Discovering Cities“",
     "exp.e3.body":
-      "DAAD-gefördertes Austauschprojekt zwischen der Bauhaus-Universität Weimar und der " +
-      "German-Jordanian University in Amman – parallel zur Stelle als wissenschaftlicher " +
-      "Mitarbeiter am InfAR. Verfassen des Projektantrags, Verwaltung der Finanzen, Lehrseminar " +
-      "in Weimar und Vorbereitung des Workshops in Amman.",
+      "Parallel zur Stelle als wissenschaftlicher Mitarbeiter am InfAR: Projektantrag, " +
+      "Projektfinanzen, Lehrseminar in Weimar, Workshop in Amman.",
     "exp.e4.date": "Mai 2016 – März 2023",
     "exp.e4.role": "Wissenschaftlicher Mitarbeiter – Informatik in der Architektur (InfAR, heute InfAU)",
     "exp.e4.body":
       "Lehre rechnergestützter Methoden für Stadtplanung und -analyse; Entwicklung von " +
       "Entwurfs- und Forschungswerkzeugen (DeCodingSpaces Toolbox, mineR); Betreuung von " +
-      "Masterarbeiten; Konferenzvorträge sowie Unterstützung von Publikationen, Ausstellungen " +
-      "und Exkursionen.",
+      "Masterarbeiten; Konferenzbeiträge (Space Syntax Symposium, eCAADe).",
     "exp.e5.date": "Mai 2016 – 2020",
     "exp.e5.role": "Mitautor – DeCodingSpaces Toolbox",
     "exp.e5.body":
-      "C#-Programmierung für eine Grasshopper-Toolbox zur Stadtanalyse; Testing, Dokumentation " +
-      "und Beratung für Stadtprojekte und Workshops.",
+      "C#-Entwicklung, Testing, Dokumentation und Beratung; interaktives " +
+      "Masterplan-Analysewerkzeug für Blankenburger Süden (TSPA, Berlin, 2019).",
     "exp.e6.date": "Okt. 2014 – Apr. 2016",
     "exp.e6.role": "Wissenschaftlicher Mitarbeiter – Lehre &amp; Computational Design",
     "exp.e6.body":
       "Lehre von rechnergestütztem und parametrischem Entwerfen (Grasshopper, Processing, " +
-      "Arduino) in einem RIBA-Part-I-zertifizierten Programm.",
+      "Arduino) im RIBA-Part-I-Programm.",
     "exp.e7.date": "Jan. 2012 – Apr. 2016",
     "exp.e7.role": "Mitgründer &amp; Architekt",
     "exp.e7.body":
-      "Entwurfsstudio und Architekturberatung – Wohn-, Bildungs- und Wettbewerbsprojekte " +
-      "(u. a. der Lusail Underpass Competition, Katar).",
+      "Wohn-, Bildungs- und Wettbewerbsprojekte, darunter der Lusail Underpass Competition, " +
+      "Katar.",
     "exp.e8.date": "Mai 2009 – Sep. 2011",
     "exp.e8.role": "Junior-Architekt",
     "exp.e8.body":
